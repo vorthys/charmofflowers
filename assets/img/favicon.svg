@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Charm of Flowers">
+  <rect width="64" height="64" rx="10" fill="#241b15"/>
+  <text x="32" y="45" text-anchor="middle"
+        font-family="Georgia, 'Times New Roman', serif" font-size="42" fill="#e4cfa1">C</text>
+  <path d="M44 40c-3.4 0-5.6 2.3-5.6 4.6 0 1.7 1.2 2.9 2.9 2.9 2.4 0 4-2 4-4.4 0-1.6-.8-2.6-2-2.6"
+        fill="none" stroke="#c2c878" stroke-width="2.4" stroke-linecap="round"/>
+</svg>

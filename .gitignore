@@ -1,0 +1,12 @@
+# pracovní soubory (stažené zdroje, seznamy URL)
+_src/
+
+# systémové
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# editory
+.vscode/
+.idea/
+*.swp
