@@ -226,10 +226,35 @@ button { font: inherit; color: inherit; }
 
 .site-head__cta { flex: none; }
 
+/* ---------- 6b. Přepínač jazyka ---------- */
+.lang {
+  display: flex; align-items: center; gap: .5rem;
+  flex: none;
+  padding-left: clamp(.9rem, 2vw, 1.4rem);
+  border-left: 1px solid var(--hair-l);
+}
+.lang__b {
+  padding: .35rem .1rem;
+  background: none; border: 0;
+  font-size: .74rem; font-weight: 500;
+  letter-spacing: .14em;
+  color: var(--ink-60);
+  cursor: pointer;
+  border-bottom: 1px solid transparent;
+  transition: color .25s var(--ease), border-color .25s var(--ease);
+}
+.lang__b:hover { color: var(--ink); }
+.lang__b.is-on { color: var(--ink); border-bottom-color: var(--olive-deep); }
+.lang__sep {
+  width: 3px; height: 3px;
+  border-radius: 50%;
+  background: var(--hair-l);
+}
+
 .burger {
   display: none;
   width: 42px; height: 42px;
-  margin-left: auto;
+  margin-left: .35rem;
   background: none; border: 1px solid var(--hair-l);
   cursor: pointer;
   padding: 0;
@@ -314,22 +339,32 @@ button { font: inherit; color: inherit; }
   font-size: .875rem;
   color: rgba(244,240,232,.66);
 }
-.hero__facts span {
-  display: inline-block; min-width: 9.5rem;
+.hero__facts li { display: flex; flex-wrap: wrap; gap: 0 .6rem; }
+.fact__l {
+  flex: none; min-width: 9.5rem;
   color: var(--gold-dim);
   font-size: .68rem; font-weight: 500;
   letter-spacing: .16em; text-transform: uppercase;
+  align-self: center;
 }
 
 .hero__photo { margin: 0; }
-.hero__photo img {
+/* hairline rámeček posunutý za fotku — ozvěna rámu světelné cedule */
+.hero__frame { position: relative; display: block; }
+.hero__frame::before {
+  content: ""; position: absolute;
+  inset: 16px -16px -16px 16px;
+  border: 1px solid rgba(228,207,161,.32);
+}
+.hero__frame img {
+  position: relative;
   width: 100%;
   aspect-ratio: 4 / 5;
   object-fit: cover;
   filter: saturate(.94) contrast(1.03);
 }
 .hero__photo figcaption {
-  margin-top: .9rem;
+  margin-top: 1.6rem;
   font-size: .72rem; letter-spacing: .16em; text-transform: uppercase;
   color: var(--gold-dim);
 }
@@ -341,25 +376,54 @@ button { font: inherit; color: inherit; }
 .sec--petrol { background: var(--petrol); color: var(--paper); }
 
 /* ---------- 9. Služby ---------- */
+/* Dvě řady po dvou kartách, fotka drží pravý sloupec.
+   Čtyři karty vedle sebe byly na text moc úzké. */
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1px;
   background: var(--hair-l);
   border: 1px solid var(--hair-l);
 }
 .card {
+  position: relative;
   background: var(--paper);
-  padding: clamp(1.7rem, 3vw, 2.4rem);
+  padding: clamp(1.7rem, 3vw, 2.6rem);
   transition: background .4s var(--ease);
 }
+.card::before {
+  content: ""; position: absolute; left: 0; top: -1px;
+  width: 100%; height: 1px;
+  background: var(--olive-deep);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform .5s var(--ease);
+}
 .card:hover { background: var(--paper-2); }
+.card:hover::before { transform: scaleX(1); }
 .card__t {
   margin: 0 0 .9rem;
   font-family: var(--ff-disp);
-  font-size: 1.4rem;
+  font-size: clamp(1.35rem, 1.2rem + .4vw, 1.6rem);
 }
-.card__p { margin: 0; color: var(--ink-60); font-size: .95rem; }
+.card__p { max-width: 42ch; margin: 0; color: var(--ink-60); font-size: .95rem; }
+
+.cards__photo {
+  grid-column: span 2;
+  margin: 0;
+  background: var(--paper-2);
+}
+.cards__photo img {
+  width: 100%; height: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: center 42%;
+}
+
+@media (min-width: 1000px) {
+  .cards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .cards__photo { grid-column: 3; grid-row: 1 / span 2; }
+  .cards__photo img { aspect-ratio: auto; }
+}
 
 /* ---------- 10. Rozpočet ---------- */
 .tiers {
@@ -403,9 +467,9 @@ button { font: inherit; color: inherit; }
   color: var(--paper);
   transition: color .3s var(--ease);
 }
-.tier__go span { transition: transform .3s var(--ease); }
+.tier__arrow { display: inline-block; transition: transform .3s var(--ease); }
 .tier__go:hover { color: var(--olive); }
-.tier__go:hover span { transform: translateX(5px); }
+.tier__go:hover .tier__arrow { transform: translateX(5px); }
 
 /* ---------- 11. Galerie ---------- */
 .link-ig {
@@ -591,6 +655,28 @@ button { font: inherit; color: inherit; }
 }
 .foot__bar p { margin: 0; }
 
+/* ---------- 14b. Výzva k volání (jen mobil) ----------
+   Objednává se hlavně telefonem, tak ať je číslo pořád po ruce. */
+.callbar {
+  display: none;
+  position: fixed; z-index: 80;
+  left: 50%; bottom: max(1rem, env(safe-area-inset-bottom));
+  align-items: center; gap: .5rem;
+  padding: .85rem 1.5rem;
+  background: var(--gold); color: var(--bark);
+  border-radius: 999px;
+  box-shadow: 0 8px 28px rgba(23,17,13,.34);
+  font-size: .8rem; font-weight: 500;
+  letter-spacing: .1em; text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  transform: translate(-50%, 150%);
+  transition: transform .45s var(--ease);
+}
+.callbar svg { width: 1.05em; height: 1.05em; fill: currentColor; }
+.callbar__num { font-variant-numeric: tabular-nums; letter-spacing: .06em; }
+.callbar.is-on { transform: translate(-50%, 0); }
+
 /* ---------- 15. Lightbox ---------- */
 .lb {
   position: fixed; inset: 0; z-index: 300;
@@ -660,6 +746,10 @@ button { font: inherit; color: inherit; }
 @media (max-width: 760px) {
   .burger { display: block; }
   .site-head__cta { display: none; }
+  .callbar { display: inline-flex; }
+  .foot { padding-bottom: 5.5rem; }
+
+  .lang { margin-left: auto; border-left: 0; padding-left: 0; }
 
   .nav {
     position: absolute; left: 0; right: 0; top: 100%;
@@ -676,15 +766,25 @@ button { font: inherit; color: inherit; }
   .nav a:last-child { border-bottom: 0; }
   .nav a::after { display: none; }
 
-  .hero__facts span { display: block; min-width: 0; margin-bottom: .15rem; }
+  .hero__facts li { display: block; }
+  .fact__l { display: block; min-width: 0; margin-bottom: .15rem; }
   .grid { grid-template-columns: repeat(2, 1fr); }
   .shot--feature { grid-column: auto; grid-row: auto; aspect-ratio: 3 / 4; }
   .foot__bar { flex-direction: column; }
 }
 
+@media (max-width: 620px) {
+  /* i fotka musí přestat sahat přes dva sloupce, jinak si grid
+     dopočítá druhý sloupec a karty se nikdy nesrovnají pod sebe */
+  .cards { grid-template-columns: 1fr; }
+  .cards__photo { grid-column: auto; }
+  .cards__photo img { aspect-ratio: 4 / 3; }
+}
+
 @media (max-width: 420px) {
   .btn { padding: .85rem 1.25rem; font-size: .72rem; }
   .grid { grid-template-columns: 1fr 1fr; gap: .5rem; }
+  .callbar { padding: .8rem 1.15rem; font-size: .72rem; gap: .4rem; }
 }
 
 /* ---------- 18. Omezený pohyb ---------- */
@@ -701,7 +801,7 @@ button { font: inherit; color: inherit; }
 
 /* ---------- 19. Tisk ---------- */
 @media print {
-  .site-head, .hero__glow, .lb, .burger, .contact__map { display: none !important; }
+  .site-head, .hero__glow, .lb, .burger, .contact__map, .callbar { display: none !important; }
   body { background: #fff; color: #000; }
   .sec--bark, .sec--petrol, .hero, .foot { background: #fff !important; color: #000 !important; }
   .sec__title--light, .hero__mark, .tier__price, .story__q { color: #000 !important; }

@@ -27,6 +27,7 @@ Pak otevřete <http://localhost:5173>.
 ├── index.html                  # celá stránka
 ├── assets/
 │   ├── css/style.css           # design systém + layout
+│   ├── js/i18n.js              # ★ všechny texty (čeština + ukrajinština)
 │   ├── js/main.js              # menu, lightbox, odhalování při scrollu
 │   └── img/
 │       ├── favicon.svg
@@ -36,6 +37,55 @@ Pak otevřete <http://localhost:5173>.
 ```
 
 Sekce na stránce: hero → služby → rozpočet → galerie → příběh → kontakt.
+
+---
+
+## Jazyky — čeština a ukrajinština
+
+Přepínač **CZ / UA** je v hlavičce. Velká část zákaznic mluví ukrajinsky
+(na Instagramu je profil vedený i v ukrajinštině), tak ať si nemusí překládat.
+
+### Jak se mění texty
+
+**Všechny texty jsou v jednom souboru — `assets/js/i18n.js`.** V HTML jsou
+jen klíče, samotná slova nikde jinde nejsou. Změna textu = jeden řádek ve slovníku,
+ne hledání po celé šabloně.
+
+```js
+heroLede: 'Každá kytice má svůj příběh.',   // cs
+heroLede: 'Кожен букет має свою історію.',  // uk
+```
+
+V HTML se klíč napojí atributem:
+
+| Atribut | Co přepíše |
+|---|---|
+| `data-i18n` | text prvku |
+| `data-i18n-html` | text včetně značek (např. `<strong>`) |
+| `data-i18n-alt` | `alt` u fotky |
+| `data-i18n-aria` | `aria-label` |
+| `data-i18n-title` | `title` |
+
+Přepínají se i `<title>`, popisek pro vyhledávače, `og:` značky a `<html lang>`.
+
+### Jak se vybírá jazyk
+
+1. `?lang=uk` v adrese (má přednost — takový odkaz jde poslat)
+2. co si návštěvník vybral minule (`localStorage`)
+3. jazyk prohlížeče — `uk`, `ru` i `be` dostanou ukrajinštinu
+4. jinak čeština
+
+Bez JavaScriptu se stránka zobrazí česky — texty jsou napsané přímo v HTML.
+
+### Přidat angličtinu
+
+Do `DICT` v `i18n.js` přibude blok `en: { … }` se stejnými klíči a do hlavičky
+`index.html` třetí tlačítko `data-lang="en"`. Nic dalšího.
+
+> **K vyhledávačům:** přepínání běží v prohlížeči, takže Google indexuje
+> českou verzi. Dokud je web ve schvalování, je to v pořádku — jedny texty se
+> udržují snáz. Až bude obsah hotový, vygenerujeme ukrajinskou verzi
+> jako samostatnou stránku `/ua/`, aby se dala najít i ve vyhledávání.
 
 ---
 
@@ -98,7 +148,10 @@ Tohle je návrh — než půjde web živě, chce to od klientky:
 - [ ] **Rozhodnout o e-shopu / objednávkovém formuláři.** Zatím se objednává
       telefonem a přes Instagram, jak to firma dělá dnes.
 - [ ] **Doplnit reference.** Na Instagramu má vlastní „Highlight" s recenzemi,
-      dala by se z nich udělat sekce.
+      dala by se z nich udělat sekce. Zatím na webu nejsou — vymýšlet si
+      cizí recenze nedává smysl.
+- [ ] **Projít ukrajinské texty.** Přeložené jsou všechny, ale rodilá mluvčí
+      je nejlepší korektor — vše je v `assets/js/i18n.js`.
 
 ---
 
@@ -121,7 +174,8 @@ s doménou a nasměrovat DNS na GitHub Pages.
 - Respektuje `prefers-reduced-motion` — animace se vypnou
 - Responzivní od 320 px výš, bez vodorovného scrollu
 - Sémantické HTML, jeden `<h1>`, strukturovaná data Schema.org `Florist`
-- Funguje i bez JavaScriptu (jen bez lightboxu a mobilního menu)
+- Funguje i bez JavaScriptu (jen bez lightboxu, mobilního menu a přepínače jazyka)
+- Na mobilu se po heru vysune tlačítko s telefonem — objednává se hlavně voláním
 
 ---
 

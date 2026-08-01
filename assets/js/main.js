@@ -27,15 +27,25 @@
     });
   }
 
-  /* ---- stín hlavičky po odscrollování ---- */
+  /* ---- hlavička a mobilní výzva k volání ---- */
   var head = document.querySelector('.site-head');
-  if (head) {
-    var onScroll = function () {
-      head.classList.toggle('is-stuck', window.scrollY > 8);
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-  }
+  var callbar = document.getElementById('callbar');
+  var hero = document.querySelector('.hero');
+
+  var onScroll = function () {
+    var y = window.scrollY;
+    if (head) head.classList.toggle('is-stuck', y > 8);
+    if (callbar && hero) {
+      /* číslo nabídneme až za heroem — nahoře je tlačítko i tak vidět,
+         a nad patičkou by lišta překrývala kontakty */
+      var past = y > hero.offsetHeight * .8;
+      var atEnd = y + window.innerHeight > document.body.scrollHeight - 160;
+      callbar.classList.toggle('is-on', past && !atEnd);
+    }
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  onScroll();
 
   /* ---- aktivní položka navigace ---- */
   var links = Array.prototype.slice.call(document.querySelectorAll('.nav a[href^="#"]'));
