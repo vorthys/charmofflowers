@@ -3,6 +3,8 @@
 Jednostránkový web pro květinářství **Charm of Flowers**, Pražská 38/43, Plzeň.
 Statické HTML, CSS a JavaScript — žádný build, žádné závislosti. Stačí otevřít `index.html`.
 
+**Náhled naživo:** <https://vorthys.github.io/charmofflowers/>
+
 ---
 
 ## Spuštění
@@ -102,14 +104,13 @@ Tohle je návrh — než půjde web živě, chce to od klientky:
 
 ## Nasazení
 
-Web je statický, hostovat se dá kdekoliv. Přes **GitHub Pages**:
+Web je statický, hostovat se dá kdekoliv.
 
-1. *Settings → Pages*
-2. *Source:* `Deploy from a branch`
-3. *Branch:* `main`, složka `/ (root)`
+**GitHub Pages je už zapnuté** — každý push do `main` se sám nasadí na
+<https://vorthys.github.io/charmofflowers/>.
 
-Pro vlastní doménu `charmofflowers.cz` přidat soubor `CNAME` s doménou
-a nasměrovat DNS na GitHub Pages.
+Pro vlastní doménu `charmofflowers.cz` přidat do rootu soubor `CNAME`
+s doménou a nasměrovat DNS na GitHub Pages.
 
 ---
 
