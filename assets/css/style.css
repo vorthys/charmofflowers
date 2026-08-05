@@ -32,7 +32,10 @@
 
   /* Type */
   --ff-logo: "Bodoni Moda", "Didot", Georgia, serif;
-  --ff-disp: "Playfair Display", "Bodoni Moda", Georgia, serif;
+  /* Cely web mluvi geometricky (TT Drugs ~ Didact Gothic);
+     serifova Abigail ~ Playfair zustava jen v kurzivnich akcentech */
+  --ff-disp: "Didact Gothic", "Jost", "Segoe UI", system-ui, sans-serif;
+  --ff-serif: "Playfair Display", "Bodoni Moda", Georgia, serif;
   /* Drugs z brand guide (geometrický grotesk ve stylu samolepek) —
      nejbližší volný řez s češtinou i ukrajinštinou je Didact Gothic */
   --ff-body: "Didact Gothic", "Jost", "Segoe UI", system-ui, sans-serif;
@@ -151,9 +154,11 @@ section[id], [id="kontakt"] { scroll-margin-top: 84px; }
 
 .sec__title {
   font-family: var(--ff-disp);
-  font-size: clamp(2.05rem, 1.2rem + 3.3vw, 3.4rem);
+  font-size: clamp(1.55rem, 1rem + 2.1vw, 2.5rem);
   font-weight: 400;
-  letter-spacing: -.012em;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  line-height: 1.22;
   text-wrap: balance;
 }
 .sec__title--light { color: #fff; }
@@ -318,7 +323,7 @@ section[id], [id="kontakt"] { scroll-margin-top: 84px; }
 
 .hero__lede {
   margin: 0 0 .55rem;
-  font-family: var(--ff-disp);
+  font-family: var(--ff-serif);
   font-style: italic;
   font-size: clamp(1.3rem, .95rem + 1.4vw, 1.85rem);
   color: var(--ink);
@@ -563,7 +568,7 @@ section[id], [id="kontakt"] { scroll-margin-top: 84px; }
 .review__orn { width: 42px; margin-bottom: 1.2rem; color: var(--moss); opacity: .8; }
 .review__q {
   margin: 0 0 1.4rem;
-  font-family: var(--ff-disp);
+  font-family: var(--ff-serif);
   font-style: italic;
   font-size: clamp(1.1rem, 1rem + .5vw, 1.35rem);
   line-height: 1.5;
@@ -605,7 +610,7 @@ section[id], [id="kontakt"] { scroll-margin-top: 84px; }
   margin: 2rem 0;
   padding-left: 1.5rem;
   border-left: 2px solid var(--chartreuse);
-  font-family: var(--ff-disp);
+  font-family: var(--ff-serif);
   font-style: italic;
   font-size: clamp(1.15rem, .95rem + .8vw, 1.5rem);
   line-height: 1.42;
