@@ -58,6 +58,8 @@
       svc3P: 'Naučíme vás vázat. Pro začátečníky, party i firmy — ve skupině nebo jeden na jednoho.',
       svc4T: 'Rozvoz po Plzni',
       svc4P: 'Vozíme každý den od 9:00 do 20:00. Čas doručení si zarezervujete dopředu, ať kytice dorazí ve správnou chvíli.',
+      svc5T: 'Květinové předplatné',
+      svc5P: 'Kytice pravidelně domů, do kanceláře nebo jako dárek — 2–4× měsíčně. Velikosti S 750 / M 1 200 / L 1 500 Kč.',
       svcAlt: 'Podzimní kytice z růží, karafiátů a eukalyptu převázaná hedvábnou stuhou',
 
       /* --- ceník --- */
@@ -83,6 +85,7 @@
       pr5: 'Výzdoba svatby či akce', pr5v: 'individuálně',
       pr6: 'Kurz vázání, workshop', pr6v: 'na dotaz',
       pr7: 'Rozvoz po Plzni (9–20 h)', pr7v: 'od 2 000 Kč zdarma · jinak dle vzdálenosti',
+      pr8: 'Květinové předplatné (2–4× měsíčně)', pr8v: 'S 750 · M 1 200 · L 1 500 Kč',
       prNote: 'Přesnou cenu vždy potvrdíme předem — telefonicky nebo ve formuláři níže.',
 
       /* --- galerie --- */
@@ -211,7 +214,8 @@
       fmOpt2: '1 000 – 2 000 Kč',
       fmOpt3: 'od 2 000 Kč',
       fmOpt4: 'svatba — individuálně',
-      fmOpt5: 'ještě nevím',
+      fmOpt5: 'květinové předplatné',
+      fmOpt6: 'ještě nevím',
       fmSend: 'Odeslat poptávku',
       fmOk: 'Děkujeme! Poptávka odešla — ozveme se co nejdřív.',
 
@@ -279,6 +283,8 @@
       svc3P: 'Навчимо вас в’язати. Для початківців, компаній і корпоративів — у групі або індивідуально.',
       svc4T: 'Доставка по Пльзні',
       svc4P: 'Возимо щодня з 9:00 до 20:00. Час доставки бронюєте наперед, щоб букет приїхав вчасно.',
+      svc5T: 'Квіткова підписка',
+      svc5P: 'Букети регулярно — додому, в офіс або на подарунок, 2–4 рази на місяць. Розміри S 750 / M 1 200 / L 1 500 Kč.',
       svcAlt: 'Осінній букет із троянд, гвоздик та евкаліпта, перев’язаний шовковою стрічкою',
 
       budEyebrow: 'Як замовити',
@@ -303,6 +309,7 @@
       pr5: 'Оформлення весілля чи події', pr5v: 'індивідуально',
       pr6: 'Курс в’язання, воркшоп', pr6v: 'за запитом',
       pr7: 'Доставка по Пльзні (9–20)', pr7v: 'від 2 000 Kč безкоштовно · інакше за відстанню',
+      pr8: 'Квіткова підписка (2–4 на місяць)', pr8v: 'S 750 · M 1 200 · L 1 500 Kč',
       prNote: 'Точну ціну завжди підтверджуємо заздалегідь — телефоном або у формі нижче.',
 
       galEyebrow: 'Останні роботи',
@@ -425,7 +432,8 @@
       fmOpt2: '1 000 – 2 000 Kč',
       fmOpt3: 'від 2 000 Kč',
       fmOpt4: 'весілля — індивідуально',
-      fmOpt5: 'ще не знаю',
+      fmOpt5: 'квіткова підписка',
+      fmOpt6: 'ще не знаю',
       fmSend: 'Надіслати запит',
       fmOk: 'Дякуємо! Запит надіслано — відповімо якнайшвидше.',
 

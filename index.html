@@ -30,7 +30,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Didact+Gothic&family=Pinyon+Script&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=7">
+<link rel="stylesheet" href="assets/css/style.css?v=8">
 
 <script type="application/ld+json">
 {
@@ -86,13 +86,14 @@
 
 <!-- Dekorativní znak z brand guide — tulipán, použit přes <use> -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
-  <symbol id="orn-tulip" viewBox="0 0 120 96">
-    <path d="M60 6C51 20 50 38 60 52C70 38 69 20 60 6Z"/>
-    <path d="M60 52C50 46 42 32 44 16C55 26 60 38 60 52Z"/>
-    <path d="M60 52C70 46 78 32 76 16C65 26 60 38 60 52Z"/>
-    <path d="M58 54C44 60 30 58 22 48C14 38 20 28 30 30C37 31.5 39 40 33 43"/>
-    <path d="M62 54C76 60 90 58 98 48C106 38 100 28 90 30C83 31.5 81 40 87 43"/>
-    <path d="M60 58C58 63 58 68 60 73C62 68 62 63 60 58Z"/>
+  <symbol id="orn-tulip" viewBox="0 0 200 201">
+    <path d="M100 2C92 14 84 28 84 42C84 52 92 55 100 60C112 67 120 92 126 122C129 134 112 150 100 158"/>
+    <path d="M100 2C108 14 116 28 116 42C116 52 108 55 100 60C88 67 80 92 74 122C71 134 88 150 100 158"/>
+    <path d="M55 29C54 40 53.5 52 52 68C51 76 46 78.5 40.7 79C37.5 83 37 95 38 103C39 110 44 114 48.1 115C51.5 116.5 53.5 118.5 53 121.5C52.5 124 49.5 125.2 47.5 123.5"/>
+    <path d="M145 29C146 40 146.5 52 148 68C149 76 154 78.5 159.3 79C162.5 83 163 95 162 103C161 110 156 114 151.9 115C148.5 116.5 146.5 118.5 147 121.5C147.5 124 150.5 125.2 152.5 123.5"/>
+    <path d="M58 66C48 66.5 34 70 26 77C12 87 2 96 2 104C2 114 6 122 12 128C18 136 26 141 34 144C44 148 54 151 60 151C74 152 90 154.5 96.5 157.5C97.2 159 97.2 160 97 161C96.5 167 92 172.5 84 175.5C72 178.5 56 177 50 169C46.5 164 48.5 159 55 156C59.5 154.2 64.5 153.6 68 154"/>
+    <path d="M142 66C152 66.5 166 70 174 77C188 87 198 96 198 104C198 114 194 122 188 128C182 136 174 141 166 144C156 148 146 151 140 151C126 152 110 154.5 103.5 157.5C102.8 159 102.8 160 103 161C103.5 167 108 172.5 116 175.5C128 178.5 144 177 150 169C153.5 164 151.5 159 145 156C140.5 154.2 135.5 153.6 132 154"/>
+    <path d="M100 158C95.5 165 91 176 91 187C91 193 95 197.5 100 199C105 197.5 109 193 109 187C109 176 104.5 165 100 158Z"/>
   </symbol>
 </svg>
 
@@ -215,6 +216,11 @@
         <p class="card__p" data-i18n="svc4P">Vozíme každý den od 9:00 do 20:00. Čas doručení si zarezervujete dopředu, ať kytice dorazí ve správnou chvíli.</p>
       </article>
 
+      <article class="card">
+        <h3 class="card__t" data-i18n="svc5T">Květinové předplatné</h3>
+        <p class="card__p" data-i18n="svc5P">Kytice pravidelně domů, do kanceláře nebo jako dárek — 2–4× měsíčně. Velikosti S 750 / M 1 200 / L 1 500 Kč.</p>
+      </article>
+
       <figure class="cards__photo">
         <picture>
           <source srcset="assets/img/gallery/kytice-08.webp" type="image/webp">
@@ -269,6 +275,7 @@
           <tr><th scope="row" data-i18n="pr5">Výzdoba svatby či akce</th><td data-i18n="pr5v">individuálně</td></tr>
           <tr><th scope="row" data-i18n="pr6">Kurz vázání, workshop</th><td data-i18n="pr6v">na dotaz</td></tr>
           <tr><th scope="row" data-i18n="pr7">Rozvoz po Plzni (9–20 h)</th><td data-i18n="pr7v">od 2 000 Kč zdarma · jinak dle vzdálenosti</td></tr>
+              <tr><th scope="row" data-i18n="pr8">Květinové předplatné (2–4× měsíčně)</th><td data-i18n="pr8v">S 750 · M 1 200 · L 1 500 Kč</td></tr>
         </tbody>
       </table>
       <p class="tbl__note" data-i18n="prNote">Přesnou cenu vždy potvrdíme předem — telefonicky nebo ve formuláři níže.</p>
@@ -443,7 +450,8 @@
               <option data-i18n="fmOpt2">1 000 – 2 000 Kč</option>
               <option data-i18n="fmOpt3">od 2 000 Kč</option>
               <option data-i18n="fmOpt4">svatba — individuálně</option>
-              <option data-i18n="fmOpt5">ještě nevím</option>
+              <option data-i18n="fmOpt5">květinové předplatné</option>
+              <option data-i18n="fmOpt6">ještě nevím</option>
             </select>
           </div>
           <div class="form__row form__row--full">
@@ -574,7 +582,7 @@
   <button class="lb__nav lb__nav--next" id="lbNext" type="button" data-i18n-aria="lbNext" aria-label="Další fotka">&#8250;</button>
 </div>
 
-<script src="assets/js/i18n.js?v=7" defer></script>
-<script src="assets/js/main.js?v=7" defer></script>
+<script src="assets/js/i18n.js?v=8" defer></script>
+<script src="assets/js/main.js?v=8" defer></script>
 </body>
 </html>

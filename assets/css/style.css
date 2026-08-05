@@ -127,9 +127,9 @@ section[id], [id="kontakt"] { scroll-margin-top: 84px; }
 .orn {
   display: block;
   /* vnější <svg> nemá viewBox (nese ho <symbol>) — poměr stran drží CSS */
-  aspect-ratio: 120 / 96;
+  aspect-ratio: 200 / 201;
   height: auto;
-  fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round;
+  fill: none; stroke: currentColor; stroke-width: 3.5; stroke-linecap: round;
 }
 .orn--divider {
   width: 44px; height: auto;
@@ -414,8 +414,8 @@ section[id], [id="kontakt"] { scroll-margin-top: 84px; }
 
 @media (min-width: 1000px) {
   .cards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .cards__photo { grid-column: 3; grid-row: 1 / span 2; }
-  .cards__photo img { aspect-ratio: auto; }
+  /* 5 karet + fotka = 6 dlaždic, fotka vpravo dole */
+  .cards__photo img { aspect-ratio: auto; height: 100%; }
 }
 
 /* ---------- 10. Ceník ---------- */
