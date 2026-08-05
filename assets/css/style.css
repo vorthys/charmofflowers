@@ -583,10 +583,17 @@ section[id], [id="kontakt"] { scroll-margin-top: 84px; }
 .story__orn {
   position: absolute;
   right: 0; bottom: -2rem;
-  width: clamp(120px, 16vw, 200px);
+  width: clamp(140px, 18vw, 230px);
   color: var(--chartreuse);
   opacity: .14;
   pointer-events: none;
+}
+/* přesný znak z brand guide — přes CSS masku, aby šel obarvit */
+.story__orn--znak {
+  aspect-ratio: 561 / 559;
+  background: var(--chartreuse);
+  -webkit-mask: url(../img/znak.svg) center / contain no-repeat;
+  mask: url(../img/znak.svg) center / contain no-repeat;
 }
 .story__photo { margin: 0; }
 .story__photo img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
