@@ -10,6 +10,23 @@
      textura, jednoduchost
    ========================================================= */
 
+/* ---------- 0b. FIREMNÍ FONTY (čeká na soubory od klientky) ----------
+   Až dorazí TT Drugs / Abigail s webovou licencí, nahrát je do
+   assets/fonts/ a odkomentovat. Zásobníky níže je pak samy použijí.
+   Návod: assets/fonts/README.md
+
+@font-face {
+  font-family: "TT Drugs";
+  src: url("../fonts/TTDrugs-Regular.woff2") format("woff2");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Abigail";
+  src: url("../fonts/Abigail-Regular.woff2") format("woff2");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+---------------------------------------------------------------------- */
+
 /* ---------- 1. Tokeny ---------- */
 :root {
   /* Brand guide */
@@ -31,14 +48,14 @@
   --hair-d:     rgba(219, 217, 134, .22);
 
   /* Type */
-  --ff-logo: "Bodoni Moda", "Didot", Georgia, serif;
+  --ff-logo: "Abigail", "Bodoni Moda", "Didot", Georgia, serif;
   /* Cely web mluvi geometricky (TT Drugs ~ Didact Gothic);
      serifova Abigail ~ Playfair zustava jen v kurzivnich akcentech */
-  --ff-disp: "Didact Gothic", "Jost", "Segoe UI", system-ui, sans-serif;
-  --ff-serif: "Playfair Display", "Bodoni Moda", Georgia, serif;
+  --ff-disp: "TT Drugs", "Didact Gothic", "Jost", "Segoe UI", system-ui, sans-serif;
+  --ff-serif: "Abigail", "Playfair Display", "Bodoni Moda", Georgia, serif;
   /* Drugs z brand guide (geometrický grotesk ve stylu samolepek) —
      nejbližší volný řez s češtinou i ukrajinštinou je Didact Gothic */
-  --ff-body: "Didact Gothic", "Jost", "Segoe UI", system-ui, sans-serif;
+  --ff-body: "TT Drugs", "Didact Gothic", "Jost", "Segoe UI", system-ui, sans-serif;
   --ff-script: "Pinyon Script", cursive;
 
   /* Rhythm */
