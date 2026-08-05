@@ -1060,12 +1060,29 @@ section[id], [id="kontakt"] { scroll-margin-top: 84px; }
 }
 
 @media (max-width: 760px) {
+  /* telefon: kratší dech sekcí, menší hero, větší terče */
+  :root { --sec-y: 3.4rem; }
+
   .burger { display: block; }
   .site-head__cta { display: none; }
   .foot { padding-bottom: 5.5rem; }
   .chat__fab span { display: none; }
   .chat__fab { padding: .95rem; }
   .chat__ico { width: 1.5em; height: 1.5em; }
+
+  .hero__in { padding-top: 2.2rem; padding-bottom: 3rem; gap: 1.8rem; }
+  .hero__frame img { aspect-ratio: 4 / 3.2; }
+  .hero__facts { margin-top: 1.6rem; padding-top: 1.1rem; }
+  .hero__photo figcaption { margin-top: 1rem; }
+
+  .card { padding: 1.25rem 1.2rem; }
+  .story__photo img { aspect-ratio: 4 / 3; }
+  .contact__map iframe { min-height: 240px; }
+
+  .lang__b { padding: .6rem .25rem; }
+  .link-ig, .info__link { padding-block: .4rem; }
+  .socials a { display: inline-block; padding-block: .25rem; }
+  .chip { padding: .65rem 1.05rem; }
 
   .lang { margin-left: auto; border-left: 0; padding-left: 0; }
 
@@ -1112,7 +1129,24 @@ section[id], [id="kontakt"] { scroll-margin-top: 84px; }
 @media (max-width: 620px) {
   .cards { grid-template-columns: 1fr; }
   .cards__photo { grid-column: auto; }
-  .cards__photo img { aspect-ratio: 4 / 3; }
+
+  /* katalog: 2 kompaktní sloupce místo jednoho obřího */
+  .kat { grid-template-columns: repeat(2, 1fr); gap: .6rem; }
+  .kat-item__body { padding: .75rem .8rem .85rem; }
+  .kat-item__t { font-size: .98rem; }
+  .kat-item__f { font-size: .74rem; margin-bottom: .6rem; }
+  .kat-item__row { flex-wrap: wrap; gap: .3rem .6rem; padding-top: .55rem; }
+  .kat-item__price { font-size: .92rem; }
+  .kat-item__tag { left: .5rem; top: .5rem; padding: .22rem .5rem; font-size: .58rem; }
+}
+
+@media (max-width: 480px) {
+  /* tabulka ceníku: dvě kolony se na 375 px tloukly (řádky 81 px) —
+     popisek a cena jdou pod sebe */
+  .tbl th, .tbl td { display: block; width: 100%; text-align: left; padding: 0; }
+  .tbl th { padding-top: .75rem; }
+  .tbl td { padding-bottom: .75rem; border-bottom: 1px solid var(--greige); color: var(--moss); }
+  .tbl tr th { border-bottom: 0; }
 }
 
 @media (max-width: 420px) {
