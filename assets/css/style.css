@@ -33,7 +33,9 @@
   /* Type */
   --ff-logo: "Bodoni Moda", "Didot", Georgia, serif;
   --ff-disp: "Playfair Display", "Bodoni Moda", Georgia, serif;
-  --ff-body: "Jost", "Segoe UI", system-ui, -apple-system, sans-serif;
+  /* Drugs z brand guide (geometrický grotesk ve stylu samolepek) —
+     nejbližší volný řez s češtinou i ukrajinštinou je Didact Gothic */
+  --ff-body: "Didact Gothic", "Jost", "Segoe UI", system-ui, sans-serif;
   --ff-script: "Pinyon Script", cursive;
 
   /* Rhythm */

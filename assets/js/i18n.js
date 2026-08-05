@@ -72,7 +72,7 @@
       t2P: 'Narozeniny, výročí, poděkování. Velikost, u které se většina zákazníků zastaví.',
       t3C: 'Autorská kytice',
       t3V: 'od 2 000 Kč',
-      t3P: 'Velké vazby a květinové boxy, které jsou vidět už ode dveří.',
+      t3P: 'Velké vazby a květinové boxy, které jsou vidět už ode dveří. Rozvoz po Plzni zdarma.',
       order: 'Objednat',
 
       prT: 'Kompletní ceník',
@@ -82,7 +82,7 @@
       pr4: 'Svatební kytice', pr4v: 'individuálně',
       pr5: 'Výzdoba svatby či akce', pr5v: 'individuálně',
       pr6: 'Kurz vázání, workshop', pr6v: 'na dotaz',
-      pr7: 'Rozvoz po Plzni (9–20 h)', pr7v: 'podle vzdálenosti',
+      pr7: 'Rozvoz po Plzni (9–20 h)', pr7v: 'od 2 000 Kč zdarma · jinak dle vzdálenosti',
       prNote: 'Přesnou cenu vždy potvrdíme předem — telefonicky nebo ve formuláři níže.',
 
       /* --- galerie --- */
@@ -143,7 +143,7 @@
       st2T: 'Zavolejte nebo napište',
       st2P: 'Telefon 723 477 375, zpráva na Instagramu, nebo poptávkový formulář. Domluvíme detaily a cenu.',
       st3T: 'Vyzvednete, nebo doručíme',
-      st3P: 'Na Pražské 43, nebo rozvoz po Plzni a okolí — šetrně a s péčí, od 30 do 60 minut.',
+      st3P: 'Na Pražské 43, nebo rozvoz po Plzni a okolí — šetrně a s péčí, od 30 do 60 minut. Od 2 000 Kč po Plzni zdarma.',
       katFormBtn: 'Poslat poptávku',
       katIgBtn: 'Aktuální kytice na Instagramu',
       katLinkBtn: 'Prohlédnout katalog kytic',
@@ -174,7 +174,7 @@
       q1: 'Jak rychle uvážete kytici?',
       a1: 'Zavolejte nebo napište — domluvíme se, kdy bude kytice připravená. U větších vazeb a květinových boxů počítejte raději den či dva dopředu.',
       q2: 'Rozvážíte květiny v konkrétní čas?',
-      a2: 'Ano, rozvážíme po Plzni a okolí každý den od 9:00 do 20:00 — obvykle do 30 až 60 minut. Čas doručení si zarezervujte předem, cenu rozvozu potvrdíme podle vzdálenosti.',
+      a2: 'Ano, rozvážíme po Plzni a okolí každý den od 9:00 do 20:00 — obvykle do 30 až 60 minut. Při objednávce od 2 000 Kč je rozvoz po Plzni zdarma, jinak cenu potvrdíme podle vzdálenosti.',
       q3: 'Kdy se ozvat kvůli svatební kytici?',
       a3: 'Čím dřív, tím líp — termíny rezervujeme s předstihem. Na konzultaci probereme styl, barvy i výzdobu obřadu a tabule.',
       q4: 'Domluvím se u vás ukrajinsky nebo anglicky?',
@@ -241,10 +241,10 @@
 
     uk: {
       katDocTitle: 'Каталог букетів — Charm of Flowers Пльзень',
-      katDocDesc: 'Каталог букетів квіткової крамниці Charm of Flowers у Пльзні. Букети від 1 000 Kč, квіткові коробки, весільна флористика. Доставка по Пльзні від 30 до 60 хвилин.',
+      katDocDesc: 'Каталог букетів квіткової студії Charm of Flowers у Пльзні. Букети від 1 000 Kč, квіткові коробки, весільна флористика. Доставка по Пльзні від 30 до 60 хвилин.',
       navCatalog: 'Каталог',
       docTitle: 'Charm of Flowers — квіти у Пльзні | Букети на замовлення та доставка',
-      docDesc: 'Квіткова крамниця Charm of Flowers на Pražská 43 у Пльзні. Букети на замовлення, весільна флористика, курси в’язання та доставка квітів по Пльзні щодня з 9:00 до 20:00.',
+      docDesc: 'Квіткова студія Charm of Flowers на Pražská 43 у Пльзні. Букети на замовлення, весільна флористика, курси в’язання та доставка квітів по Пльзні щодня з 9:00 до 20:00.',
       ogLocale: 'uk_UA',
 
       skip: 'Перейти до вмісту',
@@ -254,13 +254,13 @@
       navAria: 'Головна навігація',
       langAria: 'Вибір мови',
 
-      heroEyebrow: 'Квіткова крамниця · Pražská 43, Пльзень',
-      heroH1: 'Charm of Flowers — квіткова крамниця у Пльзні',
+      heroEyebrow: 'Квіткова студія · Pražská 43, Пльзень',
+      heroH1: 'Charm of Flowers — квіткова студія у Пльзні',
       heroLede: 'Кожен букет має свою історію.',
       heroSub: 'В’яжемо на замовлення — від невеликого букета додому до весільного оформлення. Що не встигнете забрати, привеземо.',
       heroCta1: 'Залишити запит',
       heroCta2: 'Подзвонити 723 477 375',
-      fact1L: 'Магазин',
+      fact1L: 'Студія',
       fact1V: 'Пн–Сб 9:00–18:00 · Нд 10:00–15:00',
       fact2L: 'Доставка по Пльзні',
       fact2V: 'щодня 9:00–20:00 · зазвичай за 30–60 хвилин',
@@ -292,7 +292,7 @@
       t2P: 'День народження, річниця, подяка. Розмір, на якому зупиняється більшість.',
       t3C: 'Авторський букет',
       t3V: 'від 2 000 Kč',
-      t3P: 'Великі композиції та квіткові коробки, які видно вже від дверей.',
+      t3P: 'Великі композиції та квіткові коробки, які видно вже від дверей. Доставка по Пльзні безкоштовна.',
       order: 'Замовити',
 
       prT: 'Повний прайс',
@@ -302,20 +302,20 @@
       pr4: 'Весільний букет', pr4v: 'індивідуально',
       pr5: 'Оформлення весілля чи події', pr5v: 'індивідуально',
       pr6: 'Курс в’язання, воркшоп', pr6v: 'за запитом',
-      pr7: 'Доставка по Пльзні (9–20)', pr7v: 'залежно від відстані',
+      pr7: 'Доставка по Пльзні (9–20)', pr7v: 'від 2 000 Kč безкоштовно · інакше за відстанню',
       prNote: 'Точну ціну завжди підтверджуємо заздалегідь — телефоном або у формі нижче.',
 
       galEyebrow: 'Останні роботи',
       galTitle: 'З нашої майстерні',
       zoom: 'Збільшити фото',
-      g1: 'Великий букет рожевих півонієвих троянд перед входом до квіткової крамниці',
+      g1: 'Великий букет рожевих півонієвих троянд перед входом до квіткової студії',
       g2: 'Два букети блакитних гортензій, загорнуті в білий папір',
       g3: 'Наречена з весільним букетом із кремових троянд',
       g4: 'Квіткова коробка Charm of Flowers із трояндами, гортензією та герберами',
-      g5: 'Букет з антуріумів, троянд і ромашок перед входом до квіткової крамниці',
+      g5: 'Букет з антуріумів, троянд і ромашок перед входом до квіткової студії',
       g6: 'Весільний букет із білих еустом та евкаліпта в руках нареченої',
-      g7: 'Букет білих півонієвих троянд на прилавку магазину',
-      g8: 'Покупчиня з букетом гербер і троянд у магазині під світловим логотипом',
+      g7: 'Букет білих півонієвих троянд на прилавку студії',
+      g8: 'Покупчиня з букетом гербер і троянд у студії під світловим логотипом',
       g9: 'Квіткове оформлення на столиках у косметичному салоні',
       g10: 'Великий пастельний букет із троянд і гвоздик — колаж із кадром пари з білим букетом',
 
@@ -361,7 +361,7 @@
       st2T: 'Подзвоніть або напишіть',
       st2P: 'Телефон 723 477 375, повідомлення в Instagram або форма запиту. Узгодимо деталі й ціну.',
       st3T: 'Заберіть або доставимо',
-      st3P: 'На Pražská 43, або доставка по Пльзні та околицях — дбайливо, від 30 до 60 хвилин.',
+      st3P: 'На Pražská 43, або доставка по Пльзні та околицях — дбайливо, від 30 до 60 хвилин. Від 2 000 Kč по Пльзні безкоштовно.',
       katFormBtn: 'Надіслати запит',
       katIgBtn: 'Актуальні букети в Instagram',
       katLinkBtn: 'Переглянути каталог букетів',
@@ -375,9 +375,9 @@
       rvCta: 'Більше відгуків у Google',
 
       stEyebrow: 'Історія за назвою',
-      stTitle: 'Квіткова крамниця, що почалася вдруге',
-      stP1: 'Charm of Flowers веде <strong>Наталія Івасюк</strong>. Власну квіткову крамницю вона мала ще в Україні — доки не довелося залишити її через війну.',
-      stP2: 'З чоловіком вони знайшли новий дім у Пльзні. Наталія спершу працювала в місцевій крамниці, а потім відкрила свою — з нуля і вдруге в житті.',
+      stTitle: 'Квіткова студія, що почалася вдруге',
+      stP1: 'Charm of Flowers веде <strong>Наталія Івасюк</strong>. Власну квіткову студію вона мала ще в Україні — доки не довелося залишити її через війну.',
+      stP2: 'З чоловіком вони знайшли новий дім у Пльзні. Наталія спершу працювала в місцевій крамниці, а потім відкрила власну студію — з нуля і вдруге в житті.',
       stQ: 'Тому кожен наш букет має свою історію. Про сміливість почати заново — і про те, що краса вміє вирости навіть після важких випробувань.',
       stN1: 'відкриття у Пльзні',
       stN2: 'букетів в Instagram',
@@ -389,11 +389,11 @@
       q1: 'Як швидко зв’яжете букет?',
       a1: 'Подзвоніть або напишіть — домовимось, коли букет буде готовий. Для великих композицій і квіткових коробок краще день-два наперед.',
       q2: 'Чи доставляєте квіти на конкретний час?',
-      a2: 'Так, розвозимо по Пльзні та околицях щодня з 9:00 до 20:00 — зазвичай за 30–60 хвилин. Час доставки бронюйте заздалегідь, ціну підтвердимо залежно від відстані.',
+      a2: 'Так, розвозимо по Пльзні та околицях щодня з 9:00 до 20:00 — зазвичай за 30–60 хвилин. Від 2 000 Kč доставка по Пльзні безкоштовна, інакше ціну підтвердимо за відстанню.',
       q3: 'Коли звертатися щодо весільного букета?',
       a3: 'Що раніше, то краще — дати бронюємо заздалегідь. На консультації обговоримо стиль, кольори та оформлення церемонії і столів.',
       q4: 'Чи можна спілкуватися українською або англійською?',
-      a4: 'Так. Спілкуємось чеською, англійською та українською — у крамниці, телефоном і в Instagram.',
+      a4: 'Так. Спілкуємось чеською, англійською та українською — у студії, телефоном і в Instagram.',
       q5: 'Як проходять курси в’язання?',
       a5: 'В’яжемо у групі або індивідуально — для початківців, компаній і фірм. Актуальні дати на нашому Instagram, або напишіть нам.',
 
@@ -438,7 +438,7 @@
       fCena: 'Ціна',
       fPrilez: 'Привід',
 
-      ftShop: 'Магазин',
+      ftShop: 'Студія',
       ftContact: 'Контакти',
       ftSocial: 'Соцмережі',
       toTop: 'Нагору',
@@ -450,6 +450,14 @@
       callBar: 'Зателефонувати'
     }
   };
+
+  /* Výchozí texty žijí tady. Admin panel je může přepsat souborem
+     assets/data/texty.json — co v něm je, vyhrává nad slovníkem.
+     Web tak funguje i bez toho souboru a admin nemůže rozbít syntax. */
+  window.COF_TEXTS = DICT;
+
+  var overrides = null;
+  var current = null;
 
   var STORE = 'cof-lang';
   var DEFAULT = 'cs';
@@ -473,8 +481,13 @@
   }
 
   function apply(lang) {
+    current = lang;
     var d = DICT[lang] || DICT[DEFAULT];
-    var t = function (k) { return d[k] != null ? d[k] : k; };
+    var o = (overrides && overrides[lang]) || {};
+    var t = function (k) {
+      if (o[k] != null && o[k] !== '') return o[k];
+      return d[k] != null ? d[k] : k;
+    };
 
     document.documentElement.lang = lang === 'uk' ? 'uk' : 'cs';
     /* katalog.html má vlastní titulek — pozná se podle <body data-page> */
@@ -533,5 +546,14 @@
     if (b) apply(b.getAttribute('data-lang'));
   });
 
+  /* admin stránka slovník jen čte, nic nepřepisuje */
+  if (document.body && document.body.getAttribute('data-page') === 'admin') return;
+
   apply(pick());
+
+  /* texty upravené v admin panelu (pokud existují) */
+  fetch('assets/data/texty.json', { cache: 'no-cache' })
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (o) { if (o) { overrides = o; apply(current); } })
+    .catch(function () { /* soubor zatím není — v pořádku */ });
 })();

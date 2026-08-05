@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Správa katalogu — Charm of Flowers</title>
+<title>Správa webu — Charm of Flowers</title>
 <meta name="robots" content="noindex, nofollow">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Didact+Gothic&display=swap" rel="stylesheet">
 <style>
   :root {
     --green:#102713; --green-2:#1c3a22; --chartreuse:#dbd986; --moss:#565a20;
@@ -14,203 +14,323 @@
     --ink:#102713; --ink60:rgba(16,39,19,.66); --ink40:rgba(16,39,19,.45);
   }
   * { box-sizing:border-box; }
-  body { margin:0; background:var(--bg); color:var(--ink); font:300 16px/1.6 Jost,system-ui,sans-serif; }
-  .wrap { max-width:960px; margin-inline:auto; padding:1.5rem; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:400 16px/1.6 "Didact Gothic",system-ui,sans-serif; }
+  .wrap { max-width:1060px; margin-inline:auto; padding:1.5rem 1.5rem 6rem; }
   h1 { font:400 2rem/1.1 "Playfair Display",serif; margin:0 0 .3rem; }
-  h2 { font:400 1.3rem/1.2 "Playfair Display",serif; margin:2.2rem 0 .8rem; }
+  h2 { font:400 1.35rem/1.2 "Playfair Display",serif; margin:0 0 .8rem; }
+  h3 { font:400 1.05rem/1.2 "Playfair Display",serif; margin:1.4rem 0 .6rem; }
   .hint { color:var(--ink60); font-size:.88rem; }
   .hint--ru { color:var(--ink40); font-size:.8rem; }
   .box { background:var(--card); border:1px solid var(--greige); padding:1.2rem; margin-top:1rem; }
-  label { display:block; font-size:.7rem; font-weight:500; letter-spacing:.14em; text-transform:uppercase; color:var(--moss); margin:0 0 .25rem; }
-  input[type=text], input[type=password], input[type=number], select, textarea {
+  label { display:block; font-size:.68rem; letter-spacing:.12em; text-transform:uppercase; color:var(--moss); margin:0 0 .25rem; }
+  input[type=text], input[type=password], select, textarea {
     width:100%; padding:.55rem .7rem; border:1px solid var(--greige); background:var(--bg);
-    font:inherit; font-size:1rem; border-radius:0;
+    font:inherit; font-size:1rem; border-radius:0; color:var(--ink);
   }
+  textarea { min-height:74px; resize:vertical; }
   input:focus, select:focus, textarea:focus { outline:none; border-color:var(--moss); background:#fff; }
   .row { display:grid; grid-template-columns:1fr 1fr; gap:.8rem; margin-bottom:.8rem; }
   .row--3 { grid-template-columns:1fr 1fr 1fr; }
-  @media (max-width:640px){ .row, .row--3 { grid-template-columns:1fr; } }
+  @media (max-width:680px){ .row, .row--3 { grid-template-columns:1fr; } }
   .btn { display:inline-flex; align-items:center; gap:.5rem; padding:.7rem 1.3rem; border:1px solid var(--green);
-    background:var(--green); color:#fff; font:500 .78rem/1 Jost; letter-spacing:.12em; text-transform:uppercase; cursor:pointer; }
+    background:var(--green); color:#fff; font:400 .8rem/1 "Didact Gothic"; letter-spacing:.1em; text-transform:uppercase; cursor:pointer; }
   .btn:hover { background:var(--green-2); }
   .btn--ghost { background:none; color:var(--green); }
   .btn--ghost:hover { background:rgba(16,39,19,.06); }
-  .btn--sm { padding:.45rem .8rem; font-size:.68rem; }
+  .btn--sm { padding:.45rem .8rem; font-size:.7rem; }
   .btn--danger { border-color:#8a2a2a; background:none; color:#8a2a2a; }
   .btn--danger:hover { background:rgba(138,42,42,.08); }
+  .btn[disabled] { opacity:.5; cursor:not-allowed; }
+
+  /* záložky */
+  .tabs { display:flex; gap:.4rem; flex-wrap:wrap; margin:1.4rem 0 0; border-bottom:1px solid var(--greige); }
+  .tab { padding:.7rem 1.2rem; background:none; border:1px solid transparent; border-bottom:0;
+    font:inherit; font-size:.85rem; letter-spacing:.06em; color:var(--ink60); cursor:pointer; }
+  .tab.is-on { background:var(--card); border-color:var(--greige); color:var(--ink); margin-bottom:-1px; }
+  .pane { display:none; }
+  .pane.is-on { display:block; }
+
+  /* položky katalogu */
   .item { border:1px solid var(--greige); background:var(--card); margin-bottom:1rem; }
   .item__head { display:flex; align-items:center; gap:.8rem; padding:.7rem 1rem; cursor:pointer; }
   .item__head img { width:44px; height:55px; object-fit:cover; background:var(--greige); }
   .item__head .noimg { width:44px; height:55px; display:flex; align-items:center; justify-content:center; background:var(--green); color:var(--chartreuse); font-size:1.2rem; }
-  .item__name { flex:1; font-weight:400; }
+  .item__name { flex:1; }
   .item__meta { font-size:.75rem; color:var(--ink40); }
   .item__body { display:none; padding:1rem; border-top:1px solid var(--greige); }
   .item.open .item__body { display:block; }
   .item.hidden-item { opacity:.55; }
   .occ { display:flex; flex-wrap:wrap; gap:.6rem .9rem; }
-  .occ label { display:flex; align-items:center; gap:.35rem; text-transform:none; letter-spacing:0; font-size:.9rem; font-weight:300; color:var(--ink); margin:0; }
-  .bar { position:sticky; bottom:0; background:var(--card); border-top:1px solid var(--greige); padding:.9rem 0; margin-top:2rem; display:flex; gap:.7rem; flex-wrap:wrap; align-items:center; }
-  #log { font-size:.85rem; white-space:pre-wrap; max-height:170px; overflow:auto; background:var(--green); color:var(--chartreuse); padding:.8rem 1rem; margin-top:.8rem; display:none; }
-  #log.show { display:block; }
+  .occ label { display:flex; align-items:center; gap:.35rem; text-transform:none; letter-spacing:0; font-size:.9rem; color:var(--ink); margin:0; }
   .flrow { display:flex; gap:.5rem; align-items:center; margin-bottom:.5rem; }
   .flrow input { flex:1; }
-  .pill { font-size:.68rem; letter-spacing:.12em; text-transform:uppercase; background:rgba(219,217,134,.35); padding:.2rem .55rem; }
-  .muted { color:var(--ink40); }
+
+  /* texty */
+  .txt-group { border:1px solid var(--greige); background:var(--card); margin-bottom:1rem; }
+  .txt-group > summary { padding:.8rem 1rem; cursor:pointer; font-family:"Playfair Display",serif; font-size:1.1rem; list-style:none; display:flex; justify-content:space-between; }
+  .txt-group > summary::-webkit-details-marker { display:none; }
+  .txt-group > summary::after { content:"+"; color:var(--moss); }
+  .txt-group[open] > summary::after { content:"−"; }
+  .txt-group__in { padding:0 1rem 1rem; border-top:1px solid var(--greige); }
+  .tfield { margin-top:1rem; }
+  .tfield__cols { display:grid; grid-template-columns:1fr 1fr; gap:.8rem; }
+  @media (max-width:680px){ .tfield__cols { grid-template-columns:1fr; } }
+  .tfield small { display:block; color:var(--ink40); font-size:.72rem; margin-top:.15rem; }
+
+  /* fotky */
+  .photos { display:grid; grid-template-columns:repeat(auto-fill,minmax(130px,1fr)); gap:.8rem; margin-top:1rem; }
+  .photo { border:1px solid var(--greige); background:var(--card); font-size:.72rem; }
+  .photo img { width:100%; aspect-ratio:4/5; object-fit:cover; display:block; }
+  .photo__b { padding:.4rem .5rem; word-break:break-all; }
+  .photo__acts { display:flex; gap:.3rem; padding:0 .5rem .5rem; }
+
+  .bar { position:fixed; left:0; right:0; bottom:0; z-index:50; background:var(--card); border-top:1px solid var(--greige);
+    padding:.8rem 1.5rem; display:flex; gap:.7rem; flex-wrap:wrap; align-items:center; }
+  #log { font-size:.85rem; white-space:pre-wrap; max-height:150px; overflow:auto; background:var(--green); color:var(--chartreuse); padding:.8rem 1rem; margin-top:.8rem; display:none; }
+  #log.show { display:block; }
+  .ok { color:#2f6b33; }
 </style>
 </head>
-<body>
+<body data-page="admin">
 <div class="wrap">
-  <h1>Správa katalogu</h1>
-  <p class="hint">Úprava kytic a filtrů na stránce <a href="katalog.html">katalog.html</a>. Změny se ukládají přímo do webu (GitHub) — projeví se do 1–2 minut po uložení.</p>
-  <p class="hint--ru">Редактор каталога: добавляйте букеты и фильтры, жмите «Uložit na web». Токен даёт Vorthys.</p>
+  <h1>Správa webu</h1>
+  <p class="hint">Katalog, texty a fotky webu <a href="index.html" target="_blank" rel="noopener">Charm of Flowers</a>. Uložené změny se na webu projeví do 1–2 minut.</p>
+  <p class="hint--ru">Панель управления: каталог, все тексты сайта и фото. Токен выдаёт Vorthys — вкладка «Nápověda».</p>
 
-  <div class="box" id="authBox">
-    <label for="token">GitHub token</label>
-    <input type="password" id="token" placeholder="github_pat_…" autocomplete="off">
-    <p class="hint" style="margin:.5rem 0 0">Fine-grained token s právem <b>Contents: Read &amp; write</b> jen pro repozitář <b>vorthys/charmofflowers</b>. Bez tokenu jde katalog jen prohlížet a exportovat.</p>
-    <div style="margin-top:.8rem; display:flex; gap:.7rem; flex-wrap:wrap; align-items:center">
-      <button class="btn" id="loadBtn">Načíst katalog</button>
-      <label style="display:flex;align-items:center;gap:.4rem;text-transform:none;letter-spacing:0;font-size:.85rem;font-weight:300;color:var(--ink60);margin:0">
-        <input type="checkbox" id="remember" style="width:auto"> zapamatovat token v tomto prohlížeči
-      </label>
+  <div class="box">
+    <div class="row" style="align-items:end">
+      <div>
+        <label for="token">GitHub token (přístupový klíč)</label>
+        <input type="password" id="token" placeholder="github_pat_…" autocomplete="off">
+      </div>
+      <div style="display:flex; gap:.7rem; align-items:center; flex-wrap:wrap">
+        <button class="btn" id="loadBtn">Načíst web</button>
+        <label style="display:flex;align-items:center;gap:.4rem;text-transform:none;letter-spacing:0;font-size:.85rem;color:var(--ink60);margin:0">
+          <input type="checkbox" id="remember" style="width:auto"> zapamatovat klíč
+        </label>
+      </div>
     </div>
+    <p class="hint" style="margin:.4rem 0 0">Bez klíče jde vše prohlížet, ale ne ukládat. <span class="hint--ru">Без ключа — только просмотр.</span></p>
   </div>
 
-  <div id="editor" style="display:none">
-    <h2>Filtry — příležitosti <span class="pill">zobrazí se jako čipy</span></h2>
-    <p class="hint">Nová příležitost se hned nabídne u každé kytice. Cena se filtruje podle pásem (do 1 000 / 1 000–2 000 / od 2 000) a needituje se tady.</p>
-    <div class="box" id="occList"></div>
+  <div id="app" style="display:none">
+    <div class="tabs" id="tabs">
+      <button class="tab is-on" data-t="katalog">Katalog</button>
+      <button class="tab" data-t="texty">Texty webu</button>
+      <button class="tab" data-t="fotky">Fotky</button>
+      <button class="tab" data-t="napoveda">Nápověda</button>
+    </div>
 
-    <h2>Kytice</h2>
-    <p class="hint">Klikněte na řádek pro úpravy. Šipkami měníte pořadí na stránce. „Skrýt" kytici schová, ale nesmaže — hodí se mimo sezónu.</p>
-    <div id="items"></div>
-    <button class="btn btn--ghost" id="addBtn">+ Přidat kytici</button>
+    <!-- ============ KATALOG ============ -->
+    <section class="pane is-on" id="pane-katalog">
+      <div class="box">
+        <h2>Příležitosti (čipy filtru)</h2>
+        <p class="hint">Nová příležitost se hned nabídne u každé kytice. <span class="hint--ru">Новые «поводы» сразу станут фильтрами.</span></p>
+        <div id="occList"></div>
+      </div>
+
+      <h2 style="margin-top:1.6rem">Kytice</h2>
+      <p class="hint">Klikněte na řádek pro úpravy. Šipkami měníte pořadí, „skrýt" schová kytici mimo sezónu (nesmaže ji).</p>
+      <div id="items"></div>
+      <button class="btn btn--ghost" id="addBtn">+ Přidat kytici</button>
+    </section>
+
+    <!-- ============ TEXTY ============ -->
+    <section class="pane" id="pane-texty">
+      <p class="hint" style="margin-top:1rem">Každé pole má dvě verze: <b>CZ</b> česky a <b>UA</b> ukrajinsky.
+        Prázdné pole = použije se původní text. <span class="hint--ru">Пустое поле — останется исходный текст.</span></p>
+      <div id="textGroups"></div>
+    </section>
+
+    <!-- ============ FOTKY ============ -->
+    <section class="pane" id="pane-fotky">
+      <div class="box">
+        <h2>Nahrát novou fotku</h2>
+        <p class="hint">Fotka se sama zmenší a převede do správných formátů (JPG + WebP). Pak ji vyberete u kytice v záložce Katalog.</p>
+        <div class="row--3 row" style="align-items:end">
+          <div>
+            <label for="phName">Název souboru (bez diakritiky)</label>
+            <input type="text" id="phName" placeholder="např. pivonky-cervenec">
+          </div>
+          <div>
+            <label for="phFile">Soubor</label>
+            <input type="file" id="phFile" accept="image/*">
+          </div>
+          <div><button class="btn" id="phUp">Nahrát</button></div>
+        </div>
+      </div>
+      <div class="photos" id="photos"></div>
+    </section>
+
+    <!-- ============ NÁPOVĚDA ============ -->
+    <section class="pane" id="pane-napoveda">
+      <div class="box">
+        <h2>Jak panel funguje</h2>
+        <p>Panel ukládá změny přímo do webu. Po „Uložit změny" se web sám přegeneruje — do minuty dvou jsou úpravy vidět. Nic se nedá nenávratně rozbít: každá změna se dá vrátit (napište Vorthysovi).</p>
+        <h3>Přístupový klíč (token)</h3>
+        <p>Klíč vám předá Vorthys, nebo si ho vytvoříte na GitHubu: <i>Settings → Developer settings → Fine-grained tokens → Generate new token</i> — přístup jen k repozitáři <b>vorthys/charmofflowers</b>, oprávnění <b>Contents: Read and write</b>.</p>
+        <h3>Běžné úkony</h3>
+        <p><b>Nová kytice:</b> Fotky → nahrát fotku → Katalog → Přidat kytici → vybrat fotku, vyplnit název a cenu → Uložit změny.<br>
+        <b>Kytice mimo sezónu:</b> Katalog → rozkliknout → Viditelnost „skrýt".<br>
+        <b>Změna otevírací doby či cen:</b> Texty webu → skupina Hero / Ceník.<br>
+        <b>Ukrajinská verze:</b> každé pole má sloupec UA — vyplňte oba.</p>
+        <h3>Kontakt</h3>
+        <p>Cokoliv dalšího (telefon, adresa, nové sekce, doména): <b>Vorthys</b> — web studio, Plzeň.</p>
+        <p class="hint--ru">Новый букет: «Fotky» → загрузить фото → «Katalog» → «+ Přidat kytici» → выбрать фото из списка, заполнить название и цену (обе колонки CZ и UA) → «Uložit změny» внизу. Скрыть сезонный букет: раскрыть его и «Viditelnost: skrýt». Часы работы и цены — вкладка «Texty webu».</p>
+      </div>
+    </section>
 
     <div class="bar">
-      <button class="btn" id="saveBtn">Uložit na web</button>
-      <button class="btn btn--ghost" id="exportBtn">Stáhnout JSON</button>
-      <label class="btn btn--ghost" style="margin:0">Nahrát JSON<input type="file" id="importFile" accept=".json" style="display:none"></label>
+      <button class="btn" id="saveBtn">Uložit změny</button>
+      <button class="btn btn--ghost" id="exportBtn">Záloha (stáhnout)</button>
       <span class="hint" id="dirty"></span>
+      <a class="hint" href="index.html" target="_blank" rel="noopener" style="margin-left:auto">otevřít web ↗</a>
     </div>
     <div id="log"></div>
   </div>
 </div>
 
+<datalist id="photoList"></datalist>
+
+<script src="assets/js/i18n.js?v=7"></script>
 <script>
 (function () {
   'use strict';
   var OWNER = 'vorthys', REPO = 'charmofflowers', BRANCH = 'main';
-  var DATA_PATH = 'assets/data/katalog.json';
   var API = 'https://api.github.com/repos/' + OWNER + '/' + REPO + '/contents/';
+  var F_KAT = 'assets/data/katalog.json';
+  var F_TXT = 'assets/data/texty.json';
+  var F_IMG = 'assets/img/gallery';
 
-  var data = null, sha = null, dirty = false;
+  var DEFAULTS = window.COF_TEXTS || { cs: {}, uk: {} };
+  var kat = null, txt = null;               /* data */
+  var shas = { kat: null, txt: null };
+  var dirty = { kat: false, txt: false };
+  var photos = [];
+
   var $ = function (id) { return document.getElementById(id); };
+  function log(m) { var el = $('log'); el.classList.add('show'); el.textContent += m + '\n'; el.scrollTop = el.scrollHeight; }
+  function markDirty(which) {
+    dirty[which] = true;
+    $('dirty').textContent = 'Neuložené změny: ' + (dirty.kat ? 'katalog ' : '') + (dirty.txt ? 'texty' : '');
+  }
+  function token() { return $('token').value.trim(); }
+  function headers() {
+    var h = { 'Accept': 'application/vnd.github+json' };
+    if (token()) h['Authorization'] = 'Bearer ' + token();
+    return h;
+  }
+  function b64e(str) { return btoa(String.fromCharCode.apply(null, new TextEncoder().encode(str))); }
+  function b64d(b64) { return new TextDecoder().decode(Uint8Array.from(atob(b64.replace(/\n/g, '')), function (c) { return c.charCodeAt(0); })); }
+  function slug(s) {
+    return String(s).toLowerCase()
+      .replace(/[áàâä]/g,'a').replace(/[čç]/g,'c').replace(/ď/g,'d').replace(/[éěè]/g,'e')
+      .replace(/[íì]/g,'i').replace(/ň/g,'n').replace(/[óò]/g,'o').replace(/ř/g,'r')
+      .replace(/š/g,'s').replace(/ť/g,'t').replace(/[úůù]/g,'u').replace(/ý/g,'y').replace(/ž/g,'z')
+      .replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+  }
+  function escH(s) { return String(s == null ? '' : s).replace(/[&<>]/g, function (c) { return { '&':'&amp;','<':'&lt;','>':'&gt;' }[c]; }); }
+  function escA(s) { return escH(s).replace(/"/g, '&quot;'); }
 
   try {
     var saved = localStorage.getItem('cof-admin-token');
     if (saved) { $('token').value = saved; $('remember').checked = true; }
   } catch (e) {}
 
-  function log(msg) {
-    var el = $('log');
-    el.classList.add('show');
-    el.textContent += msg + '\n';
-    el.scrollTop = el.scrollHeight;
-  }
-  function markDirty() {
-    dirty = true;
-    $('dirty').textContent = 'Neuložené změny';
-  }
-  function headers() {
-    var h = { 'Accept': 'application/vnd.github+json' };
-    var t = $('token').value.trim();
-    if (t) h['Authorization'] = 'Bearer ' + t;
-    return h;
-  }
-  /* base64 pro unicode */
-  function b64encode(str) {
-    return btoa(String.fromCharCode.apply(null, new TextEncoder().encode(str)));
-  }
-  function b64decode(b64) {
-    return new TextDecoder().decode(Uint8Array.from(atob(b64.replace(/\n/g, '')), function (c) { return c.charCodeAt(0); }));
-  }
+  /* ---------- záložky ---------- */
+  $('tabs').addEventListener('click', function (e) {
+    var t = e.target.closest('.tab'); if (!t) return;
+    document.querySelectorAll('.tab').forEach(function (x) { x.classList.toggle('is-on', x === t); });
+    document.querySelectorAll('.pane').forEach(function (p) { p.classList.toggle('is-on', p.id === 'pane-' + t.getAttribute('data-t')); });
+    if (t.getAttribute('data-t') === 'fotky' && !photos.length) loadPhotos();
+  });
 
   /* ---------- načtení ---------- */
   $('loadBtn').addEventListener('click', function () {
     try {
-      if ($('remember').checked) localStorage.setItem('cof-admin-token', $('token').value.trim());
+      if ($('remember').checked) localStorage.setItem('cof-admin-token', token());
       else localStorage.removeItem('cof-admin-token');
     } catch (e) {}
-    var t = $('token').value.trim();
-    var p = t
-      ? fetch(API + DATA_PATH + '?ref=' + BRANCH, { headers: headers() })
-          .then(function (r) { if (!r.ok) throw new Error('GitHub API ' + r.status + ' — zkontrolujte token'); return r.json(); })
-          .then(function (j) { sha = j.sha; return JSON.parse(b64decode(j.content)); })
-      : fetch(DATA_PATH + '?nocache=' + Math.random()).then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); });
-    p.then(function (d) {
-      data = d;
-      $('editor').style.display = 'block';
-      renderAll();
-      log(t ? 'Načteno z GitHubu (sha ' + String(sha).slice(0, 7) + ') — ukládání povoleno.' : 'Načteno jen pro čtení (bez tokenu nejde ukládat na web).');
+
+    var getFile = function (path) {
+      if (token()) {
+        return fetch(API + path + '?ref=' + BRANCH, { headers: headers() })
+          .then(function (r) {
+            if (r.status === 404) return { missing: true };
+            if (!r.ok) throw new Error('GitHub ' + r.status + ' u ' + path);
+            return r.json().then(function (j) { return { sha: j.sha, data: JSON.parse(b64d(j.content)) }; });
+          });
+      }
+      return fetch(path + '?nc=' + Math.random())
+        .then(function (r) { return r.ok ? r.json().then(function (d) { return { data: d }; }) : { missing: true }; });
+    };
+
+    Promise.all([getFile(F_KAT), getFile(F_TXT)]).then(function (res) {
+      if (res[0].missing) throw new Error('katalog.json nenalezen');
+      kat = res[0].data; shas.kat = res[0].sha || null;
+      shas.txt = res[1].missing ? null : (res[1].sha || null);
+      var over = res[1].missing ? { cs: {}, uk: {} } : res[1].data;
+      /* merged texty = výchozí slovník + přepisy */
+      txt = { cs: {}, uk: {} };
+      ['cs', 'uk'].forEach(function (L) {
+        Object.keys(DEFAULTS[L]).forEach(function (k) { txt[L][k] = DEFAULTS[L][k]; });
+        Object.keys(over[L] || {}).forEach(function (k) { if (over[L][k] != null && over[L][k] !== '') txt[L][k] = over[L][k]; });
+      });
+      $('app').style.display = 'block';
+      renderKat(); renderTexts();
+      log(token()
+        ? 'Načteno z GitHubu — ukládání povoleno.'
+        : 'Načteno jen pro čtení (bez klíče nejde ukládat).');
     }).catch(function (e) { log('Chyba: ' + e.message); });
   });
 
-  /* ---------- render ---------- */
-  function renderAll() { renderOcc(); renderItems(); }
+  /* ================= KATALOG ================= */
+  function renderKat() { renderOcc(); renderItems(); }
 
   function renderOcc() {
-    var box = $('occList');
-    box.innerHTML = '';
-    data.filters.prilezitost.forEach(function (f, i) {
-      var row = document.createElement('div');
-      row.className = 'flrow';
+    var box = $('occList'); box.innerHTML = '';
+    kat.filters.prilezitost.forEach(function (f, i) {
+      var row = document.createElement('div'); row.className = 'flrow';
       row.innerHTML =
-        '<input type="text" value="' + escAttr(f.cs) + '" data-k="cs" placeholder="česky">' +
-        '<input type="text" value="' + escAttr(f.uk) + '" data-k="uk" placeholder="українською">' +
+        '<input type="text" value="' + escA(f.cs) + '" data-k="cs" placeholder="česky">' +
+        '<input type="text" value="' + escA(f.uk) + '" data-k="uk" placeholder="українською">' +
         '<button class="btn btn--sm btn--danger" type="button">smazat</button>';
       row.querySelectorAll('input').forEach(function (inp) {
         inp.addEventListener('input', function () {
           f[inp.getAttribute('data-k')] = inp.value;
           if (inp.getAttribute('data-k') === 'cs') f.id = slug(inp.value) || f.id;
-          markDirty();
+          markDirty('kat');
         });
       });
       row.querySelector('button').addEventListener('click', function () {
-        data.filters.prilezitost.splice(i, 1);
-        data.items.forEach(function (it) {
-          it.occasions = (it.occasions || []).filter(function (o) { return o !== f.id; });
-        });
-        markDirty(); renderAll();
+        kat.filters.prilezitost.splice(i, 1);
+        kat.items.forEach(function (it) { it.occasions = (it.occasions || []).filter(function (o) { return o !== f.id; }); });
+        markDirty('kat'); renderKat();
       });
       box.appendChild(row);
     });
     var add = document.createElement('button');
-    add.className = 'btn btn--ghost btn--sm';
-    add.type = 'button';
-    add.textContent = '+ přidat příležitost';
+    add.className = 'btn btn--ghost btn--sm'; add.type = 'button'; add.textContent = '+ přidat příležitost';
     add.addEventListener('click', function () {
-      data.filters.prilezitost.push({ id: 'nova-' + Date.now(), cs: '', uk: '' });
-      markDirty(); renderOcc();
+      kat.filters.prilezitost.push({ id: 'nova-' + Date.now(), cs: '', uk: '' });
+      markDirty('kat'); renderOcc();
     });
     box.appendChild(add);
   }
 
   function renderItems() {
-    var box = $('items');
-    box.innerHTML = '';
-    data.items.forEach(function (it, i) { box.appendChild(itemEl(it, i)); });
+    var box = $('items'); box.innerHTML = '';
+    kat.items.forEach(function (it) { box.appendChild(itemEl(it)); });
   }
 
-  function itemEl(it, i) {
+  function itemEl(it) {
     var el = document.createElement('div');
     el.className = 'item' + (it.visible === false ? ' hidden-item' : '');
-    var thumb = it.img
-      ? '<img src="' + escAttr(it.img) + '.jpg" alt="">'
-      : '<span class="noimg">✿</span>';
+    var thumb = it.img ? '<img src="' + escA(it.img) + '.jpg" alt="" loading="lazy">' : '<span class="noimg">✿</span>';
     el.innerHTML =
       '<div class="item__head">' + thumb +
-      '<span class="item__name">' + escHtml((it.name && it.name.cs) || '(bez názvu)') + '</span>' +
-      '<span class="item__meta">' + escHtml((it.price && it.price.cs) || '') + (it.visible === false ? ' · skryto' : '') + '</span>' +
+      '<span class="item__name">' + escH((it.name && it.name.cs) || '(bez názvu)') + '</span>' +
+      '<span class="item__meta">' + escH((it.price && it.price.cs) || '') + (it.visible === false ? ' · skryto' : '') + '</span>' +
       '<span class="item__meta">▾</span></div>' +
       '<div class="item__body"></div>';
 
@@ -222,21 +342,24 @@
 
     function buildBody() {
       var b = el.querySelector('.item__body');
-      var occ = data.filters.prilezitost.map(function (f) {
+      function fld(lbl, path, list) {
+        return '<div><label>' + escH(lbl) + '</label><input type="text" data-f="' + escA(path) + '"' + (list ? ' list="photoList"' : '') + '></div>';
+      }
+      var occ = kat.filters.prilezitost.map(function (f) {
         var on = (it.occasions || []).indexOf(f.id) !== -1;
-        return '<label><input type="checkbox" data-occ="' + escAttr(f.id) + '"' + (on ? ' checked' : '') + ' style="width:auto"> ' + escHtml(f.cs) + '</label>';
+        return '<label><input type="checkbox" data-occ="' + escA(f.id) + '"' + (on ? ' checked' : '') + ' style="width:auto"> ' + escH(f.cs) + '</label>';
       }).join('');
       b.innerHTML =
         '<div class="row">' +
         fld('Název (CZ)', 'name.cs') + fld('Назва (UA)', 'name.uk') +
         fld('Květiny (CZ)', 'flowers.cs') + fld('Квіти (UA)', 'flowers.uk') +
-        fld('Popis fotky (CZ)', 'alt.cs') + fld('Опис фото (UA)', 'alt.uk') +
+        fld('Popis fotky pro nevidomé (CZ)', 'alt.cs') + fld('Опис фото (UA)', 'alt.uk') +
         '</div>' +
         '<div class="row row--3">' +
-        '<div><label>Cenové pásmo</label><select data-f="tier">' +
+        '<div><label>Cenové pásmo (filtr)</label><select data-f="tier">' +
         '<option value="t1">do 1 000 Kč</option><option value="t2">1 000 – 2 000 Kč</option>' +
         '<option value="t3">od 2 000 Kč</option><option value="ind">individuálně</option>' +
-        '<option value="">— žádné (např. dle rozpočtu)</option></select></div>' +
+        '<option value="">— žádné</option></select></div>' +
         fld('Cena — text (CZ)', 'price.cs') + fld('Ціна — текст (UA)', 'price.uk') +
         '</div>' +
         '<div class="row row--3">' +
@@ -244,13 +367,12 @@
         '<option value="">žádný</option><option value="season">Sezónní</option>' +
         '<option value="wedding">Svatební</option><option value="box">Box</option>' +
         '<option value="decor">Výzdoba</option></select></div>' +
-        fld('Fotka — cesta bez přípony', 'img') +
+        fld('Fotka (vyberte ze seznamu)', 'img', true) +
         '<div><label>Viditelnost</label><select data-f="visible">' +
         '<option value="true">zobrazit</option><option value="false">skrýt</option></select></div>' +
         '</div>' +
-        '<label>Příležitosti</label><div class="occ">' + occ + '</div>' +
-        '<p class="hint" style="margin:.6rem 0 1rem">Fotka: nahrajte ji do <code>assets/img/gallery/</code> (jpg + webp se stejným názvem) a sem napište cestu bez přípony, např. <code>assets/img/gallery/kytice-14</code>. Nejsnáz: pošlete fotku Vorthysovi, připraví ji.</p>' +
-        '<div style="display:flex;gap:.5rem;flex-wrap:wrap">' +
+        '<label>Příležitosti (filtr)</label><div class="occ">' + occ + '</div>' +
+        '<div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1rem">' +
         '<button class="btn btn--sm btn--ghost" data-a="up">↑ výš</button>' +
         '<button class="btn btn--sm btn--ghost" data-a="down">↓ níž</button>' +
         '<button class="btn btn--sm btn--ghost" data-a="dup">duplikovat</button>' +
@@ -265,18 +387,21 @@
       }
       b.querySelectorAll('[data-f]').forEach(function (inp) {
         var f = inp.getAttribute('data-f');
-        var v = get(f);
         if (f === 'visible') inp.value = String(it.visible !== false);
-        else inp.value = v;
+        else inp.value = get(f);
         inp.addEventListener('input', function () {
           if (f === 'visible') it.visible = inp.value === 'true';
           else set(f, inp.value);
           if (f === 'tier') {
-            var map = { t1: ['do 1 000 Kč', 'до 1 000 Kč'], t2: ['1 000 – 2 000 Kč', '1 000 – 2 000 Kč'], t3: ['od 2 000 Kč', 'від 2 000 Kč'], ind: ['individuálně', 'індивідуально'] };
-            if (map[inp.value]) { set('price.cs', map[inp.value][0]); set('price.uk', map[inp.value][1]); b.querySelector('[data-f="price.cs"]').value = map[inp.value][0]; b.querySelector('[data-f="price.uk"]').value = map[inp.value][1]; }
+            var map = { t1:['do 1 000 Kč','до 1 000 Kč'], t2:['1 000 – 2 000 Kč','1 000 – 2 000 Kč'], t3:['od 2 000 Kč','від 2 000 Kč'], ind:['individuálně','індивідуально'] };
+            if (map[inp.value]) {
+              set('price.cs', map[inp.value][0]); set('price.uk', map[inp.value][1]);
+              b.querySelector('[data-f="price.cs"]').value = map[inp.value][0];
+              b.querySelector('[data-f="price.uk"]').value = map[inp.value][1];
+            }
           }
           if (f === 'name.cs') { it.id = slug(inp.value) || it.id; el.querySelector('.item__name').textContent = inp.value || '(bez názvu)'; }
-          markDirty();
+          markDirty('kat');
         });
       });
       b.querySelectorAll('[data-occ]').forEach(function (cb) {
@@ -285,96 +410,251 @@
           it.occasions = it.occasions || [];
           if (cb.checked) { if (it.occasions.indexOf(id) === -1) it.occasions.push(id); }
           else it.occasions = it.occasions.filter(function (o) { return o !== id; });
-          markDirty();
+          markDirty('kat');
         });
       });
       b.querySelectorAll('[data-a]').forEach(function (btn) {
         btn.addEventListener('click', function () {
           var a = btn.getAttribute('data-a');
-          var idx = data.items.indexOf(it);
-          if (a === 'del') data.items.splice(idx, 1);
-          if (a === 'up' && idx > 0) { data.items.splice(idx, 1); data.items.splice(idx - 1, 0, it); }
-          if (a === 'down' && idx < data.items.length - 1) { data.items.splice(idx, 1); data.items.splice(idx + 1, 0, it); }
-          if (a === 'dup') { var c = JSON.parse(JSON.stringify(it)); c.id = c.id + '-kopie'; data.items.splice(idx + 1, 0, c); }
-          markDirty(); renderItems();
+          var idx = kat.items.indexOf(it);
+          if (a === 'del') { if (!confirm('Opravdu smazat „' + ((it.name||{}).cs||'') + '"?')) return; kat.items.splice(idx, 1); }
+          if (a === 'up' && idx > 0) { kat.items.splice(idx, 1); kat.items.splice(idx - 1, 0, it); }
+          if (a === 'down' && idx < kat.items.length - 1) { kat.items.splice(idx, 1); kat.items.splice(idx + 1, 0, it); }
+          if (a === 'dup') { var c = JSON.parse(JSON.stringify(it)); c.id += '-kopie'; kat.items.splice(idx + 1, 0, c); }
+          markDirty('kat'); renderItems();
         });
       });
-      function fld(lbl, path) {
-        return '<div><label>' + escHtml(lbl) + '</label><input type="text" data-f="' + escAttr(path) + '"></div>';
-      }
     }
-    /* fld je definován uvnitř buildBody přes closure — viz výše */
     return el;
   }
 
   $('addBtn').addEventListener('click', function () {
-    data.items.push({
-      id: 'nova-kytice-' + Date.now(),
-      img: '',
+    kat.items.push({
+      id: 'nova-kytice-' + Date.now(), img: '',
       name: { cs: '', uk: '' }, flowers: { cs: '', uk: '' }, alt: { cs: '', uk: '' },
       tier: 't2', price: { cs: '1 000 – 2 000 Kč', uk: '1 000 – 2 000 Kč' },
       occasions: [], tag: '', cat: 'kytice', visible: true
     });
-    markDirty(); renderItems();
+    markDirty('kat'); renderItems();
     var last = $('items').lastElementChild;
-    if (last) last.querySelector('.item__head').click();
-    last.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    if (last) { last.querySelector('.item__head').click(); last.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
   });
 
-  /* ---------- uložení ---------- */
-  $('saveBtn').addEventListener('click', function () {
-    if (!$('token').value.trim()) { log('Bez tokenu nelze ukládat — použijte „Stáhnout JSON" a pošlete soubor Vorthysovi.'); return; }
-    if (!sha) { log('Katalog nebyl načtený přes GitHub — načtěte znovu s tokenem.'); return; }
-    var body = {
-      message: 'Katalog: úprava přes admin panel',
-      content: b64encode(JSON.stringify(data, null, 2) + '\n'),
-      sha: sha,
-      branch: BRANCH
-    };
-    log('Ukládám…');
-    fetch(API + DATA_PATH, { method: 'PUT', headers: headers(), body: JSON.stringify(body) })
-      .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
-      .then(function (res) {
-        if (!res.ok) throw new Error(res.j.message || 'uložení selhalo');
-        sha = res.j.content.sha;
-        dirty = false;
-        $('dirty').textContent = '';
-        log('Uloženo ✓ (commit ' + res.j.commit.sha.slice(0, 7) + '). Web se přegeneruje do 1–2 minut.');
+  /* ================= TEXTY ================= */
+  var GROUPS = [
+    ['Úvod (hero)', [
+      ['heroLede', 'Hlavní slogan'], ['heroSub', 'Podtitulek', 1], ['heroCap', 'Popisek fotky'],
+      ['fact1V', 'Otevírací doba'], ['fact2V', 'Rozvoz — řádek'], ['fact3V', 'Jazyky — řádek']
+    ]],
+    ['Služby', [
+      ['svcTitle', 'Nadpis sekce'],
+      ['svc1T', 'Služba 1 — název'], ['svc1P', 'Služba 1 — popis', 1],
+      ['svc2T', 'Služba 2 — název'], ['svc2P', 'Služba 2 — popis', 1],
+      ['svc3T', 'Služba 3 — název'], ['svc3P', 'Služba 3 — popis', 1],
+      ['svc4T', 'Služba 4 — název'], ['svc4P', 'Služba 4 — popis', 1]
+    ]],
+    ['Ceník', [
+      ['budTitle', 'Nadpis sekce'], ['budLede', 'Úvodní text', 1],
+      ['t1C', 'Karta 1 — štítek'], ['t1V', 'Karta 1 — cena'], ['t1P', 'Karta 1 — popis', 1],
+      ['t2C', 'Karta 2 — štítek'], ['t2V', 'Karta 2 — cena'], ['t2P', 'Karta 2 — popis', 1],
+      ['t3C', 'Karta 3 — štítek'], ['t3V', 'Karta 3 — cena'], ['t3P', 'Karta 3 — popis', 1],
+      ['prT', 'Tabulka — nadpis'],
+      ['pr1', 'Řádek 1'], ['pr1v', 'Řádek 1 — cena'],
+      ['pr2', 'Řádek 2'], ['pr2v', 'Řádek 2 — cena'],
+      ['pr3', 'Řádek 3'], ['pr3v', 'Řádek 3 — cena'],
+      ['pr4', 'Řádek 4'], ['pr4v', 'Řádek 4 — cena'],
+      ['pr5', 'Řádek 5'], ['pr5v', 'Řádek 5 — cena'],
+      ['pr6', 'Řádek 6'], ['pr6v', 'Řádek 6 — cena'],
+      ['pr7', 'Řádek 7'], ['pr7v', 'Řádek 7 — cena'],
+      ['prNote', 'Poznámka pod tabulkou', 1]
+    ]],
+    ['Recenze', [
+      ['rv1', 'Recenze 1', 1], ['rv1src', 'Recenze 1 — zdroj'],
+      ['rv2', 'Recenze 2', 1], ['rv2src', 'Recenze 2 — zdroj']
+    ]],
+    ['Příběh', [
+      ['stTitle', 'Nadpis'], ['stP1', 'Odstavec 1 (může obsahovat <strong>)', 1],
+      ['stP2', 'Odstavec 2', 1], ['stQ', 'Citát', 1],
+      ['stN1', 'Číslo 1 — popisek'], ['stN2', 'Číslo 2 — popisek'], ['stN3', 'Číslo 3 — popisek']
+    ]],
+    ['Časté dotazy', [
+      ['q1', 'Otázka 1'], ['a1', 'Odpověď 1', 1],
+      ['q2', 'Otázka 2'], ['a2', 'Odpověď 2', 1],
+      ['q3', 'Otázka 3'], ['a3', 'Odpověď 3', 1],
+      ['q4', 'Otázka 4'], ['a4', 'Odpověď 4', 1],
+      ['q5', 'Otázka 5'], ['a5', 'Odpověď 5', 1]
+    ]],
+    ['Kontakt a formulář', [
+      ['coTitle', 'Nadpis sekce'], ['coRow3V', 'Rozvoz — hodnota v hodinách'],
+      ['coNote', 'Poznámka u objednávek', 1],
+      ['fmT', 'Formulář — nadpis'], ['fmNote', 'Formulář — úvod', 1],
+      ['fmMsgPh', 'Formulář — nápověda ve vzkazu'], ['fmOk', 'Hláška po odeslání']
+    ]],
+    ['Stránka Katalog', [
+      ['katTitle', 'Nadpis'], ['katLede', 'Úvodní text', 1], ['katNote', 'Poznámka pod katalogem', 1],
+      ['stepsTitle', 'Kroky — nadpis'],
+      ['st1T', 'Krok 1 — název'], ['st1P', 'Krok 1 — text', 1],
+      ['st2T', 'Krok 2 — název'], ['st2P', 'Krok 2 — text', 1],
+      ['st3T', 'Krok 3 — název'], ['st3P', 'Krok 3 — text', 1]
+    ]],
+    ['Chat a SEO', [
+      ['chatSub', 'Chat — podtitulek'],
+      ['docTitle', 'SEO titulek hlavní stránky'], ['docDesc', 'SEO popis hlavní stránky', 1],
+      ['katDocTitle', 'SEO titulek katalogu'], ['katDocDesc', 'SEO popis katalogu', 1]
+    ]]
+  ];
+
+  function renderTexts() {
+    var box = $('textGroups'); box.innerHTML = '';
+    GROUPS.forEach(function (g) {
+      var d = document.createElement('details'); d.className = 'txt-group';
+      var inner = '<summary>' + escH(g[0]) + '</summary><div class="txt-group__in">';
+      g[1].forEach(function (f) {
+        var key = f[0], lbl = f[1], ta = f[2];
+        var mk = function (L) {
+          var v = escA(txt[L][key] || '');
+          return ta
+            ? '<textarea data-key="' + key + '" data-l="' + L + '">' + escH(txt[L][key] || '') + '</textarea>'
+            : '<input type="text" value="' + v + '" data-key="' + key + '" data-l="' + L + '">';
+        };
+        inner += '<div class="tfield"><label>' + escH(lbl) + '</label>' +
+          '<div class="tfield__cols"><div>' + mk('cs') + '<small>CZ</small></div>' +
+          '<div>' + mk('uk') + '<small>UA</small></div></div></div>';
+      });
+      d.innerHTML = inner + '</div>';
+      d.querySelectorAll('[data-key]').forEach(function (inp) {
+        inp.addEventListener('input', function () {
+          txt[inp.getAttribute('data-l')][inp.getAttribute('data-key')] = inp.value;
+          markDirty('txt');
+        });
+      });
+      box.appendChild(d);
+    });
+  }
+
+  /* ================= FOTKY ================= */
+  function loadPhotos() {
+    fetch(API + F_IMG + '?ref=' + BRANCH, { headers: headers() })
+      .then(function (r) { if (!r.ok) throw new Error('výpis fotek: ' + r.status); return r.json(); })
+      .then(function (list) {
+        photos = list.filter(function (f) { return /\.jpg$/i.test(f.name); });
+        var dl = $('photoList');
+        dl.innerHTML = photos.map(function (p) { return '<option value="' + F_IMG + '/' + p.name.replace(/\.jpg$/i, '') + '">'; }).join('');
+        var box = $('photos');
+        box.innerHTML = photos.map(function (p, i) {
+          return '<div class="photo"><img src="' + F_IMG + '/' + escA(p.name) + '" alt="" loading="lazy">' +
+            '<div class="photo__b">' + escH(p.name) + '</div>' +
+            '<div class="photo__acts"><button class="btn btn--sm btn--danger" data-del="' + i + '">smazat</button></div></div>';
+        }).join('');
+        box.querySelectorAll('[data-del]').forEach(function (btn) {
+          btn.addEventListener('click', function () { delPhoto(photos[+btn.getAttribute('data-del')]); });
+        });
       })
-      .catch(function (e) { log('Chyba při ukládání: ' + e.message); });
+      .catch(function (e) { log('Chyba: ' + e.message); });
+  }
+
+  function delPhoto(p) {
+    if (!token()) { log('Mazání vyžaduje klíč.'); return; }
+    if (!confirm('Smazat ' + p.name + '? Kytice, které ji používají, přijdou o fotku.')) return;
+    var base = p.name.replace(/\.jpg$/i, '');
+    var delOne = function (name, sha) {
+      return fetch(API + F_IMG + '/' + name, {
+        method: 'DELETE', headers: headers(),
+        body: JSON.stringify({ message: 'Admin: smazání fotky ' + name, sha: sha, branch: BRANCH })
+      });
+    };
+    delOne(p.name, p.sha)
+      .then(function () {
+        /* webp sourozenec — sha zjistíme z výpisu */
+        return fetch(API + F_IMG + '/' + base + '.webp?ref=' + BRANCH, { headers: headers() })
+          .then(function (r) { return r.ok ? r.json().then(function (j) { return delOne(base + '.webp', j.sha); }) : null; });
+      })
+      .then(function () { log('Smazáno: ' + base); loadPhotos(); })
+      .catch(function (e) { log('Chyba mazání: ' + e.message); });
+  }
+
+  $('phUp').addEventListener('click', function () {
+    if (!token()) { log('Nahrávání vyžaduje klíč.'); return; }
+    var name = slug($('phName').value);
+    var file = $('phFile').files[0];
+    if (!name || !file) { log('Vyplňte název a vyberte soubor.'); return; }
+
+    var img = new Image();
+    img.onload = function () {
+      var W = Math.min(1000, img.width);
+      var H = Math.round(img.height * W / img.width);
+      var c = document.createElement('canvas'); c.width = W; c.height = H;
+      c.getContext('2d').drawImage(img, 0, 0, W, H);
+      c.toBlob(function (jpg) {
+        c.toBlob(function (webp) {
+          if (!webp) { log('Tento prohlížeč neumí WebP — pošlete fotku Vorthysovi, připraví ji.'); return; }
+          var put = function (path, blob) {
+            return blob.arrayBuffer().then(function (buf) {
+              var bin = ''; new Uint8Array(buf).forEach(function (x) { bin += String.fromCharCode(x); });
+              return fetch(API + F_IMG + '/' + path, {
+                method: 'PUT', headers: headers(),
+                body: JSON.stringify({ message: 'Admin: nová fotka ' + path, content: btoa(bin), branch: BRANCH })
+              }).then(function (r) { if (!r.ok) return r.json().then(function (j) { throw new Error(j.message); }); });
+            });
+          };
+          log('Nahrávám ' + name + '…');
+          put(name + '.jpg', jpg)
+            .then(function () { return put(name + '.webp', webp); })
+            .then(function () {
+              log('Nahráno ✓ — fotku vyberete u kytice jako ' + F_IMG + '/' + name);
+              $('phName').value = ''; $('phFile').value = '';
+              loadPhotos();
+            })
+            .catch(function (e) { log('Chyba nahrávání: ' + e.message); });
+        }, 'image/webp', .82);
+      }, 'image/jpeg', .85);
+    };
+    img.onerror = function () { log('Soubor se nepodařilo přečíst jako obrázek.'); };
+    img.src = URL.createObjectURL(file);
   });
 
-  /* ---------- export / import ---------- */
+  /* ================= ULOŽENÍ ================= */
+  function putJson(path, data, sha, msg) {
+    var body = { message: msg, content: b64e(JSON.stringify(data, null, 2) + '\n'), branch: BRANCH };
+    if (sha) body.sha = sha;
+    return fetch(API + path, { method: 'PUT', headers: headers(), body: JSON.stringify(body) })
+      .then(function (r) { return r.json().then(function (j) { if (!r.ok) throw new Error(j.message || 'uložení selhalo'); return j.content.sha; }); });
+  }
+
+  $('saveBtn').addEventListener('click', function () {
+    if (!token()) { log('Bez klíče nelze ukládat — použijte Zálohu a pošlete soubor Vorthysovi.'); return; }
+    if (!dirty.kat && !dirty.txt) { log('Žádné změny k uložení.'); return; }
+    var chain = Promise.resolve();
+    if (dirty.kat) {
+      chain = chain.then(function () {
+        log('Ukládám katalog…');
+        return putJson(F_KAT, kat, shas.kat, 'Katalog: úprava přes admin panel')
+          .then(function (sha) { shas.kat = sha; dirty.kat = false; log('Katalog uložen ✓'); });
+      });
+    }
+    if (dirty.txt) {
+      chain = chain.then(function () {
+        log('Ukládám texty…');
+        return putJson(F_TXT, txt, shas.txt, 'Texty: úprava přes admin panel')
+          .then(function (sha) { shas.txt = sha; dirty.txt = false; log('Texty uloženy ✓'); });
+      });
+    }
+    chain.then(function () {
+      $('dirty').textContent = '';
+      log('Hotovo — web se přegeneruje do 1–2 minut.');
+    }).catch(function (e) { log('Chyba: ' + e.message); });
+  });
+
   $('exportBtn').addEventListener('click', function () {
     var a = document.createElement('a');
-    a.href = URL.createObjectURL(new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' }));
-    a.download = 'katalog.json';
+    a.href = URL.createObjectURL(new Blob([JSON.stringify({ katalog: kat, texty: txt }, null, 2)], { type: 'application/json' }));
+    a.download = 'charmofflowers-zaloha.json';
     a.click();
-  });
-  $('importFile').addEventListener('change', function () {
-    var f = this.files[0];
-    if (!f) return;
-    f.text().then(function (txt) {
-      data = JSON.parse(txt);
-      markDirty(); renderAll();
-      log('Soubor načten — nezapomeňte Uložit na web.');
-    }).catch(function (e) { log('Neplatný JSON: ' + e.message); });
   });
 
   window.addEventListener('beforeunload', function (e) {
-    if (dirty) { e.preventDefault(); e.returnValue = ''; }
+    if (dirty.kat || dirty.txt) { e.preventDefault(); e.returnValue = ''; }
   });
-
-  /* ---------- pomocníci ---------- */
-  function slug(s) {
-    return String(s).toLowerCase()
-      .replace(/[áàâä]/g, 'a').replace(/[čç]/g, 'c').replace(/ď/g, 'd').replace(/[éěè]/g, 'e')
-      .replace(/[íì]/g, 'i').replace(/ň/g, 'n').replace(/[óò]/g, 'o').replace(/ř/g, 'r')
-      .replace(/š/g, 's').replace(/ť/g, 't').replace(/[úůù]/g, 'u').replace(/ý/g, 'y').replace(/ž/g, 'z')
-      .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
-  }
-  function escHtml(s) { return String(s == null ? '' : s).replace(/[&<>]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]; }); }
-  function escAttr(s) { return escHtml(s).replace(/"/g, '&quot;'); }
 })();
 </script>
 </body>

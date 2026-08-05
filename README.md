@@ -71,7 +71,7 @@ plné české/ukrajinské sazby. Webové náhrady:
 |---|---|---|
 | Logotyp (jen latinka) | Abigail | **Bodoni Moda** + **Pinyon Script** („of") |
 | Nadpisy (čeština + ukrajinština) | Abigail | **Playfair Display** |
-| Text a UI | Drugs | **Jost** |
+| Text a UI | Drugs (viz samolepky) | **Didact Gothic** — geometrický grotesk nejblíž samolepkám, umí ČJ i UA |
 
 Pokud klientka dodá webové licence originálních řezů, stačí je nasadit
 přes `@font-face` a přepsat `--ff-disp` / `--ff-body` v tokenech.
@@ -141,10 +141,20 @@ to na floristce" (vzor ověřený u konkurence), „Chci tuhle" předvyplní
 formulář (`?kytice=Název`). Fakt „rozvoz od 30 do 60 minut" pochází
 z popisku jejich postu na Instagramu.
 
-## Správa katalogu (admin.html)
+## Správa webu (admin.html)
 
-`admin.html` je editor `katalog.json`: přidání/úprava/skrytí kytic,
-pořadí, příležitosti (nové se hned objeví jako čip), dvoujazyčné texty.
+`admin.html` je plný editor pro klientku — čtyři záložky:
+
+- **Katalog** — kytice (přidání/úprava/skrytí/pořadí) a příležitosti
+  filtru; data v `assets/data/katalog.json`
+- **Texty webu** — všechny texty obou stránek ve dvou jazycích,
+  seskupené po sekcích; ukládá se do `assets/data/texty.json`,
+  který **přepisuje** výchozí slovník v `i18n.js` (prázdné pole =
+  původní text; smazáním souboru se web vrátí k výchozím textům)
+- **Fotky** — nahrání s automatickým zmenšením a převodem na
+  JPG + WebP přímo v prohlížeči, mazání, výběr fotky u kytice
+- **Nápověda** — návod pro klientku (CZ + RU)
+
 Ukládá **přímo do repozitáře přes GitHub API** — web se přegeneruje
 do 1–2 minut.
 
