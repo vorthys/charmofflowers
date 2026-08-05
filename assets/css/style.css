@@ -127,9 +127,9 @@ section[id], [id="kontakt"] { scroll-margin-top: 84px; }
 .orn {
   display: block;
   /* vnější <svg> nemá viewBox (nese ho <symbol>) — poměr stran drží CSS */
-  aspect-ratio: 200 / 201;
+  aspect-ratio: 120 / 80;
   height: auto;
-  fill: none; stroke: currentColor; stroke-width: 4; stroke-linecap: round;
+  fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round;
 }
 .orn--divider {
   width: 58px; height: auto;
