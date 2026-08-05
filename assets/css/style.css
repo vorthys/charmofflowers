@@ -1123,7 +1123,10 @@ section[id], [id="kontakt"] { scroll-margin-top: 84px; }
 
   /* menší logotyp v hero, ať se nadpis nezalamuje přes tři řádky */
   .mark--xl { font-size: clamp(2.9rem, 16vw, 4.2rem); }
-  .hero__orn { top: -48px; right: 0; width: 56px; }
+  /* znak nad fotkou se po zkráceni hero ořezával — na telefonu pryč,
+     zůstává v oddělovačích; rámeček fotky jemnější */
+  .hero__orn { display: none; }
+  .hero__frame::before { inset: 10px -10px -10px 10px; }
 }
 
 @media (max-width: 620px) {
