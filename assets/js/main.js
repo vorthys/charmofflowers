@@ -191,6 +191,29 @@
       });
   }
 
+  /* ---- galerie z Instagramu ----
+     assets/data/instagram.json plní denně GitHub Action; dokud
+     neexistuje, zůstává statická galerie. Dlaždice vedou na posty. */
+  var galGrid = document.getElementById('grid');
+  if (galGrid) {
+    var escIg = function (s) {
+      return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+      });
+    };
+    fetch('assets/data/instagram.json', { cache: 'no-cache' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) {
+        if (!d || !d.posts || !d.posts.length) return;
+        galGrid.innerHTML = d.posts.slice(0, 6).map(function (p) {
+          return '<a class="shot shot--ig" href="' + escIg(p.permalink) + '" target="_blank" rel="noopener">' +
+            '<picture><source srcset="' + escIg(p.img) + '.webp" type="image/webp">' +
+            '<img src="' + escIg(p.img) + '.jpg" loading="lazy" decoding="async" alt="' + escIg(p.alt) + '"></picture></a>';
+        }).join('');
+      })
+      .catch(function () { /* statická galerie zůstává */ });
+  }
+
   /* ---- předvyplnění poptávky z katalogu (?kytice=…) ---- */
   var msgField = document.getElementById('f-msg');
   var wanted = new URLSearchParams(location.search).get('kytice');

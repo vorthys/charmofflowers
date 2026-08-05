@@ -1,0 +1,40 @@
+# Denně stáhne poslední příspěvky z Instagramu do bloku na hlavní stránce.
+# Bez nastaveného secretu IG_TOKEN neškodně proběhne a nic nezmění.
+name: Instagram feed
+
+on:
+  schedule:
+    - cron: "17 6 * * *"   # každý den 6:17 UTC
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install --quiet pillow
+
+      - name: Stáhnout příspěvky
+        env:
+          IG_TOKEN: ${{ secrets.IG_TOKEN }}
+        run: python scripts/fetch_instagram.py
+
+      - name: Commit změn
+        run: |
+          git config user.name "instagram-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add assets/data/instagram.json assets/img/ig || true
+          if git diff --cached --quiet; then
+            echo "Beze změn."
+          else
+            git commit -m "Instagram: automatická aktualizace feedu"
+            git push
+          fi

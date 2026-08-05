@@ -576,6 +576,9 @@ section[id], [id="kontakt"] { scroll-margin-top: 84px; }
 .shot:hover img, .shot:focus-visible img { transform: scale(1.055); }
 .shot:hover::after, .shot:focus-visible::after { opacity: 1; }
 
+/* dlaždice živého Instagram feedu — odkaz na post místo lightboxu */
+.shot--ig { cursor: pointer; text-decoration: none; }
+
 
 
 /* ---------- 12. Recenze ---------- */

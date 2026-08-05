@@ -171,6 +171,33 @@ přímé adrese `/admin.html`.
 stejným názvem do `assets/img/gallery/`, do admin panelu zapsat cestu
 bez přípony. (WebP: `python -c "from PIL import Image; im=Image.open('f.jpg'); im.save('f.webp','WEBP',quality=82)"`)
 
+## Živý Instagram feed (galerie na hlavní stránce)
+
+Galerie „Z naší dílny" se umí sama plnit posledními příspěvky
+z Instagramu: GitHub Action (`.github/workflows/instagram.yml`) denně
+v 6:17 UTC stáhne přes oficiální Instagram API posledních 6 fotek,
+zmenší je, uloží do repozitáře (`assets/img/ig/` + 
+`assets/data/instagram.json`) a web se přegeneruje. Dlaždice pak
+vedou na konkrétní posty. Dokud feed není zapnutý, běží statická
+galerie s lightboxem — nic se nerozbije.
+
+**Zapnutí (jednorázově, potřebuje účet klientky):**
+
+1. Instagram klientky musí být **profesionální profil** (business —
+   už je, má propojenou FB stránku).
+2. Na <https://developers.facebook.com> vytvořit aplikaci →
+   přidat produkt **Instagram** → „API setup with Instagram login" →
+   přihlásit její IG účet → **Generate token** → zkopírovat
+   dlouhodobý token.
+3. GitHub: repo → *Settings → Secrets and variables → Actions* →
+   New repository secret → jméno `IG_TOKEN`, hodnota = token.
+4. Záložka *Actions* → workflow „Instagram feed" → *Run workflow* —
+   a zkontrolovat web.
+
+Token platí 60 dní a **každý běh si ho sám prodlužuje** — dokud
+Action běží aspoň jednou za 2 měsíce, nikdy nevyprší. Kdyby feed
+přestal jet, stačí vygenerovat nový token a přepsat secret.
+
 ## Chat
 
 Plovoucí bublina vpravo dole — **žádný cizí widget**, jen skutečné
