@@ -77,12 +77,18 @@ def main():
             base = f"{OUT_DIR}/ig-{i}"
             im.save(base + ".jpg", "JPEG", quality=84, optimize=True)
             im.save(base + ".webp", "WEBP", quality=80, method=6)
+            if im.size[0] > 500:
+                k2 = 480 / im.size[0]
+                sm = im.resize((480, round(im.size[1] * k2)), Image.LANCZOS)
+                sm.save(base + "-480.jpg", "JPEG", quality=82, optimize=True)
+                sm.save(base + "-480.webp", "WEBP", quality=80, method=6)
         except Exception as e:
             print(f"Příspěvek {i}: stažení selhalo ({e}), přeskočen.")
             continue
         cap = (m.get("caption") or "").strip().split("\n")[0][:110]
         posts.append({
             "img": base,
+            "w": im.size[0],
             "permalink": m.get("permalink", "https://www.instagram.com/charmofflowers.cz/"),
             "alt": cap or "Příspěvek Charm of Flowers na Instagramu",
         })

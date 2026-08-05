@@ -113,10 +113,12 @@
       ['cena', 'prilezitost'].forEach(function (group) {
         var box = filtersEl.querySelector('[data-group="' + group + '"]');
         if (!box) return;
-        var html = '<button class="chip' + (active[group] === 'all' ? ' is-on' : '') + '" type="button" data-f="all">' + esc(UI[L].all) + '</button>';
-        (katData.filters[group] || []).forEach(function (f) {
-          html += '<button class="chip' + (active[group] === f.id ? ' is-on' : '') + '" type="button" data-f="' + esc(f.id) + '">' + esc(f[L] || f.cs) + '</button>';
-        });
+        var mk = function (id, label) {
+          var on = active[group] === id;
+          return '<button class="chip' + (on ? ' is-on' : '') + '" type="button" data-f="' + esc(id) + '" aria-pressed="' + on + '">' + esc(label) + '</button>';
+        };
+        var html = mk('all', UI[L].all);
+        (katData.filters[group] || []).forEach(function (f) { html += mk(f.id, f[L] || f.cs); });
         box.innerHTML = html;
       });
     };
@@ -141,11 +143,19 @@
         var photo;
         if (it.img) {
           photo =
-            '<figure class="kat-item__photo">' + tag +
-            '<picture><source srcset="' + esc(it.img) + '.webp" type="image/webp">' +
-            '<img src="' + esc(it.img) + '.jpg"' +
-            (it.w ? ' width="' + it.w + '" height="' + it.h + '"' : '') +
-            ' loading="lazy" decoding="async" alt="' + esc(alt) + '"></picture></figure>';
+            (function () {
+              var b = esc(it.img);
+              var W = it.w || 1000;
+              var sizes = '(max-width: 620px) 46vw, (max-width: 1000px) 45vw, 280px';
+              var has480 = W > 500;
+              var wsrc = has480 ? b + '-480.webp 480w, ' + b + '.webp ' + W + 'w' : b + '.webp';
+              var jsrc = has480 ? ' srcset="' + b + '-480.jpg 480w, ' + b + '.jpg ' + W + 'w" sizes="' + sizes + '"' : '';
+              return '<figure class="kat-item__photo">' + tag +
+                '<picture><source type="image/webp" srcset="' + wsrc + '"' + (has480 ? ' sizes="' + sizes + '"' : '') + '>' +
+                '<img src="' + b + '.jpg"' + jsrc +
+                (it.w ? ' width="' + it.w + '" height="' + it.h + '"' : '') +
+                ' loading="lazy" decoding="async" alt="' + esc(alt) + '"></picture></figure>';
+            })();
         } else {
           photo =
             '<div class="kat-item__photo kat-item__orn" aria-hidden="true">' +
@@ -156,7 +166,7 @@
           '<article class="kat-item' + (it.img ? '' : ' kat-item--fl') + (vis ? '' : ' is-hidden') + '">' +
           photo +
           '<div class="kat-item__body">' +
-          '<h2 class="kat-item__t">' + esc(name) + '</h2>' +
+          '<h3 class="kat-item__t">' + esc(name) + '</h3>' +
           '<p class="kat-item__f">' + esc(flowers) + '</p>' +
           '<div class="kat-item__row">' +
           '<span class="kat-item__price">' + esc(price) + '</span>' +
@@ -174,8 +184,11 @@
         var chip = e.target.closest('.chip');
         if (!chip) return;
         var group = chip.closest('[data-group]').getAttribute('data-group');
-        active[group] = chip.getAttribute('data-f');
+        var fId = chip.getAttribute('data-f');
+        active[group] = fId;
         renderAll();
+        var again = filtersEl.querySelector('[data-group="' + group + '"] .chip[data-f="' + fId + '"]');
+        if (again) again.focus();
       });
     }
 
@@ -205,10 +218,23 @@
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (d) {
         if (!d || !d.posts || !d.posts.length) return;
+        var upd = document.getElementById('igUpd');
+        if (upd && d.updated) {
+          var dt = new Date(d.updated);
+          var t = document.getElementById('igUpdDate');
+          if (t && !isNaN(dt)) t.textContent = dt.getDate() + '. ' + (dt.getMonth() + 1) + '. ' + dt.getFullYear();
+          upd.hidden = false;
+        }
         galGrid.innerHTML = d.posts.slice(0, 6).map(function (p) {
+          var b = escIg(p.img);
+          var sz = '(max-width: 760px) 46vw, 31vw';
+          var w = p.w || 0;
+          var has480 = w > 500;
+          var ws = has480 ? b + '-480.webp 480w, ' + b + '.webp ' + w + 'w' : b + '.webp';
+          var js = has480 ? ' srcset="' + b + '-480.jpg 480w, ' + b + '.jpg ' + w + 'w" sizes="' + sz + '"' : '';
           return '<a class="shot shot--ig" href="' + escIg(p.permalink) + '" target="_blank" rel="noopener">' +
-            '<picture><source srcset="' + escIg(p.img) + '.webp" type="image/webp">' +
-            '<img src="' + escIg(p.img) + '.jpg" loading="lazy" decoding="async" alt="' + escIg(p.alt) + '"></picture></a>';
+            '<picture><source type="image/webp" srcset="' + ws + '"' + (has480 ? ' sizes="' + sz + '"' : '') + '>' +
+            '<img src="' + b + '.jpg"' + js + ' loading="lazy" decoding="async" alt="' + escIg(p.alt) + '"></picture></a>';
         }).join('');
       })
       .catch(function () { /* statická galerie zůstává */ });
@@ -292,7 +318,7 @@
       var src = shots[at].querySelector('img');
       lbImg.src = src.currentSrc || src.src;
       lbImg.alt = src.alt;
-      lbCap.textContent = src.alt;
+      lbCap.textContent = src.alt + ' (' + (at + 1) + ' / ' + shots.length + ')';
     };
 
     var open = function (i) {

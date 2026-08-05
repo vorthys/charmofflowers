@@ -89,8 +89,10 @@
       prNote: 'Přesnou cenu vždy potvrdíme předem — telefonicky nebo ve formuláři níže.',
 
       /* --- galerie --- */
-      galEyebrow: 'Poslední práce',
-      galTitle: 'Z naší dílny',
+      galEyebrow: 'Instagram',
+      galLede: 'Nejnovější kytice přidáváme na Instagram — tady je posledních šest z dílny.',
+      igFollow: 'Sledovat na Instagramu',
+      igUpd: 'galerie se obnovuje automaticky · aktualizováno',
       zoom: 'Zvětšit fotku',
       g1: 'Velká kytice růžových pivoňkových růží před vchodem do květinářství',
       g2: 'Dvě kytice modrých hortenzií zabalené v bílém papíru',
@@ -312,8 +314,10 @@
       pr8: 'Квіткова підписка (2–4 на місяць)', pr8v: 'S 750 · M 1 200 · L 1 500 Kč',
       prNote: 'Точну ціну завжди підтверджуємо заздалегідь — телефоном або у формі нижче.',
 
-      galEyebrow: 'Останні роботи',
-      galTitle: 'З нашої майстерні',
+      galEyebrow: 'Instagram',
+      galLede: 'Найновіші букети додаємо в Instagram — ось останні шість з майстерні.',
+      igFollow: 'Стежити в Instagram',
+      igUpd: 'галерея оновлюється автоматично · оновлено',
       zoom: 'Збільшити фото',
       g1: 'Великий букет рожевих півонієвих троянд перед входом до квіткової студії',
       g2: 'Два букети блакитних гортензій, загорнуті в білий папір',
@@ -507,6 +511,17 @@
     meta('meta[property="og:title"]', t(titleKey));
     meta('meta[property="og:description"]', t(descKey));
     meta('meta[property="og:locale"]', t('ogLocale'));
+
+    /* každá jazyková verze musí být self-canonical, jinak Google
+       ukrajinskou variantu složí do české a hreflang nefunguje */
+    var canon = document.querySelector('link[rel="canonical"]');
+    if (canon) {
+      var cu = new URL(canon.href);
+      if (lang === 'uk') cu.searchParams.set('lang', 'uk');
+      else cu.searchParams.delete('lang');
+      canon.href = cu.href;
+      meta('meta[property="og:url"]', cu.href);
+    }
 
     document.querySelectorAll('[data-i18n]').forEach(function (el) {
       el.textContent = t(el.getAttribute('data-i18n'));

@@ -103,7 +103,7 @@ picture { display: contents; }
 }
 
 /* kotvy nesmí zajíždět pod přilepenou hlavičku */
-section[id], [id="kontakt"] { scroll-margin-top: 84px; }
+section[id], main[id], [id="kontakt"] { scroll-margin-top: 84px; }
 
 .skip {
   position: absolute; left: 1rem; top: -4rem; z-index: 200;
@@ -388,7 +388,7 @@ section[id], [id="kontakt"] { scroll-margin-top: 84px; }
 .hero__photo figcaption {
   margin-top: 1.6rem;
   font-size: .72rem; letter-spacing: .16em; text-transform: uppercase;
-  color: var(--ink-40);
+  color: var(--ink-60);
 }
 
 /* ---------- 8. Sekce ---------- */
@@ -529,7 +529,7 @@ section[id], [id="kontakt"] { scroll-margin-top: 84px; }
   margin: 1.1rem 0 0;
   text-align: center;
   font-size: .85rem;
-  color: var(--ink-40);
+  color: var(--ink-60);
 }
 
 /* ---------- 11. Galerie ---------- */
@@ -579,6 +579,27 @@ section[id], [id="kontakt"] { scroll-margin-top: 84px; }
 /* dlaždice živého Instagram feedu — odkaz na post místo lightboxu */
 .shot--ig { cursor: pointer; text-decoration: none; }
 
+/* hlavička Instagram sekce */
+.ig-badge {
+  width: 46px; height: 46px;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 1.1rem;
+  border: 1px solid var(--greige);
+  border-radius: 50%;
+  background: var(--card);
+  color: var(--moss);
+}
+.ig-badge svg { width: 20px; height: 20px; fill: currentColor; }
+.sec__title--handle { text-transform: none; letter-spacing: .02em; }
+.ig-upd {
+  margin: .9rem 0 0;
+  font-size: .7rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ink-60);
+}
+.gal-follow { margin-top: clamp(1.8rem, 3.5vw, 2.6rem); text-align: center; }
+
 
 
 /* ---------- 12. Recenze ---------- */
@@ -601,7 +622,7 @@ section[id], [id="kontakt"] { scroll-margin-top: 84px; }
   line-height: 1.5;
   color: var(--ink);
 }
-.review__src { margin: 0; font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-40); }
+.review__src { margin: 0; font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-60); }
 .reviews__cta { margin-top: clamp(1.8rem, 3.5vw, 2.6rem); text-align: center; }
 
 /* ---------- 13. Příběh ---------- */
@@ -770,7 +791,7 @@ section[id], [id="kontakt"] { scroll-margin-top: 84px; }
   margin-bottom: .7rem;
 }
 .info__big a { border: 0; }
-.info__note { font-size: .85rem; color: var(--ink-40); }
+.info__note { font-size: .85rem; color: var(--ink-60); }
 .info__link { display: inline-block; margin-top: .3rem; font-size: .78rem; letter-spacing: .1em; }
 
 .hours { width: 100%; border-collapse: collapse; font-size: .92rem; }
@@ -865,9 +886,9 @@ section[id], [id="kontakt"] { scroll-margin-top: 84px; }
   font-size: 1.18rem;
   font-weight: 400;
 }
-.kat-item__f { margin: 0 0 .9rem; font-size: .84rem; color: var(--ink-40); }
+.kat-item__f { margin: 0 0 .9rem; font-size: .84rem; color: var(--ink-60); }
 .kat-item__row {
-  display: flex; align-items: baseline; justify-content: space-between; gap: .8rem;
+  display: flex; align-items: center; justify-content: space-between; gap: .8rem;
   margin-top: auto;
   padding-top: .8rem;
   border-top: 1px solid var(--hair-l);
@@ -879,6 +900,10 @@ section[id], [id="kontakt"] { scroll-margin-top: 84px; }
   white-space: nowrap;
 }
 .kat-item__go {
+  display: inline-flex; align-items: center;
+  min-height: 44px;
+  padding: .5rem 0 .5rem .75rem;
+  margin-block: -.5rem;
   font-size: .72rem; font-weight: 500;
   letter-spacing: .12em; text-transform: uppercase;
   text-decoration: none;
@@ -1114,9 +1139,10 @@ section[id], [id="kontakt"] { scroll-margin-top: 84px; }
     background: var(--bg);
     border-bottom: 1px solid var(--hair-l);
     max-height: 0; overflow: hidden;
-    transition: max-height .4s var(--ease);
+    visibility: hidden;
+    transition: max-height .4s var(--ease), visibility 0s .4s;
   }
-  .nav.is-open { max-height: 26rem; }
+  .nav.is-open { max-height: 26rem; visibility: visible; transition-delay: 0s; }
   .nav a { padding: .95rem 0; border-bottom: 1px solid var(--hair-l); font-size: .95rem; }
   .nav a:last-child { border-bottom: 0; }
   .nav a::after { display: none; }
@@ -1150,6 +1176,17 @@ section[id], [id="kontakt"] { scroll-margin-top: 84px; }
 }
 
 @media (max-width: 620px) {
+  /* lightbox: flex rada s bocnimi tlacitky pretekala o ~50px na kazdou
+     stranu — sipky jdou prekryvem na fotku */
+  .lb { padding: 1rem; }
+  .lb__fig img { max-width: calc(100vw - 2rem); }
+  .lb__nav {
+    position: absolute; top: 50%; transform: translateY(-50%); z-index: 2;
+    background: rgba(16, 39, 19, .55);
+  }
+  .lb__nav--prev { left: .75rem; }
+  .lb__nav--next { right: .75rem; }
+
   .cards { grid-template-columns: 1fr; }
   .cards__photo { grid-column: auto; }
 
