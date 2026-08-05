@@ -757,10 +757,16 @@ section[id], [id="kontakt"] { scroll-margin-top: 84px; }
 .kat-head { padding: clamp(3rem, 6vw, 4.5rem) 0 0; }
 .kat-head .sec__lede { max-width: 52ch; }
 
-.chips {
-  display: flex; flex-wrap: wrap; gap: .5rem;
-  margin: clamp(1.8rem, 4vw, 2.6rem) 0 0;
+.filters { margin: clamp(1.8rem, 4vw, 2.6rem) 0 0; display: grid; gap: 1rem; }
+.fgroup { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; }
+.fgroup__l {
+  flex: none; min-width: 5.6rem;
+  margin: 0;
+  font-size: .68rem; font-weight: 500;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: var(--moss);
 }
+.chips { display: flex; flex-wrap: wrap; gap: .5rem; }
 .chip {
   padding: .55rem 1.05rem;
   background: var(--card);
@@ -922,26 +928,57 @@ section[id], [id="kontakt"] { scroll-margin-top: 84px; }
 }
 .foot__bar p { margin: 0; }
 
-/* ---------- 17. Výzva k volání (mobil) ---------- */
-.callbar {
-  display: none;
-  position: fixed; z-index: 80;
-  left: 50%; bottom: max(1rem, env(safe-area-inset-bottom));
-  align-items: center; gap: .5rem;
-  padding: .85rem 1.5rem;
+/* ---------- 17. Chat — plovoucí spouštěč kanálů ----------
+   Objednávky žijí v directech na Instagramu (jejich bio),
+   chat proto otevírá skutečné kanály, žádný falešný widget. */
+.chat {
+  position: fixed; z-index: 120;
+  right: max(1rem, env(safe-area-inset-right));
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  display: flex; flex-direction: column; align-items: flex-end;
+  gap: .7rem;
+}
+.chat__fab {
+  display: inline-flex; align-items: center; gap: .55rem;
+  padding: .9rem 1.4rem;
   background: var(--green); color: #fff;
-  border-radius: 999px;
+  border: 0; border-radius: 999px;
   box-shadow: 0 8px 28px rgba(16,39,19,.35);
   font-size: .8rem; font-weight: 500;
   letter-spacing: .1em; text-transform: uppercase;
-  text-decoration: none;
-  white-space: nowrap;
-  transform: translate(-50%, 150%);
-  transition: transform .45s var(--ease);
+  cursor: pointer;
+  transition: background .3s var(--ease), transform .3s var(--ease);
 }
-.callbar svg { width: 1.05em; height: 1.05em; fill: var(--chartreuse); }
-.callbar__num { color: var(--chartreuse); font-variant-numeric: tabular-nums; letter-spacing: .06em; }
-.callbar.is-on { transform: translate(-50%, 0); }
+.chat__fab:hover { background: var(--green-2); transform: translateY(-2px); }
+.chat__ico { width: 1.2em; height: 1.2em; fill: var(--chartreuse); }
+
+.chat__panel {
+  width: min(320px, calc(100vw - 2rem));
+  padding: 1.4rem 1.4rem 1.1rem;
+  background: var(--card);
+  border: 1px solid var(--greige);
+  box-shadow: 0 16px 48px rgba(16,39,19,.22);
+}
+.chat__t {
+  margin: 0 0 .2rem;
+  font-family: var(--ff-disp);
+  font-size: 1.3rem;
+  color: var(--ink);
+}
+.chat__sub { margin: 0 0 1.1rem; font-size: .85rem; color: var(--ink-60); }
+.chat__link {
+  display: flex; align-items: center; gap: .7rem;
+  padding: .7rem .2rem;
+  border-top: 1px solid var(--hair-l);
+  font-size: .92rem;
+  text-decoration: none;
+  color: var(--ink);
+  transition: color .25s var(--ease);
+}
+.chat__link svg { width: 19px; height: 19px; fill: var(--moss); flex: none; transition: fill .25s var(--ease); }
+.chat__link:hover { color: var(--moss); }
+.chat__link--ig { font-weight: 500; }
+.chat__link--ig svg { fill: var(--green); }
 
 /* ---------- 18. Lightbox ---------- */
 .lb {
@@ -1003,8 +1040,10 @@ section[id], [id="kontakt"] { scroll-margin-top: 84px; }
 @media (max-width: 760px) {
   .burger { display: block; }
   .site-head__cta { display: none; }
-  .callbar { display: inline-flex; }
   .foot { padding-bottom: 5.5rem; }
+  .chat__fab span { display: none; }
+  .chat__fab { padding: .95rem; }
+  .chat__ico { width: 1.5em; height: 1.5em; }
 
   .lang { margin-left: auto; border-left: 0; padding-left: 0; }
 
@@ -1058,7 +1097,6 @@ section[id], [id="kontakt"] { scroll-margin-top: 84px; }
 @media (max-width: 420px) {
   .btn { padding: .85rem 1.25rem; font-size: .72rem; }
   .grid { grid-template-columns: 1fr 1fr; gap: .5rem; }
-  .callbar { padding: .8rem 1.15rem; font-size: .72rem; gap: .4rem; }
 }
 
 /* ---------- 21. Omezený pohyb ---------- */
@@ -1075,7 +1113,7 @@ section[id], [id="kontakt"] { scroll-margin-top: 84px; }
 
 /* ---------- 22. Tisk ---------- */
 @media print {
-  .site-head, .hero__shadow, .lb, .burger, .contact__map, .callbar, .form { display: none !important; }
+  .site-head, .hero__shadow, .lb, .burger, .contact__map, .chat, .form { display: none !important; }
   body { background: #fff; color: #000; }
   .sec--green, .hero, .foot { background: #fff !important; color: #000 !important; }
   .sec__title--light, .hero__mark, .tier__price, .story__q { color: #000 !important; }

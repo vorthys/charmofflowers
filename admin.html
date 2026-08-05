@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Správa katalogu — Charm of Flowers</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green:#102713; --green-2:#1c3a22; --chartreuse:#dbd986; --moss:#565a20;
+    --greige:#dbd5d1; --bg:#efefef; --card:#fff;
+    --ink:#102713; --ink60:rgba(16,39,19,.66); --ink40:rgba(16,39,19,.45);
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:300 16px/1.6 Jost,system-ui,sans-serif; }
+  .wrap { max-width:960px; margin-inline:auto; padding:1.5rem; }
+  h1 { font:400 2rem/1.1 "Playfair Display",serif; margin:0 0 .3rem; }
+  h2 { font:400 1.3rem/1.2 "Playfair Display",serif; margin:2.2rem 0 .8rem; }
+  .hint { color:var(--ink60); font-size:.88rem; }
+  .hint--ru { color:var(--ink40); font-size:.8rem; }
+  .box { background:var(--card); border:1px solid var(--greige); padding:1.2rem; margin-top:1rem; }
+  label { display:block; font-size:.7rem; font-weight:500; letter-spacing:.14em; text-transform:uppercase; color:var(--moss); margin:0 0 .25rem; }
+  input[type=text], input[type=password], input[type=number], select, textarea {
+    width:100%; padding:.55rem .7rem; border:1px solid var(--greige); background:var(--bg);
+    font:inherit; font-size:1rem; border-radius:0;
+  }
+  input:focus, select:focus, textarea:focus { outline:none; border-color:var(--moss); background:#fff; }
+  .row { display:grid; grid-template-columns:1fr 1fr; gap:.8rem; margin-bottom:.8rem; }
+  .row--3 { grid-template-columns:1fr 1fr 1fr; }
+  @media (max-width:640px){ .row, .row--3 { grid-template-columns:1fr; } }
+  .btn { display:inline-flex; align-items:center; gap:.5rem; padding:.7rem 1.3rem; border:1px solid var(--green);
+    background:var(--green); color:#fff; font:500 .78rem/1 Jost; letter-spacing:.12em; text-transform:uppercase; cursor:pointer; }
+  .btn:hover { background:var(--green-2); }
+  .btn--ghost { background:none; color:var(--green); }
+  .btn--ghost:hover { background:rgba(16,39,19,.06); }
+  .btn--sm { padding:.45rem .8rem; font-size:.68rem; }
+  .btn--danger { border-color:#8a2a2a; background:none; color:#8a2a2a; }
+  .btn--danger:hover { background:rgba(138,42,42,.08); }
+  .item { border:1px solid var(--greige); background:var(--card); margin-bottom:1rem; }
+  .item__head { display:flex; align-items:center; gap:.8rem; padding:.7rem 1rem; cursor:pointer; }
+  .item__head img { width:44px; height:55px; object-fit:cover; background:var(--greige); }
+  .item__head .noimg { width:44px; height:55px; display:flex; align-items:center; justify-content:center; background:var(--green); color:var(--chartreuse); font-size:1.2rem; }
+  .item__name { flex:1; font-weight:400; }
+  .item__meta { font-size:.75rem; color:var(--ink40); }
+  .item__body { display:none; padding:1rem; border-top:1px solid var(--greige); }
+  .item.open .item__body { display:block; }
+  .item.hidden-item { opacity:.55; }
+  .occ { display:flex; flex-wrap:wrap; gap:.6rem .9rem; }
+  .occ label { display:flex; align-items:center; gap:.35rem; text-transform:none; letter-spacing:0; font-size:.9rem; font-weight:300; color:var(--ink); margin:0; }
+  .bar { position:sticky; bottom:0; background:var(--card); border-top:1px solid var(--greige); padding:.9rem 0; margin-top:2rem; display:flex; gap:.7rem; flex-wrap:wrap; align-items:center; }
+  #log { font-size:.85rem; white-space:pre-wrap; max-height:170px; overflow:auto; background:var(--green); color:var(--chartreuse); padding:.8rem 1rem; margin-top:.8rem; display:none; }
+  #log.show { display:block; }
+  .flrow { display:flex; gap:.5rem; align-items:center; margin-bottom:.5rem; }
+  .flrow input { flex:1; }
+  .pill { font-size:.68rem; letter-spacing:.12em; text-transform:uppercase; background:rgba(219,217,134,.35); padding:.2rem .55rem; }
+  .muted { color:var(--ink40); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Správa katalogu</h1>
+  <p class="hint">Úprava kytic a filtrů na stránce <a href="katalog.html">katalog.html</a>. Změny se ukládají přímo do webu (GitHub) — projeví se do 1–2 minut po uložení.</p>
+  <p class="hint--ru">Редактор каталога: добавляйте букеты и фильтры, жмите «Uložit na web». Токен даёт Vorthys.</p>
+
+  <div class="box" id="authBox">
+    <label for="token">GitHub token</label>
+    <input type="password" id="token" placeholder="github_pat_…" autocomplete="off">
+    <p class="hint" style="margin:.5rem 0 0">Fine-grained token s právem <b>Contents: Read &amp; write</b> jen pro repozitář <b>vorthys/charmofflowers</b>. Bez tokenu jde katalog jen prohlížet a exportovat.</p>
+    <div style="margin-top:.8rem; display:flex; gap:.7rem; flex-wrap:wrap; align-items:center">
+      <button class="btn" id="loadBtn">Načíst katalog</button>
+      <label style="display:flex;align-items:center;gap:.4rem;text-transform:none;letter-spacing:0;font-size:.85rem;font-weight:300;color:var(--ink60);margin:0">
+        <input type="checkbox" id="remember" style="width:auto"> zapamatovat token v tomto prohlížeči
+      </label>
+    </div>
+  </div>
+
+  <div id="editor" style="display:none">
+    <h2>Filtry — příležitosti <span class="pill">zobrazí se jako čipy</span></h2>
+    <p class="hint">Nová příležitost se hned nabídne u každé kytice. Cena se filtruje podle pásem (do 1 000 / 1 000–2 000 / od 2 000) a needituje se tady.</p>
+    <div class="box" id="occList"></div>
+
+    <h2>Kytice</h2>
+    <p class="hint">Klikněte na řádek pro úpravy. Šipkami měníte pořadí na stránce. „Skrýt" kytici schová, ale nesmaže — hodí se mimo sezónu.</p>
+    <div id="items"></div>
+    <button class="btn btn--ghost" id="addBtn">+ Přidat kytici</button>
+
+    <div class="bar">
+      <button class="btn" id="saveBtn">Uložit na web</button>
+      <button class="btn btn--ghost" id="exportBtn">Stáhnout JSON</button>
+      <label class="btn btn--ghost" style="margin:0">Nahrát JSON<input type="file" id="importFile" accept=".json" style="display:none"></label>
+      <span class="hint" id="dirty"></span>
+    </div>
+    <div id="log"></div>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var OWNER = 'vorthys', REPO = 'charmofflowers', BRANCH = 'main';
+  var DATA_PATH = 'assets/data/katalog.json';
+  var API = 'https://api.github.com/repos/' + OWNER + '/' + REPO + '/contents/';
+
+  var data = null, sha = null, dirty = false;
+  var $ = function (id) { return document.getElementById(id); };
+
+  try {
+    var saved = localStorage.getItem('cof-admin-token');
+    if (saved) { $('token').value = saved; $('remember').checked = true; }
+  } catch (e) {}
+
+  function log(msg) {
+    var el = $('log');
+    el.classList.add('show');
+    el.textContent += msg + '\n';
+    el.scrollTop = el.scrollHeight;
+  }
+  function markDirty() {
+    dirty = true;
+    $('dirty').textContent = 'Neuložené změny';
+  }
+  function headers() {
+    var h = { 'Accept': 'application/vnd.github+json' };
+    var t = $('token').value.trim();
+    if (t) h['Authorization'] = 'Bearer ' + t;
+    return h;
+  }
+  /* base64 pro unicode */
+  function b64encode(str) {
+    return btoa(String.fromCharCode.apply(null, new TextEncoder().encode(str)));
+  }
+  function b64decode(b64) {
+    return new TextDecoder().decode(Uint8Array.from(atob(b64.replace(/\n/g, '')), function (c) { return c.charCodeAt(0); }));
+  }
+
+  /* ---------- načtení ---------- */
+  $('loadBtn').addEventListener('click', function () {
+    try {
+      if ($('remember').checked) localStorage.setItem('cof-admin-token', $('token').value.trim());
+      else localStorage.removeItem('cof-admin-token');
+    } catch (e) {}
+    var t = $('token').value.trim();
+    var p = t
+      ? fetch(API + DATA_PATH + '?ref=' + BRANCH, { headers: headers() })
+          .then(function (r) { if (!r.ok) throw new Error('GitHub API ' + r.status + ' — zkontrolujte token'); return r.json(); })
+          .then(function (j) { sha = j.sha; return JSON.parse(b64decode(j.content)); })
+      : fetch(DATA_PATH + '?nocache=' + Math.random()).then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); });
+    p.then(function (d) {
+      data = d;
+      $('editor').style.display = 'block';
+      renderAll();
+      log(t ? 'Načteno z GitHubu (sha ' + String(sha).slice(0, 7) + ') — ukládání povoleno.' : 'Načteno jen pro čtení (bez tokenu nejde ukládat na web).');
+    }).catch(function (e) { log('Chyba: ' + e.message); });
+  });
+
+  /* ---------- render ---------- */
+  function renderAll() { renderOcc(); renderItems(); }
+
+  function renderOcc() {
+    var box = $('occList');
+    box.innerHTML = '';
+    data.filters.prilezitost.forEach(function (f, i) {
+      var row = document.createElement('div');
+      row.className = 'flrow';
+      row.innerHTML =
+        '<input type="text" value="' + escAttr(f.cs) + '" data-k="cs" placeholder="česky">' +
+        '<input type="text" value="' + escAttr(f.uk) + '" data-k="uk" placeholder="українською">' +
+        '<button class="btn btn--sm btn--danger" type="button">smazat</button>';
+      row.querySelectorAll('input').forEach(function (inp) {
+        inp.addEventListener('input', function () {
+          f[inp.getAttribute('data-k')] = inp.value;
+          if (inp.getAttribute('data-k') === 'cs') f.id = slug(inp.value) || f.id;
+          markDirty();
+        });
+      });
+      row.querySelector('button').addEventListener('click', function () {
+        data.filters.prilezitost.splice(i, 1);
+        data.items.forEach(function (it) {
+          it.occasions = (it.occasions || []).filter(function (o) { return o !== f.id; });
+        });
+        markDirty(); renderAll();
+      });
+      box.appendChild(row);
+    });
+    var add = document.createElement('button');
+    add.className = 'btn btn--ghost btn--sm';
+    add.type = 'button';
+    add.textContent = '+ přidat příležitost';
+    add.addEventListener('click', function () {
+      data.filters.prilezitost.push({ id: 'nova-' + Date.now(), cs: '', uk: '' });
+      markDirty(); renderOcc();
+    });
+    box.appendChild(add);
+  }
+
+  function renderItems() {
+    var box = $('items');
+    box.innerHTML = '';
+    data.items.forEach(function (it, i) { box.appendChild(itemEl(it, i)); });
+  }
+
+  function itemEl(it, i) {
+    var el = document.createElement('div');
+    el.className = 'item' + (it.visible === false ? ' hidden-item' : '');
+    var thumb = it.img
+      ? '<img src="' + escAttr(it.img) + '.jpg" alt="">'
+      : '<span class="noimg">✿</span>';
+    el.innerHTML =
+      '<div class="item__head">' + thumb +
+      '<span class="item__name">' + escHtml((it.name && it.name.cs) || '(bez názvu)') + '</span>' +
+      '<span class="item__meta">' + escHtml((it.price && it.price.cs) || '') + (it.visible === false ? ' · skryto' : '') + '</span>' +
+      '<span class="item__meta">▾</span></div>' +
+      '<div class="item__body"></div>';
+
+    el.querySelector('.item__head').addEventListener('click', function () {
+      var was = el.classList.contains('open');
+      el.classList.toggle('open', !was);
+      if (!was && !el.querySelector('.item__body').childNodes.length) buildBody();
+    });
+
+    function buildBody() {
+      var b = el.querySelector('.item__body');
+      var occ = data.filters.prilezitost.map(function (f) {
+        var on = (it.occasions || []).indexOf(f.id) !== -1;
+        return '<label><input type="checkbox" data-occ="' + escAttr(f.id) + '"' + (on ? ' checked' : '') + ' style="width:auto"> ' + escHtml(f.cs) + '</label>';
+      }).join('');
+      b.innerHTML =
+        '<div class="row">' +
+        fld('Název (CZ)', 'name.cs') + fld('Назва (UA)', 'name.uk') +
+        fld('Květiny (CZ)', 'flowers.cs') + fld('Квіти (UA)', 'flowers.uk') +
+        fld('Popis fotky (CZ)', 'alt.cs') + fld('Опис фото (UA)', 'alt.uk') +
+        '</div>' +
+        '<div class="row row--3">' +
+        '<div><label>Cenové pásmo</label><select data-f="tier">' +
+        '<option value="t1">do 1 000 Kč</option><option value="t2">1 000 – 2 000 Kč</option>' +
+        '<option value="t3">od 2 000 Kč</option><option value="ind">individuálně</option>' +
+        '<option value="">— žádné (např. dle rozpočtu)</option></select></div>' +
+        fld('Cena — text (CZ)', 'price.cs') + fld('Ціна — текст (UA)', 'price.uk') +
+        '</div>' +
+        '<div class="row row--3">' +
+        '<div><label>Štítek na fotce</label><select data-f="tag">' +
+        '<option value="">žádný</option><option value="season">Sezónní</option>' +
+        '<option value="wedding">Svatební</option><option value="box">Box</option>' +
+        '<option value="decor">Výzdoba</option></select></div>' +
+        fld('Fotka — cesta bez přípony', 'img') +
+        '<div><label>Viditelnost</label><select data-f="visible">' +
+        '<option value="true">zobrazit</option><option value="false">skrýt</option></select></div>' +
+        '</div>' +
+        '<label>Příležitosti</label><div class="occ">' + occ + '</div>' +
+        '<p class="hint" style="margin:.6rem 0 1rem">Fotka: nahrajte ji do <code>assets/img/gallery/</code> (jpg + webp se stejným názvem) a sem napište cestu bez přípony, např. <code>assets/img/gallery/kytice-14</code>. Nejsnáz: pošlete fotku Vorthysovi, připraví ji.</p>' +
+        '<div style="display:flex;gap:.5rem;flex-wrap:wrap">' +
+        '<button class="btn btn--sm btn--ghost" data-a="up">↑ výš</button>' +
+        '<button class="btn btn--sm btn--ghost" data-a="down">↓ níž</button>' +
+        '<button class="btn btn--sm btn--ghost" data-a="dup">duplikovat</button>' +
+        '<button class="btn btn--sm btn--danger" data-a="del">smazat</button>' +
+        '</div>';
+
+      function get(path) { var p = path.split('.'); var v = it; p.forEach(function (k) { v = (v || {})[k]; }); return v == null ? '' : v; }
+      function set(path, val) {
+        var p = path.split('.'); var o = it;
+        for (var k = 0; k < p.length - 1; k++) { if (!o[p[k]]) o[p[k]] = {}; o = o[p[k]]; }
+        o[p[p.length - 1]] = val;
+      }
+      b.querySelectorAll('[data-f]').forEach(function (inp) {
+        var f = inp.getAttribute('data-f');
+        var v = get(f);
+        if (f === 'visible') inp.value = String(it.visible !== false);
+        else inp.value = v;
+        inp.addEventListener('input', function () {
+          if (f === 'visible') it.visible = inp.value === 'true';
+          else set(f, inp.value);
+          if (f === 'tier') {
+            var map = { t1: ['do 1 000 Kč', 'до 1 000 Kč'], t2: ['1 000 – 2 000 Kč', '1 000 – 2 000 Kč'], t3: ['od 2 000 Kč', 'від 2 000 Kč'], ind: ['individuálně', 'індивідуально'] };
+            if (map[inp.value]) { set('price.cs', map[inp.value][0]); set('price.uk', map[inp.value][1]); b.querySelector('[data-f="price.cs"]').value = map[inp.value][0]; b.querySelector('[data-f="price.uk"]').value = map[inp.value][1]; }
+          }
+          if (f === 'name.cs') { it.id = slug(inp.value) || it.id; el.querySelector('.item__name').textContent = inp.value || '(bez názvu)'; }
+          markDirty();
+        });
+      });
+      b.querySelectorAll('[data-occ]').forEach(function (cb) {
+        cb.addEventListener('change', function () {
+          var id = cb.getAttribute('data-occ');
+          it.occasions = it.occasions || [];
+          if (cb.checked) { if (it.occasions.indexOf(id) === -1) it.occasions.push(id); }
+          else it.occasions = it.occasions.filter(function (o) { return o !== id; });
+          markDirty();
+        });
+      });
+      b.querySelectorAll('[data-a]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var a = btn.getAttribute('data-a');
+          var idx = data.items.indexOf(it);
+          if (a === 'del') data.items.splice(idx, 1);
+          if (a === 'up' && idx > 0) { data.items.splice(idx, 1); data.items.splice(idx - 1, 0, it); }
+          if (a === 'down' && idx < data.items.length - 1) { data.items.splice(idx, 1); data.items.splice(idx + 1, 0, it); }
+          if (a === 'dup') { var c = JSON.parse(JSON.stringify(it)); c.id = c.id + '-kopie'; data.items.splice(idx + 1, 0, c); }
+          markDirty(); renderItems();
+        });
+      });
+      function fld(lbl, path) {
+        return '<div><label>' + escHtml(lbl) + '</label><input type="text" data-f="' + escAttr(path) + '"></div>';
+      }
+    }
+    /* fld je definován uvnitř buildBody přes closure — viz výše */
+    return el;
+  }
+
+  $('addBtn').addEventListener('click', function () {
+    data.items.push({
+      id: 'nova-kytice-' + Date.now(),
+      img: '',
+      name: { cs: '', uk: '' }, flowers: { cs: '', uk: '' }, alt: { cs: '', uk: '' },
+      tier: 't2', price: { cs: '1 000 – 2 000 Kč', uk: '1 000 – 2 000 Kč' },
+      occasions: [], tag: '', cat: 'kytice', visible: true
+    });
+    markDirty(); renderItems();
+    var last = $('items').lastElementChild;
+    if (last) last.querySelector('.item__head').click();
+    last.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+
+  /* ---------- uložení ---------- */
+  $('saveBtn').addEventListener('click', function () {
+    if (!$('token').value.trim()) { log('Bez tokenu nelze ukládat — použijte „Stáhnout JSON" a pošlete soubor Vorthysovi.'); return; }
+    if (!sha) { log('Katalog nebyl načtený přes GitHub — načtěte znovu s tokenem.'); return; }
+    var body = {
+      message: 'Katalog: úprava přes admin panel',
+      content: b64encode(JSON.stringify(data, null, 2) + '\n'),
+      sha: sha,
+      branch: BRANCH
+    };
+    log('Ukládám…');
+    fetch(API + DATA_PATH, { method: 'PUT', headers: headers(), body: JSON.stringify(body) })
+      .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+      .then(function (res) {
+        if (!res.ok) throw new Error(res.j.message || 'uložení selhalo');
+        sha = res.j.content.sha;
+        dirty = false;
+        $('dirty').textContent = '';
+        log('Uloženo ✓ (commit ' + res.j.commit.sha.slice(0, 7) + '). Web se přegeneruje do 1–2 minut.');
+      })
+      .catch(function (e) { log('Chyba při ukládání: ' + e.message); });
+  });
+
+  /* ---------- export / import ---------- */
+  $('exportBtn').addEventListener('click', function () {
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' }));
+    a.download = 'katalog.json';
+    a.click();
+  });
+  $('importFile').addEventListener('change', function () {
+    var f = this.files[0];
+    if (!f) return;
+    f.text().then(function (txt) {
+      data = JSON.parse(txt);
+      markDirty(); renderAll();
+      log('Soubor načten — nezapomeňte Uložit na web.');
+    }).catch(function (e) { log('Neplatný JSON: ' + e.message); });
+  });
+
+  window.addEventListener('beforeunload', function (e) {
+    if (dirty) { e.preventDefault(); e.returnValue = ''; }
+  });
+
+  /* ---------- pomocníci ---------- */
+  function slug(s) {
+    return String(s).toLowerCase()
+      .replace(/[áàâä]/g, 'a').replace(/[čç]/g, 'c').replace(/ď/g, 'd').replace(/[éěè]/g, 'e')
+      .replace(/[íì]/g, 'i').replace(/ň/g, 'n').replace(/[óò]/g, 'o').replace(/ř/g, 'r')
+      .replace(/š/g, 's').replace(/ť/g, 't').replace(/[úůù]/g, 'u').replace(/ý/g, 'y').replace(/ž/g, 'z')
+      .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+  }
+  function escHtml(s) { return String(s == null ? '' : s).replace(/[&<>]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]; }); }
+  function escAttr(s) { return escHtml(s).replace(/"/g, '&quot;'); }
+})();
+</script>
+</body>
+</html>

@@ -45,7 +45,7 @@
       fact1L: 'Obchod',
       fact1V: 'Po–So 9:00–18:00 · Ne 10:00–15:00',
       fact2L: 'Rozvoz po Plzni',
-      fact2V: 'každý den 9:00–20:00',
+      fact2V: 'denně 9:00–20:00 · obvykle do 30–60 minut',
       fact3L: 'Domluvíme se',
       fact3V: 'česky · anglicky · ukrajinsky',
       heroCap: 'Hortenzie · sezónní kytice',
@@ -219,11 +219,20 @@
       fmSend: 'Odeslat poptávku',
       fmOk: 'Děkujeme! Poptávka odešla — ozveme se co nejdřív.',
 
+      /* --- chat --- */
+      chatAria: 'Napište nám',
+      chatT: 'Napište nám',
+      chatSub: 'Odpovídáme během otevírací doby, obvykle do pár minut.',
+      chatCall: 'Zavolat 723 477 375',
+      chatForm: 'Poptávkový formulář',
+      chatBtn: 'Napište nám',
+      fCena: 'Cena',
+      fPrilez: 'Příležitost',
+
       /* --- patička --- */
       ftShop: 'Prodejna',
       ftContact: 'Kontakt',
       ftSocial: 'Sítě',
-      ftBy: 'Design a kód —',
       toTop: 'Zpět nahoru',
 
       /* --- lightbox a lišta --- */
@@ -262,7 +271,7 @@
       fact1L: 'Магазин',
       fact1V: 'Пн–Сб 9:00–18:00 · Нд 10:00–15:00',
       fact2L: 'Доставка по Пльзні',
-      fact2V: 'щодня 9:00–20:00',
+      fact2V: 'щодня 9:00–20:00 · зазвичай за 30–60 хвилин',
       fact3L: 'Спілкуємось',
       fact3V: 'чеською · англійською · українською',
       heroCap: 'Гортензії · сезонний букет',
@@ -428,10 +437,18 @@
       fmSend: 'Надіслати запит',
       fmOk: 'Дякуємо! Запит надіслано — відповімо якнайшвидше.',
 
+      chatAria: 'Напишіть нам',
+      chatT: 'Напишіть нам',
+      chatSub: 'Відповідаємо в години роботи, зазвичай за кілька хвилин.',
+      chatCall: 'Подзвонити 723 477 375',
+      chatForm: 'Форма запиту',
+      chatBtn: 'Напишіть нам',
+      fCena: 'Ціна',
+      fPrilez: 'Привід',
+
       ftShop: 'Магазин',
       ftContact: 'Контакти',
       ftSocial: 'Соцмережі',
-      ftBy: 'Дизайн і код —',
       toTop: 'Нагору',
 
       lbAria: 'Перегляд фото',

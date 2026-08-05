@@ -23,12 +23,14 @@ Pak otevřete <http://localhost:5173>.
 ```
 .
 ├── index.html                  # hlavní stránka
-├── katalog.html                # katalog kytic (filtr, předvyplnění poptávky)
+├── katalog.html                # katalog kytic (skládá se z katalog.json)
+├── admin.html                  # ★ správa katalogu (viz níže)
 ├── robots.txt / sitemap.xml    # SEO (balíček Standard)
 ├── assets/
 │   ├── css/style.css           # design systém + layout
-│   ├── js/i18n.js              # ★ všechny texty (čeština + ukrajinština)
-│   ├── js/main.js              # menu, lightbox, FAQ, formulář, scroll
+│   ├── js/i18n.js              # ★ texty stránek (čeština + ukrajinština)
+│   ├── js/main.js              # menu, lightbox, FAQ, formulář, katalog, chat
+│   ├── data/katalog.json       # ★ položky a filtry katalogu
 │   └── img/
 │       ├── favicon.svg         # tulipán z brand guide
 │       └── gallery/            # fotky .jpg + .webp
@@ -132,15 +134,42 @@ formuláře), `sitemap.xml`, `robots.txt`. Přidat soubor `CNAME`.
 
 ## Katalog (katalog.html)
 
-Karty kytic s orientačními cenami podle cenových pásem, která klientka
-sama používá v Instagram highlights (do 1 000 / 1 000–2 000 / od 2 000 Kč).
-Filtry čipy, karta „Nechám to na floristce" (vzor ověřený u konkurence),
-tlačítko „Chci tuhle" předvyplní poptávkový formulář na hlavní stránce
-(`?kytice=Název`). Fakt „rozvoz od 30 do 60 minut" pochází z popisku
-jejich vlastního postu na Instagramu.
+Karty i filtry se skládají z **`assets/data/katalog.json`** — dvě osy
+filtrů (cena + příležitost), obě definované v datech. Cenová pásma jsou
+ta, která klientka sama používá v Instagram highlights. Karta „Nechám
+to na floristce" (vzor ověřený u konkurence), „Chci tuhle" předvyplní
+formulář (`?kytice=Název`). Fakt „rozvoz od 30 do 60 minut" pochází
+z popisku jejich postu na Instagramu.
 
-Úprava položek: HTML karty v `katalog.html` + texty v `i18n.js`
-(klíče `kn*`/`kf*`). Sezónní obměna = výměna fotky a dvou řádků.
+## Správa katalogu (admin.html)
+
+`admin.html` je editor `katalog.json`: přidání/úprava/skrytí kytic,
+pořadí, příležitosti (nové se hned objeví jako čip), dvoujazyčné texty.
+Ukládá **přímo do repozitáře přes GitHub API** — web se přegeneruje
+do 1–2 minut.
+
+**Token:** GitHub → Settings → Developer settings → Fine-grained tokens
+→ Generate new token → Repository access: *Only select repositories* →
+`vorthys/charmofflowers` → Permissions → Contents: **Read and write**.
+Token vložit v admin.html; volitelně se pamatuje v prohlížeči.
+Bez tokenu funguje admin jen pro čtení + export/import JSON.
+
+Stránka je v `robots.txt` a má `noindex` — není v navigaci, jen na
+přímé adrese `/admin.html`.
+
+**Nové fotky:** zmenšit na ~800 px šířky, uložit `.jpg` + `.webp` se
+stejným názvem do `assets/img/gallery/`, do admin panelu zapsat cestu
+bez přípony. (WebP: `python -c "from PIL import Image; im=Image.open('f.jpg'); im.save('f.webp','WEBP',quality=82)"`)
+
+## Chat
+
+Plovoucí bublina vpravo dole — **žádný cizí widget**, jen skutečné
+kanály obchodu: Instagram DM (`ig.me/m/…`, jejich hlavní objednávkový
+kanál dle bia), Messenger (`m.me/…`), telefon, formulář. Zero skriptů
+třetích stran = žádná cookie lišta. Analýza konkurence: 4 z 5 webů
+živý chat nemají; Meta svůj vestavěný widget ukončila v 2024.
+Kdyby časem bylo potřeba víc, kandidát je český **Smartsupp**
+(vyžaduje registraci a závazek klientky odpovídat).
 
 ---
 

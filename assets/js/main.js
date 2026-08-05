@@ -1,5 +1,6 @@
 /* Charm of Flowers — interakce
-   Bez závislostí. Vše funguje i bez JS, script jen přidává komfort. */
+   Bez závislostí. Vše podstatné funguje i bez JS, script přidává komfort:
+   menu, lightbox, FAQ, formulář, katalog z JSON, chat. */
 (function () {
   'use strict';
 
@@ -18,7 +19,6 @@
       var open = nav.classList.toggle('is-open');
       burger.setAttribute('aria-expanded', String(open));
     });
-
     nav.addEventListener('click', function (e) {
       if (e.target.tagName === 'A') {
         nav.classList.remove('is-open');
@@ -27,27 +27,15 @@
     });
   }
 
-  /* ---- hlavička a mobilní výzva k volání ---- */
+  /* ---- stín hlavičky ---- */
   var head = document.querySelector('.site-head');
-  var callbar = document.getElementById('callbar');
-  var hero = document.querySelector('.hero');
-
   var onScroll = function () {
-    var y = window.scrollY;
-    if (head) head.classList.toggle('is-stuck', y > 8);
-    if (callbar && hero) {
-      /* číslo nabídneme až za heroem — nahoře je tlačítko i tak vidět,
-         a nad patičkou by lišta překrývala kontakty */
-      var past = y > hero.offsetHeight * .8;
-      var atEnd = y + window.innerHeight > document.body.scrollHeight - 160;
-      callbar.classList.toggle('is-on', past && !atEnd);
-    }
+    if (head) head.classList.toggle('is-stuck', window.scrollY > 8);
   };
   window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', onScroll, { passive: true });
   onScroll();
 
-  /* ---- aktivní položka navigace ---- */
+  /* ---- aktivní položka navigace (jen kotvy na téže stránce) ---- */
   var links = Array.prototype.slice.call(document.querySelectorAll('.nav a[href^="#"]'));
   var sections = links
     .map(function (a) { return document.querySelector(a.getAttribute('href')); })
@@ -62,41 +50,152 @@
         });
       });
     }, { rootMargin: '-45% 0px -50% 0px' });
-
     sections.forEach(function (s) { spy.observe(s); });
   }
 
-  /* ---- katalog: filtr přes čipy ---- */
-  var chips = document.getElementById('chips');
-  var kat = document.getElementById('kat');
-  if (chips && kat) {
-    chips.addEventListener('click', function (e) {
-      var chip = e.target.closest('.chip');
-      if (!chip) return;
-      var f = chip.getAttribute('data-f');
-      chips.querySelectorAll('.chip').forEach(function (c) {
-        c.classList.toggle('is-on', c === chip);
-      });
-      kat.querySelectorAll('.kat-item').forEach(function (item) {
-        var tier = item.getAttribute('data-tier');
-        var cat = item.getAttribute('data-cat');
-        var show;
-        if (f === 'all') show = true;
-        else if (f === 'svatba') show = cat === 'svatba';
-        else if (f === 'boxdecor') show = cat === 'box' || cat === 'vyzdoba';
-        else show = tier === f || (tier === 'any' && cat === 'kytice');
-        item.classList.toggle('is-hidden', !show);
-      });
+  /* ---- chat ---- */
+  var chatFab = document.getElementById('chatFab');
+  var chatPanel = document.getElementById('chatPanel');
+  if (chatFab && chatPanel) {
+    var chatSet = function (open) {
+      chatPanel.hidden = !open;
+      chatFab.setAttribute('aria-expanded', String(open));
+    };
+    chatFab.addEventListener('click', function () { chatSet(chatPanel.hidden); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !chatPanel.hidden) { chatSet(false); chatFab.focus(); }
     });
+    document.addEventListener('click', function (e) {
+      if (!chatPanel.hidden && !e.target.closest('.chat')) chatSet(false);
+    });
+  }
+
+  /* ---- katalog z JSON ----
+     Data (položky i filtry) žijí v assets/data/katalog.json,
+     upravují se v admin.html. Tady se jen skládá HTML. */
+  var katEl = document.getElementById('kat');
+  var filtersEl = document.getElementById('filters');
+  if (katEl && katEl.getAttribute('data-src')) {
+    var katData = null;
+    var active = { cena: 'all', prilezitost: 'all' };
+
+    var lang = function () { return document.documentElement.lang === 'uk' ? 'uk' : 'cs'; };
+    var esc = function (s) {
+      return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+      });
+    };
+
+    var TAGS = { season: 'tagSeason', wedding: 'tagWedding', box: 'tagBox', decor: 'tagDecor' };
+    /* překlady mimo slovník i18n — malé UI katalogu */
+    var UI = {
+      cs: { all: 'Vše', cta: 'Chci tuhle', want: 'Mám zájem o: ', empty: 'Tomuhle filtru zatím nic neodpovídá — zkuste jiný, nebo nám napište.' },
+      uk: { all: 'Усі', cta: 'Хочу цей', want: 'Мене цікавить: ', empty: 'Під цей фільтр поки нічого не підходить — спробуйте інший або напишіть нам.' }
+    };
+    var TAG_TX = {
+      tagSeason: { cs: 'Sezónní', uk: 'Сезонний' },
+      tagWedding: { cs: 'Svatební', uk: 'Весільний' },
+      tagBox: { cs: 'Box', uk: 'Коробка' },
+      tagDecor: { cs: 'Výzdoba', uk: 'Оформлення' }
+    };
+
+    var matches = function (item) {
+      if (item.always) return true;
+      var okCena = active.cena === 'all' || item.tier === active.cena;
+      var okOcc = active.prilezitost === 'all' ||
+        (item.occasions || []).indexOf(active.prilezitost) !== -1;
+      return okCena && okOcc;
+    };
+
+    var renderChips = function () {
+      if (!filtersEl || !katData) return;
+      var L = lang();
+      ['cena', 'prilezitost'].forEach(function (group) {
+        var box = filtersEl.querySelector('[data-group="' + group + '"]');
+        if (!box) return;
+        var html = '<button class="chip' + (active[group] === 'all' ? ' is-on' : '') + '" type="button" data-f="all">' + esc(UI[L].all) + '</button>';
+        (katData.filters[group] || []).forEach(function (f) {
+          html += '<button class="chip' + (active[group] === f.id ? ' is-on' : '') + '" type="button" data-f="' + esc(f.id) + '">' + esc(f[L] || f.cs) + '</button>';
+        });
+        box.innerHTML = html;
+      });
+    };
+
+    var renderCards = function () {
+      if (!katData) return;
+      var L = lang();
+      var html = '';
+      var shown = 0;
+      katData.items.forEach(function (it) {
+        if (it.visible === false) return;
+        var vis = matches(it);
+        if (vis) shown++;
+        var name = (it.name && (it.name[L] || it.name.cs)) || '';
+        var flowers = (it.flowers && (it.flowers[L] || it.flowers.cs)) || '';
+        var price = (it.price && (it.price[L] || it.price.cs)) || '';
+        var alt = (it.alt && (it.alt[L] || it.alt.cs)) || '';
+        var tagKey = TAGS[it.tag];
+        var tag = tagKey ? '<span class="kat-item__tag">' + esc(TAG_TX[tagKey][L]) + '</span>' : '';
+        var cta = 'index.html?kytice=' + encodeURIComponent(name) + '#kontakt';
+
+        var photo;
+        if (it.img) {
+          photo =
+            '<figure class="kat-item__photo">' + tag +
+            '<picture><source srcset="' + esc(it.img) + '.webp" type="image/webp">' +
+            '<img src="' + esc(it.img) + '.jpg"' +
+            (it.w ? ' width="' + it.w + '" height="' + it.h + '"' : '') +
+            ' loading="lazy" decoding="async" alt="' + esc(alt) + '"></picture></figure>';
+        } else {
+          photo =
+            '<div class="kat-item__photo kat-item__orn" aria-hidden="true">' +
+            '<svg class="orn" focusable="false"><use href="#orn-tulip"/></svg></div>';
+        }
+
+        html +=
+          '<article class="kat-item' + (it.img ? '' : ' kat-item--fl') + (vis ? '' : ' is-hidden') + '">' +
+          photo +
+          '<div class="kat-item__body">' +
+          '<h2 class="kat-item__t">' + esc(name) + '</h2>' +
+          '<p class="kat-item__f">' + esc(flowers) + '</p>' +
+          '<div class="kat-item__row">' +
+          '<span class="kat-item__price">' + esc(price) + '</span>' +
+          '<a class="kat-item__go" href="' + esc(cta) + '">' + esc(UI[L].cta) + '</a>' +
+          '</div></div></article>';
+      });
+      if (!shown) html += '<p class="kat-note">' + esc(UI[L].empty) + '</p>';
+      katEl.innerHTML = html;
+    };
+
+    var renderAll = function () { renderChips(); renderCards(); };
+
+    if (filtersEl) {
+      filtersEl.addEventListener('click', function (e) {
+        var chip = e.target.closest('.chip');
+        if (!chip) return;
+        var group = chip.closest('[data-group]').getAttribute('data-group');
+        active[group] = chip.getAttribute('data-f');
+        renderAll();
+      });
+    }
+
+    document.addEventListener('langchange', renderAll);
+
+    fetch(katEl.getAttribute('data-src'))
+      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(function (d) { katData = d; renderAll(); })
+      .catch(function () {
+        katEl.innerHTML = '<p class="kat-note">Katalog se nepodařilo načíst. Aktuální nabídku najdete na ' +
+          '<a href="https://www.instagram.com/charmofflowers.cz/">Instagramu</a>, ' +
+          'nebo zavolejte +420 723 477 375.</p>';
+      });
   }
 
   /* ---- předvyplnění poptávky z katalogu (?kytice=…) ---- */
   var msgField = document.getElementById('f-msg');
   var wanted = new URLSearchParams(location.search).get('kytice');
   if (msgField && wanted) {
-    var d = document.documentElement.lang === 'uk'
-      ? 'Мене цікавить: '
-      : 'Mám zájem o: ';
+    var d = document.documentElement.lang === 'uk' ? 'Мене цікавить: ' : 'Mám zájem o: ';
     if (!msgField.value) msgField.value = d + wanted + '\n';
     var u2 = new URL(location.href);
     u2.searchParams.delete('kytice');
@@ -117,8 +216,8 @@
   if (faq) {
     faq.addEventListener('toggle', function (e) {
       if (e.target.open) {
-        faq.querySelectorAll('details[open]').forEach(function (d) {
-          if (d !== e.target) d.open = false;
+        faq.querySelectorAll('details[open]').forEach(function (dd) {
+          if (dd !== e.target) dd.open = false;
         });
       }
     }, true);
@@ -127,12 +226,11 @@
   /* ---- odhalování bloků při scrollu ---- */
   var revealables = document.querySelectorAll(
     '.sec__head, .card, .tier, .pricelist, .shot, .review, .reviews__cta, ' +
-    '.story__photo, .story__text, .faq__item, .form, .info, .contact__map'
+    '.story__photo, .story__text, .faq__item, .form, .info, .contact__map, .step'
   );
 
   if (!reduce && 'IntersectionObserver' in window) {
     var shown = false;
-
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en, i) {
         if (!en.isIntersecting) return;
@@ -149,9 +247,7 @@
       io.observe(el);
     });
 
-    /* Pojistka: kdyby observer z jakéhokoli důvodu nikdy nespustil,
-       obsah se po chvíli odkryje sám. Radši žádná animace než
-       neviditelná stránka. */
+    /* Pojistka: kdyby observer nikdy nespustil, obsah se odkryje sám. */
     setTimeout(function () {
       if (shown) return;
       io.disconnect();
@@ -181,8 +277,6 @@
       show(i);
       lb.hidden = false;
       document.body.style.overflow = 'hidden';
-      /* vynutíme přepočet layoutu, aby přechod naskočil i tam,
-         kde je requestAnimationFrame přiškrcený (např. na pozadí) */
       void lb.offsetWidth;
       lb.classList.add('is-open');
       document.getElementById('lbX').focus();
@@ -191,10 +285,7 @@
     var close = function () {
       lb.classList.remove('is-open');
       document.body.style.overflow = '';
-      var done = function () {
-        lb.hidden = true;
-        lbImg.src = '';
-      };
+      var done = function () { lb.hidden = true; lbImg.src = ''; };
       reduce ? done() : setTimeout(done, 300);
       if (opener) opener.focus();
     };
@@ -217,7 +308,6 @@
       else if (e.key === 'ArrowLeft') show(at - 1);
       else if (e.key === 'ArrowRight') show(at + 1);
       else if (e.key === 'Tab') {
-        /* jednoduchá past na fokus uvnitř dialogu */
         var f = lb.querySelectorAll('button');
         var first = f[0], last = f[f.length - 1];
         if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
