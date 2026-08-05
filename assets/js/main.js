@@ -66,9 +66,31 @@
     sections.forEach(function (s) { spy.observe(s); });
   }
 
+  /* ---- potvrzení po odeslání formuláře (návrat z FormSubmit) ---- */
+  var formOk = document.getElementById('formOk');
+  if (formOk && new URLSearchParams(location.search).get('sent') === '1') {
+    formOk.hidden = false;
+    var u = new URL(location.href);
+    u.searchParams.delete('sent');
+    history.replaceState(null, '', u);
+  }
+
+  /* ---- FAQ: otevřená vždy jen jedna otázka ---- */
+  var faq = document.getElementById('faq');
+  if (faq) {
+    faq.addEventListener('toggle', function (e) {
+      if (e.target.open) {
+        faq.querySelectorAll('details[open]').forEach(function (d) {
+          if (d !== e.target) d.open = false;
+        });
+      }
+    }, true);
+  }
+
   /* ---- odhalování bloků při scrollu ---- */
   var revealables = document.querySelectorAll(
-    '.sec__head, .card, .tier, .shot, .story__photo, .story__text, .info, .contact__map'
+    '.sec__head, .card, .tier, .pricelist, .shot, .review, .reviews__cta, ' +
+    '.story__photo, .story__text, .faq__item, .form, .info, .contact__map'
   );
 
   if (!reduce && 'IntersectionObserver' in window) {

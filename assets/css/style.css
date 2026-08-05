@@ -1,39 +1,38 @@
 /* =========================================================
    Charm of Flowers — Plzeň
-   Paleta i typografie vychází z reálných materiálů obchodu:
-   světelná cedule (zlatá na tmavě hnědé), logo (uhlová
-   antikva + olivový skript "of"), petrolejový nábytek
-   a kraftový balicí papír.
+   Design podle oficiálního brand guide (Priakha Svitlana):
+   - paleta: #102713 lesní zeleň · #DBD986 chartreuse
+             #DBD5D1 greige · #EFEFEF hlavní pozadí
+   - typografie: Abigail (didone) ~ Playfair Display,
+                 Drugs (geometrický grotesk) ~ Jost,
+                 logotyp Bodoni Moda + Pinyon Script
+   - nálada moodboardu: světlo, vzduch, stíny listů,
+     textura, jednoduchost
    ========================================================= */
 
 /* ---------- 1. Tokeny ---------- */
 :root {
-  /* Ground */
-  --bark:       #241b15;   /* hnědá ze světelné cedule */
-  --bark-deep:  #17110d;
-  --bark-soft:  #32261e;
-  --paper:      #f4f0e8;   /* kraftový papír */
-  --paper-2:    #eae3d6;
-  --petrol:     #2c4a4e;   /* nábytek v prodejně */
-  --petrol-dk:  #223b3e;
+  /* Brand guide */
+  --green:      #102713;   /* hlavní tmavá — inkoust i tmavé sekce */
+  --green-2:    #1c3a22;   /* světlejší zeleň pro hover */
+  --chartreuse: #dbd986;   /* akcent na tmavé, skript "of" */
+  --moss:       #565a20;   /* ztmavený chartreuse — akcent na světlém */
+  --greige:     #dbd5d1;   /* linky, rámečky */
+  --bg:         #efefef;   /* hlavní pozadí (dle guide) */
+  --card:       #ffffff;
 
   /* Ink */
-  --ink:        #1d1a17;
-  --ink-60:     #5c534a;
-  --ink-40:     #8a8076;
-
-  /* Accents */
-  --gold:       #e4cfa1;   /* písmo cedule */
-  --gold-dim:   #b9a479;
-  --olive:      #c2c878;   /* skript "of" v logu */
-  --olive-deep: #5f6530;   /* čitelná varianta na světlém */
+  --ink:        var(--green);
+  --ink-60:     rgba(16, 39, 19, .66);
+  --ink-40:     rgba(16, 39, 19, .45);
 
   /* Lines */
-  --hair-d:     rgba(228,207,161,.20);
-  --hair-l:     rgba(29,26,23,.14);
+  --hair-l:     rgba(16, 39, 19, .13);
+  --hair-d:     rgba(219, 217, 134, .22);
 
   /* Type */
-  --ff-disp: "Bodoni Moda", "Didot", "Bodoni MT", Georgia, serif;
+  --ff-logo: "Bodoni Moda", "Didot", Georgia, serif;
+  --ff-disp: "Playfair Display", "Bodoni Moda", Georgia, serif;
   --ff-body: "Jost", "Segoe UI", system-ui, -apple-system, sans-serif;
   --ff-script: "Pinyon Script", cursive;
 
@@ -50,7 +49,7 @@
 html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
 body {
   margin: 0;
-  background: var(--paper);
+  background: var(--bg);
   color: var(--ink);
   font-family: var(--ff-body);
   font-size: clamp(1rem, .96rem + .2vw, 1.0625rem);
@@ -61,15 +60,16 @@ body {
 }
 img, iframe { display: block; max-width: 100%; }
 img { height: auto; }
-h1, h2, h3 { margin: 0; font-weight: 400; line-height: 1.08; }
+h1, h2, h3 { margin: 0; font-weight: 400; line-height: 1.1; }
 p { margin: 0 0 1em; }
 a { color: inherit; }
 button { font: inherit; color: inherit; }
+picture { display: contents; }
 
-::selection { background: var(--olive); color: var(--bark); }
+::selection { background: var(--chartreuse); color: var(--green); }
 
 :focus-visible {
-  outline: 2px solid var(--olive);
+  outline: 2px solid var(--moss);
   outline-offset: 3px;
   border-radius: 2px;
 }
@@ -82,7 +82,7 @@ button { font: inherit; color: inherit; }
 
 .skip {
   position: absolute; left: 1rem; top: -4rem; z-index: 200;
-  background: var(--bark); color: var(--gold);
+  background: var(--green); color: var(--chartreuse);
   padding: .7rem 1.1rem; text-decoration: none;
   transition: top .2s var(--ease);
 }
@@ -90,39 +90,41 @@ button { font: inherit; color: inherit; }
 
 .wrap { width: 100%; max-width: var(--max); margin-inline: auto; padding-inline: var(--pad); }
 
-/* ---------- 3. Logotyp ----------
-   Rekonstrukce značky: antikva + olivový skript "of",
-   který visí pod prvním řádkem a mírně vlevo. */
+/* ---------- 3. Logotyp (dle brand guide) ---------- */
 .mark {
   display: inline-grid;
   grid-template-columns: auto auto;
   align-items: baseline;
-  font-family: var(--ff-disp);
+  font-family: var(--ff-logo);
   font-weight: 400;
   line-height: .92;
   letter-spacing: .005em;
 }
-.mark__a {
-  grid-column: 2;
-  justify-self: start;
-  /* "Charm" mírně přesahuje doleva přes "flowers", jako v originále */
-  margin-left: -.24em;
-}
+.mark__a { grid-column: 2; justify-self: start; margin-left: -.24em; }
 .mark__of {
-  grid-column: 1;
-  justify-self: end;
+  grid-column: 1; justify-self: end;
   font-family: var(--ff-script);
-  font-size: .84em;
-  line-height: 1;
-  color: var(--olive);
+  font-size: .84em; line-height: 1;
+  color: var(--chartreuse);
   padding-right: .06em;
   transform: translateY(-.14em);
 }
 .mark__b { grid-column: 2; justify-self: start; }
 
-.mark--xl { font-size: clamp(3.4rem, 13vw, 8.75rem); }
+.mark--xl { font-size: clamp(3.2rem, 12vw, 8rem); }
 .mark--md { font-size: clamp(1.9rem, 4.5vw, 2.6rem); }
 .mark--sm { font-size: clamp(1.15rem, 2.4vw, 1.4rem); }
+
+/* na světlém pozadí potřebuje skript tmavší tón, aby byl vidět */
+.mark--on-light .mark__of { color: var(--moss); }
+
+/* ---------- 3b. Dekorativní znak (tulipán z brand guide) ---------- */
+.orn { display: block; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; }
+.orn--divider {
+  width: 44px; height: auto;
+  margin: 0 auto;
+  color: var(--greige);
+}
 
 /* ---------- 4. Utility typografie ---------- */
 .eyebrow {
@@ -131,41 +133,39 @@ button { font: inherit; color: inherit; }
   font-weight: 500;
   letter-spacing: .24em;
   text-transform: uppercase;
-  color: var(--olive-deep);
+  color: var(--moss);
 }
-.eyebrow--gold { color: var(--gold-dim); }
+.eyebrow--light { color: var(--chartreuse); }
 
 .sec__title {
   font-family: var(--ff-disp);
-  font-size: clamp(2.05rem, 1.2rem + 3.3vw, 3.5rem);
+  font-size: clamp(2.05rem, 1.2rem + 3.3vw, 3.4rem);
   font-weight: 400;
   letter-spacing: -.012em;
   text-wrap: balance;
 }
-.sec__title--light { color: var(--paper); }
+.sec__title--light { color: #fff; }
 
 .sec__lede {
   max-width: 46ch;
   margin: 1.4rem 0 0;
-  color: rgba(244,240,232,.72);
+  color: var(--ink-60);
 }
 .sec__head { margin-bottom: clamp(2.5rem, 5vw, 4rem); }
 .sec__head--center { text-align: center; margin-inline: auto; max-width: 60ch; }
 .sec__head--center .sec__lede { margin-inline: auto; }
 .sec__head--split {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-end;
-  justify-content: space-between;
+  display: flex; flex-wrap: wrap;
+  align-items: flex-end; justify-content: space-between;
   gap: 1.5rem 2rem;
 }
 
 /* ---------- 5. Tlačítka ---------- */
 .btn {
-  --bg: transparent; --fg: currentColor; --bd: currentColor;
+  --bg-b: transparent; --fg: currentColor; --bd: currentColor;
   display: inline-flex; align-items: center; gap: .55rem;
-  padding: .92rem 1.7rem;
-  background: var(--bg); color: var(--fg);
+  padding: .95rem 1.75rem;
+  background: var(--bg-b); color: var(--fg);
   border: 1px solid var(--bd);
   font-size: .78rem; font-weight: 500;
   letter-spacing: .13em; text-transform: uppercase;
@@ -175,27 +175,30 @@ button { font: inherit; color: inherit; }
 }
 .btn svg { width: 1.05em; height: 1.05em; fill: currentColor; }
 
-.btn--gold { --bg: var(--gold); --fg: var(--bark); --bd: var(--gold); }
-.btn--gold:hover { --bg: var(--olive); --bd: var(--olive); }
+.btn--solid { --bg-b: var(--green); --fg: #fff; --bd: var(--green); }
+.btn--solid:hover { --bg-b: var(--green-2); --bd: var(--green-2); }
 
-.btn--outline { --fg: var(--paper); --bd: rgba(244,240,232,.34); }
-.btn--outline:hover { --bg: rgba(244,240,232,.08); --bd: var(--gold); --fg: var(--gold); }
+.btn--outline { --fg: var(--green); --bd: rgba(16,39,19,.35); }
+.btn--outline:hover { --bd: var(--green); --bg-b: rgba(16,39,19,.05); }
+
+.btn--chart { --bg-b: var(--chartreuse); --fg: var(--green); --bd: var(--chartreuse); }
+.btn--chart:hover { --bg-b: #fff; --bd: #fff; }
 
 .btn--ghost { --fg: var(--ink); --bd: var(--hair-l); padding: .6rem 1.05rem; }
-.btn--ghost:hover { --bg: var(--ink); --fg: var(--paper); --bd: var(--ink); }
+.btn--ghost:hover { --bg-b: var(--green); --fg: #fff; --bd: var(--green); }
 
 /* ---------- 6. Hlavička ---------- */
 .site-head {
   position: sticky; top: 0; z-index: 90;
-  background: rgba(244,240,232,.86);
+  background: rgba(239,239,239,.88);
   backdrop-filter: blur(14px);
   border-bottom: 1px solid transparent;
-  transition: border-color .3s var(--ease), background .3s var(--ease);
+  transition: border-color .3s var(--ease);
 }
 .site-head.is-stuck { border-bottom-color: var(--hair-l); }
 
 .site-head__in {
-  display: flex; align-items: center; gap: 1.5rem;
+  display: flex; align-items: center; gap: 1.4rem;
   width: 100%; max-width: var(--max);
   margin-inline: auto;
   padding: .85rem var(--pad);
@@ -203,7 +206,7 @@ button { font: inherit; color: inherit; }
 .site-head__logo { text-decoration: none; flex: none; }
 
 .nav {
-  display: flex; gap: clamp(1.1rem, 2.4vw, 2.1rem);
+  display: flex; gap: clamp(1rem, 2.2vw, 2rem);
   margin-left: auto;
   font-size: .82rem; letter-spacing: .07em;
 }
@@ -217,14 +220,12 @@ button { font: inherit; color: inherit; }
 .nav a::after {
   content: ""; position: absolute; left: 0; bottom: 0;
   width: 100%; height: 1px;
-  background: var(--olive-deep);
+  background: var(--moss);
   transform: scaleX(0); transform-origin: right;
   transition: transform .35s var(--ease);
 }
 .nav a:hover, .nav a.is-here { color: var(--ink); }
 .nav a:hover::after, .nav a.is-here::after { transform: scaleX(1); transform-origin: left; }
-
-.site-head__cta { flex: none; }
 
 /* ---------- 6b. Přepínač jazyka ---------- */
 .lang {
@@ -244,174 +245,156 @@ button { font: inherit; color: inherit; }
   transition: color .25s var(--ease), border-color .25s var(--ease);
 }
 .lang__b:hover { color: var(--ink); }
-.lang__b.is-on { color: var(--ink); border-bottom-color: var(--olive-deep); }
-.lang__sep {
-  width: 3px; height: 3px;
-  border-radius: 50%;
-  background: var(--hair-l);
-}
+.lang__b.is-on { color: var(--ink); border-bottom-color: var(--moss); }
+.lang__sep { width: 3px; height: 3px; border-radius: 50%; background: var(--hair-l); }
+
+.site-head__cta { flex: none; }
 
 .burger {
   display: none;
   width: 42px; height: 42px;
   margin-left: .35rem;
   background: none; border: 1px solid var(--hair-l);
-  cursor: pointer;
-  padding: 0;
+  cursor: pointer; padding: 0;
 }
 .burger span {
   display: block; width: 18px; height: 1px;
   margin: 4px auto;
   background: var(--ink);
-  transition: transform .3s var(--ease), opacity .3s var(--ease);
+  transition: transform .3s var(--ease);
 }
 .burger[aria-expanded="true"] span:first-child { transform: translateY(2.5px) rotate(45deg); }
 .burger[aria-expanded="true"] span:last-child { transform: translateY(-2.5px) rotate(-45deg); }
 
-/* ---------- 7. Hero — světelná cedule ---------- */
+/* ---------- 7. Hero — světlo a stín listů ---------- */
 .hero {
   position: relative;
-  background: var(--bark);
-  color: var(--paper);
+  background: var(--bg);
   overflow: hidden;
   isolation: isolate;
 }
-.hero::after {
-  content: ""; position: absolute; inset: 0; z-index: 1;
-  pointer-events: none;
-  background: radial-gradient(115% 85% at 22% 34%, transparent 42%, rgba(0,0,0,.5) 100%);
-}
-.hero__glow {
+
+/* měkký stín rostliny putující po pozadí (moodboard: "тіні") */
+.hero__shadow {
   position: absolute; z-index: 0;
-  left: -8%; top: 4%;
-  width: 74%; height: 72%;
-  background: radial-gradient(closest-side, rgba(240,226,194,.30), rgba(240,226,194,.09) 52%, transparent 76%);
-  filter: blur(14px);
-  opacity: 0;
-  animation: sign-on 2.1s var(--ease) .25s forwards;
+  right: -6%; top: -10%;
+  width: 58%; height: 120%;
+  color: var(--green);
+  opacity: .07;
+  filter: blur(26px);
+  animation: shadow-drift 46s ease-in-out infinite alternate;
+  pointer-events: none;
 }
-@keyframes sign-on {
-  0%   { opacity: 0; }
-  14%  { opacity: .85; }
-  20%  { opacity: .12; }
-  30%  { opacity: .95; }
-  36%  { opacity: .3; }
-  100% { opacity: 1; }
+@keyframes shadow-drift {
+  from { transform: translate3d(0, -1.5%, 0) rotate(-2deg); }
+  to   { transform: translate3d(-3%, 2.5%, 0) rotate(2.5deg); }
 }
 
 .hero__in {
   position: relative; z-index: 2;
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr);
+  grid-template-columns: minmax(0, 1.12fr) minmax(0, .88fr);
   align-items: center;
   gap: clamp(2.5rem, 6vw, 5rem);
   width: 100%; max-width: var(--max);
   margin-inline: auto;
-  padding: clamp(4rem, 9vw, 7.5rem) var(--pad) clamp(4rem, 8vw, 6.5rem);
+  padding: clamp(3.5rem, 8vw, 6.5rem) var(--pad) clamp(4rem, 8vw, 6.5rem);
 }
 
-.hero__mark {
-  margin: 0 0 1.6rem;
-  color: var(--gold);
-  text-shadow: 0 0 46px rgba(228,207,161,.34), 0 0 12px rgba(228,207,161,.18);
-}
-.hero__mark .mark__of { color: var(--olive); text-shadow: 0 0 34px rgba(194,200,120,.42); }
+.hero__mark { margin: 0 0 1.6rem; color: var(--green); }
+.hero__mark .mark__of { color: var(--moss); }
 
 .hero__lede {
   margin: 0 0 .55rem;
   font-family: var(--ff-disp);
   font-style: italic;
   font-size: clamp(1.3rem, .95rem + 1.4vw, 1.85rem);
-  color: var(--paper);
+  color: var(--ink);
 }
-.hero__sub {
-  max-width: 44ch;
-  margin: 0 0 2.2rem;
-  color: rgba(244,240,232,.68);
-}
+.hero__sub { max-width: 44ch; margin: 0 0 2.2rem; color: var(--ink-60); }
 .hero__cta { display: flex; flex-wrap: wrap; gap: .75rem; }
 
 .hero__facts {
   display: grid; gap: .55rem;
   margin: 2.6rem 0 0; padding: 1.6rem 0 0;
   list-style: none;
-  border-top: 1px solid var(--hair-d);
+  border-top: 1px solid var(--greige);
   font-size: .875rem;
-  color: rgba(244,240,232,.66);
+  color: var(--ink-60);
 }
 .hero__facts li { display: flex; flex-wrap: wrap; gap: 0 .6rem; }
 .fact__l {
   flex: none; min-width: 9.5rem;
-  color: var(--gold-dim);
+  color: var(--moss);
   font-size: .68rem; font-weight: 500;
   letter-spacing: .16em; text-transform: uppercase;
   align-self: center;
 }
 
-.hero__photo { margin: 0; }
-/* hairline rámeček posunutý za fotku — ozvěna rámu světelné cedule */
+.hero__photo { position: relative; margin: 0; }
 .hero__frame { position: relative; display: block; }
 .hero__frame::before {
   content: ""; position: absolute;
   inset: 16px -16px -16px 16px;
-  border: 1px solid rgba(228,207,161,.32);
+  border: 1px solid var(--greige);
 }
 .hero__frame img {
   position: relative;
   width: 100%;
   aspect-ratio: 4 / 5;
   object-fit: cover;
-  filter: saturate(.94) contrast(1.03);
+}
+.hero__orn {
+  position: absolute;
+  right: -10px; top: -26px; z-index: 2;
+  width: 58px;
+  color: var(--moss);
+  background: var(--bg);
+  padding: 6px;
 }
 .hero__photo figcaption {
   margin-top: 1.6rem;
   font-size: .72rem; letter-spacing: .16em; text-transform: uppercase;
-  color: var(--gold-dim);
+  color: var(--ink-40);
 }
 
 /* ---------- 8. Sekce ---------- */
 .sec { padding-block: var(--sec-y); }
-.sec--paper { background: var(--paper); color: var(--ink); }
-.sec--bark { background: var(--bark); color: var(--paper); }
-.sec--petrol { background: var(--petrol); color: var(--paper); }
+.sec--light { background: var(--bg); }
+.sec--white { background: var(--card); }
+.sec--green { background: var(--green); color: rgba(255,255,255,.82); }
 
 /* ---------- 9. Služby ---------- */
-/* Dvě řady po dvou kartách, fotka drží pravý sloupec.
-   Čtyři karty vedle sebe byly na text moc úzké. */
 .cards {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1px;
-  background: var(--hair-l);
-  border: 1px solid var(--hair-l);
+  background: var(--greige);
+  border: 1px solid var(--greige);
 }
 .card {
   position: relative;
-  background: var(--paper);
+  background: var(--card);
   padding: clamp(1.7rem, 3vw, 2.6rem);
   transition: background .4s var(--ease);
 }
 .card::before {
   content: ""; position: absolute; left: 0; top: -1px;
   width: 100%; height: 1px;
-  background: var(--olive-deep);
+  background: var(--moss);
   transform: scaleX(0); transform-origin: left;
   transition: transform .5s var(--ease);
 }
-.card:hover { background: var(--paper-2); }
+.card:hover { background: #fbfaf9; }
 .card:hover::before { transform: scaleX(1); }
 .card__t {
   margin: 0 0 .9rem;
   font-family: var(--ff-disp);
-  font-size: clamp(1.35rem, 1.2rem + .4vw, 1.6rem);
+  font-size: clamp(1.3rem, 1.15rem + .4vw, 1.55rem);
 }
 .card__p { max-width: 42ch; margin: 0; color: var(--ink-60); font-size: .95rem; }
 
-.cards__photo {
-  grid-column: span 2;
-  margin: 0;
-  background: var(--paper-2);
-}
+.cards__photo { grid-column: span 2; margin: 0; background: var(--bg); }
 .cards__photo img {
   width: 100%; height: 100%;
   aspect-ratio: 16 / 9;
@@ -425,7 +408,7 @@ button { font: inherit; color: inherit; }
   .cards__photo img { aspect-ratio: auto; }
 }
 
-/* ---------- 10. Rozpočet ---------- */
+/* ---------- 10. Ceník ---------- */
 .tiers {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
@@ -434,42 +417,80 @@ button { font: inherit; color: inherit; }
 .tier {
   display: flex; flex-direction: column;
   padding: clamp(1.9rem, 3vw, 2.6rem);
-  background: var(--bark-soft);
-  border: 1px solid var(--hair-d);
+  background: var(--card);
+  border: 1px solid var(--greige);
   transition: transform .4s var(--ease), border-color .4s var(--ease);
 }
-.tier:hover { transform: translateY(-5px); border-color: rgba(228,207,161,.4); }
-.tier--flag { background: var(--bark-deep); border-color: rgba(194,200,120,.42); }
+.tier:hover { transform: translateY(-5px); border-color: var(--moss); }
+.tier--flag { background: var(--green); border-color: var(--green); color: rgba(255,255,255,.82); }
+.tier--flag:hover { border-color: var(--chartreuse); }
 
 .tier__cap {
   margin: 0 0 1.5rem;
   font-size: .68rem; font-weight: 500;
   letter-spacing: .2em; text-transform: uppercase;
-  color: var(--olive);
+  color: var(--moss);
 }
+.tier--flag .tier__cap { color: var(--chartreuse); }
 .tier__price {
   margin: 0 0 1rem;
   font-family: var(--ff-disp);
-  font-size: clamp(1.75rem, 1.2rem + 1.5vw, 2.35rem);
+  font-size: clamp(1.7rem, 1.2rem + 1.4vw, 2.25rem);
   line-height: 1.05;
-  color: var(--gold);
+  color: var(--green);
 }
-.tier__p { margin: 0 0 2rem; font-size: .93rem; color: rgba(244,240,232,.66); }
+.tier--flag .tier__price { color: #fff; }
+.tier__p { margin: 0 0 2rem; font-size: .93rem; color: var(--ink-60); }
+.tier--flag .tier__p { color: rgba(255,255,255,.72); }
 
 .tier__go {
   display: inline-flex; align-items: center; gap: .55rem;
   margin-top: auto;
   padding-top: 1.1rem;
-  border-top: 1px solid var(--hair-d);
+  border-top: 1px solid var(--hair-l);
   font-size: .74rem; font-weight: 500;
   letter-spacing: .16em; text-transform: uppercase;
   text-decoration: none;
-  color: var(--paper);
+  color: var(--ink);
   transition: color .3s var(--ease);
 }
+.tier--flag .tier__go { color: #fff; border-top-color: var(--hair-d); }
 .tier__arrow { display: inline-block; transition: transform .3s var(--ease); }
-.tier__go:hover { color: var(--olive); }
+.tier__go:hover { color: var(--moss); }
+.tier--flag .tier__go:hover { color: var(--chartreuse); }
 .tier__go:hover .tier__arrow { transform: translateX(5px); }
+
+/* kompletní ceník — přehledná tabulka (pakiet Standard) */
+.pricelist {
+  max-width: 760px;
+  margin: clamp(2.5rem, 5vw, 4rem) auto 0;
+}
+.pricelist__t {
+  margin: 0 0 1.4rem;
+  text-align: center;
+  font-family: var(--ff-disp);
+  font-size: 1.45rem;
+}
+.tbl { width: 100%; border-collapse: collapse; font-size: .97rem; }
+.tbl th, .tbl td {
+  padding: .85rem .25rem;
+  text-align: left;
+  border-bottom: 1px solid var(--greige);
+  font-weight: 300;
+}
+.tbl th { color: var(--ink); }
+.tbl td {
+  text-align: right;
+  color: var(--ink-60);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.tbl__note {
+  margin: 1.1rem 0 0;
+  text-align: center;
+  font-size: .85rem;
+  color: var(--ink-40);
+}
 
 /* ---------- 11. Galerie ---------- */
 .link-ig {
@@ -482,7 +503,7 @@ button { font: inherit; color: inherit; }
   transition: color .3s var(--ease), border-color .3s var(--ease);
 }
 .link-ig svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.4; }
-.link-ig:hover { color: var(--ink); border-color: var(--olive-deep); }
+.link-ig:hover { color: var(--ink); border-color: var(--moss); }
 
 .grid {
   display: grid;
@@ -495,7 +516,7 @@ button { font: inherit; color: inherit; }
   display: block;
   margin: 0; padding: 0;
   aspect-ratio: 3 / 4;
-  background: var(--paper-2);
+  background: var(--greige);
   border: 0;
   cursor: zoom-in;
   overflow: hidden;
@@ -508,43 +529,69 @@ button { font: inherit; color: inherit; }
 }
 .shot::after {
   content: ""; position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(36,27,21,.34), transparent 52%);
+  background: linear-gradient(to top, rgba(16,39,19,.32), transparent 52%);
   opacity: 0;
   transition: opacity .4s var(--ease);
 }
 .shot:hover img, .shot:focus-visible img { transform: scale(1.055); }
 .shot:hover::after, .shot:focus-visible::after { opacity: 1; }
 
-/* první snímek drží celou mřížku pohromadě — 2×2 pole,
-   poměr stran zůstává stejný, takže řádky nikde nerozhodí */
 .shot--feature { grid-column: span 2; grid-row: span 2; aspect-ratio: auto; }
 
-/* ---------- 12. Příběh ---------- */
+/* ---------- 12. Recenze ---------- */
+.reviews {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: clamp(1rem, 2.5vw, 2rem);
+}
+.review {
+  padding: clamp(1.9rem, 3vw, 2.6rem);
+  background: var(--card);
+  border: 1px solid var(--greige);
+}
+.review__orn { width: 34px; margin-bottom: 1.2rem; color: var(--moss); opacity: .8; }
+.review__q {
+  margin: 0 0 1.4rem;
+  font-family: var(--ff-disp);
+  font-style: italic;
+  font-size: clamp(1.1rem, 1rem + .5vw, 1.35rem);
+  line-height: 1.5;
+  color: var(--ink);
+}
+.review__src { margin: 0; font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-40); }
+.reviews__cta { margin-top: clamp(1.8rem, 3.5vw, 2.6rem); text-align: center; }
+
+/* ---------- 13. Příběh ---------- */
 .story {
+  position: relative;
   display: grid;
   grid-template-columns: minmax(0, .78fr) minmax(0, 1fr);
   align-items: center;
   gap: clamp(2.5rem, 6vw, 5rem);
 }
-.story__photo { margin: 0; }
-.story__photo img {
-  width: 100%;
-  aspect-ratio: 3 / 4;
-  object-fit: cover;
+.story__orn {
+  position: absolute;
+  right: 0; bottom: -2rem;
+  width: clamp(120px, 16vw, 200px);
+  color: var(--chartreuse);
+  opacity: .14;
+  pointer-events: none;
 }
-.story__text p { color: rgba(244,240,232,.76); }
-.story__text strong { font-weight: 500; color: var(--paper); }
+.story__photo { margin: 0; }
+.story__photo img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
+.story__text p { color: rgba(255,255,255,.78); }
+.story__text strong { font-weight: 500; color: #fff; }
 .story__text .sec__title { margin-bottom: 1.6rem; }
 
 .story__q {
   margin: 2rem 0;
   padding-left: 1.5rem;
-  border-left: 2px solid var(--olive);
+  border-left: 2px solid var(--chartreuse);
   font-family: var(--ff-disp);
   font-style: italic;
   font-size: clamp(1.15rem, .95rem + .8vw, 1.5rem);
   line-height: 1.42;
-  color: var(--gold);
+  color: var(--chartreuse);
 }
 
 .story__nums {
@@ -555,37 +602,118 @@ button { font: inherit; color: inherit; }
 }
 .story__nums dt {
   font-family: var(--ff-disp);
-  font-size: 1.9rem;
-  line-height: 1;
-  color: var(--gold);
+  font-size: 1.9rem; line-height: 1;
+  color: var(--chartreuse);
 }
 .story__nums dd {
   margin: .45rem 0 0;
   font-size: .72rem; letter-spacing: .13em; text-transform: uppercase;
-  color: rgba(244,240,232,.6);
+  color: rgba(255,255,255,.6);
 }
 
-/* ---------- 13. Kontakt ---------- */
+/* ---------- 14. FAQ ---------- */
+.faq { max-width: 760px; margin-inline: auto; }
+.faq__item {
+  background: var(--card);
+  border: 1px solid var(--greige);
+  border-bottom: 0;
+}
+.faq__item:last-child { border-bottom: 1px solid var(--greige); }
+.faq__item summary {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding: 1.15rem clamp(1.1rem, 2.5vw, 1.7rem);
+  font-weight: 400;
+  font-size: 1.02rem;
+  cursor: pointer;
+  list-style: none;
+  transition: color .25s var(--ease);
+}
+.faq__item summary::-webkit-details-marker { display: none; }
+.faq__item summary::after {
+  content: "+";
+  flex: none;
+  font-family: var(--ff-disp);
+  font-size: 1.3rem;
+  color: var(--moss);
+  transition: transform .3s var(--ease);
+}
+.faq__item[open] summary::after { transform: rotate(45deg); }
+.faq__item summary:hover { color: var(--moss); }
+.faq__a {
+  padding: 0 clamp(1.1rem, 2.5vw, 1.7rem) 1.3rem;
+  max-width: 62ch;
+  color: var(--ink-60);
+  font-size: .95rem;
+}
+
+/* ---------- 15. Kontakt + formulář ---------- */
 .contact {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr);
   gap: clamp(2rem, 5vw, 4rem);
   align-items: start;
 }
+
+.form {
+  background: var(--card);
+  border: 1px solid var(--greige);
+  padding: clamp(1.8rem, 3.5vw, 2.8rem);
+}
+.form__t { margin: 0 0 .5rem; font-family: var(--ff-disp); font-size: 1.6rem; }
+.form__note { margin: 0 0 1.8rem; font-size: .9rem; color: var(--ink-60); }
+.form__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; }
+.form__row { display: grid; gap: .4rem; }
+.form__row--full { grid-column: 1 / -1; }
+.form label {
+  font-size: .7rem; font-weight: 500;
+  letter-spacing: .16em; text-transform: uppercase;
+  color: var(--moss);
+}
+.form input, .form select, .form textarea {
+  width: 100%;
+  padding: .8rem .9rem;
+  background: var(--bg);
+  border: 1px solid var(--greige);
+  border-radius: 0;
+  font: inherit;
+  font-size: .95rem;
+  color: var(--ink);
+  transition: border-color .25s var(--ease), background .25s var(--ease);
+}
+.form input:focus, .form select:focus, .form textarea:focus {
+  outline: none;
+  border-color: var(--moss);
+  background: #fff;
+}
+.form textarea { min-height: 108px; resize: vertical; }
+.form select { appearance: none; background-image: linear-gradient(45deg, transparent 50%, var(--moss) 50%), linear-gradient(135deg, var(--moss) 50%, transparent 50%); background-position: calc(100% - 18px) 50%, calc(100% - 13px) 50%; background-size: 5px 5px; background-repeat: no-repeat; }
+.form__send { margin-top: 1.4rem; width: 100%; justify-content: center; }
+.form__hp { position: absolute; left: -6000px; width: 1px; height: 1px; overflow: hidden; }
+.form__ok {
+  margin: 0 0 1.4rem;
+  padding: .9rem 1.1rem;
+  background: rgba(219,217,134,.25);
+  border: 1px solid var(--chartreuse);
+  font-size: .92rem;
+  color: var(--ink);
+}
+.form__ok[hidden] { display: none; }
+
 .contact__info {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: clamp(1.8rem, 4vw, 2.6rem);
+  align-content: start;
 }
 .info__t {
   margin: 0 0 .9rem;
   font-size: .68rem; font-weight: 500;
   letter-spacing: .2em; text-transform: uppercase;
-  color: var(--olive-deep);
+  color: var(--moss);
 }
 .info p { margin: 0 0 .5rem; font-size: .95rem; color: var(--ink-60); }
 .info a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--hair-l); transition: border-color .3s var(--ease); }
-.info a:hover { border-color: var(--olive-deep); }
+.info a:hover { border-color: var(--moss); }
 .info__big {
   font-family: var(--ff-disp);
   font-size: clamp(1.3rem, 1.1rem + .7vw, 1.6rem);
@@ -593,42 +721,40 @@ button { font: inherit; color: inherit; }
 }
 .info__big a { border: 0; }
 .info__note { font-size: .85rem; color: var(--ink-40); }
-.info__link {
-  display: inline-block; margin-top: .3rem;
-  font-size: .78rem; letter-spacing: .1em;
-}
+.info__link { display: inline-block; margin-top: .3rem; font-size: .78rem; letter-spacing: .1em; }
 
 .hours { width: 100%; border-collapse: collapse; font-size: .92rem; }
-.hours th, .hours td { padding: .5rem 0; text-align: left; border-bottom: 1px solid var(--hair-l); }
-.hours th { font-weight: 400; color: var(--ink-60); }
+.hours th, .hours td { padding: .5rem 0; text-align: left; border-bottom: 1px solid var(--hair-l); font-weight: 300; }
+.hours th { color: var(--ink-60); }
 .hours td { text-align: right; font-variant-numeric: tabular-nums; }
-.hours__hi th, .hours__hi td { color: var(--olive-deep); border-bottom: 0; }
+.hours__hi th, .hours__hi td { color: var(--moss); border-bottom: 0; }
 
 .socials { margin: 0; padding: 0; list-style: none; display: grid; gap: .45rem; font-size: .95rem; }
 .socials a { text-decoration: none; border-bottom: 1px solid var(--hair-l); transition: border-color .3s var(--ease); }
-.socials a:hover { border-color: var(--olive-deep); }
+.socials a:hover { border-color: var(--moss); }
 
 .contact__map {
-  background: var(--paper-2);
-  border: 1px solid var(--hair-l);
+  grid-column: 1 / -1;
+  background: var(--card);
+  border: 1px solid var(--greige);
 }
 .contact__map iframe {
   width: 100%; height: 100%;
-  min-height: 380px;
+  min-height: 360px;
   border: 0;
-  filter: grayscale(.55) sepia(.14) contrast(1.02);
+  filter: grayscale(.5) sepia(.08);
 }
 
-/* ---------- 14. Patička ---------- */
+/* ---------- 16. Patička ---------- */
 .foot {
-  background: var(--bark-deep);
-  color: rgba(244,240,232,.62);
+  background: var(--green);
+  color: rgba(255,255,255,.66);
   padding-block: clamp(3rem, 6vw, 4.5rem) 2rem;
   font-size: .9rem;
 }
 .foot__in { display: grid; gap: clamp(2rem, 4vw, 3rem); }
-.foot__logo { color: var(--gold); text-decoration: none; justify-self: start; }
-.foot__logo .mark__of { color: var(--olive); }
+.foot__logo { color: #fff; text-decoration: none; justify-self: start; }
+.foot__logo .mark__of { color: var(--chartreuse); }
 
 .foot__cols {
   display: grid;
@@ -639,11 +765,11 @@ button { font: inherit; color: inherit; }
   margin: 0 0 .6rem;
   font-size: .66rem; font-weight: 500;
   letter-spacing: .2em; text-transform: uppercase;
-  color: var(--gold-dim);
+  color: var(--chartreuse);
 }
 .foot__cols p { margin: 0; line-height: 1.8; }
 .foot a { text-decoration: none; transition: color .3s var(--ease); }
-.foot a:hover { color: var(--gold); }
+.foot a:hover { color: var(--chartreuse); }
 
 .foot__bar {
   display: flex; flex-wrap: wrap;
@@ -651,21 +777,20 @@ button { font: inherit; color: inherit; }
   padding-top: 1.6rem;
   border-top: 1px solid var(--hair-d);
   font-size: .78rem;
-  color: rgba(244,240,232,.42);
+  color: rgba(255,255,255,.45);
 }
 .foot__bar p { margin: 0; }
 
-/* ---------- 14b. Výzva k volání (jen mobil) ----------
-   Objednává se hlavně telefonem, tak ať je číslo pořád po ruce. */
+/* ---------- 17. Výzva k volání (mobil) ---------- */
 .callbar {
   display: none;
   position: fixed; z-index: 80;
   left: 50%; bottom: max(1rem, env(safe-area-inset-bottom));
   align-items: center; gap: .5rem;
   padding: .85rem 1.5rem;
-  background: var(--gold); color: var(--bark);
+  background: var(--green); color: #fff;
   border-radius: 999px;
-  box-shadow: 0 8px 28px rgba(23,17,13,.34);
+  box-shadow: 0 8px 28px rgba(16,39,19,.35);
   font-size: .8rem; font-weight: 500;
   letter-spacing: .1em; text-transform: uppercase;
   text-decoration: none;
@@ -673,17 +798,17 @@ button { font: inherit; color: inherit; }
   transform: translate(-50%, 150%);
   transition: transform .45s var(--ease);
 }
-.callbar svg { width: 1.05em; height: 1.05em; fill: currentColor; }
-.callbar__num { font-variant-numeric: tabular-nums; letter-spacing: .06em; }
+.callbar svg { width: 1.05em; height: 1.05em; fill: var(--chartreuse); }
+.callbar__num { color: var(--chartreuse); font-variant-numeric: tabular-nums; letter-spacing: .06em; }
 .callbar.is-on { transform: translate(-50%, 0); }
 
-/* ---------- 15. Lightbox ---------- */
+/* ---------- 18. Lightbox ---------- */
 .lb {
   position: fixed; inset: 0; z-index: 300;
   display: flex; align-items: center; justify-content: center;
   gap: clamp(.5rem, 2vw, 1.5rem);
   padding: clamp(1rem, 4vw, 3rem);
-  background: rgba(23,17,13,.94);
+  background: rgba(16,39,19,.94);
   backdrop-filter: blur(6px);
   opacity: 0;
   transition: opacity .3s var(--ease);
@@ -702,39 +827,30 @@ button { font: inherit; color: inherit; }
   max-width: 60ch;
   font-size: .85rem;
   text-align: center;
-  color: rgba(244,240,232,.68);
+  color: rgba(255,255,255,.72);
 }
 
-.lb__x {
-  position: absolute; top: clamp(.75rem, 2vw, 1.5rem); right: clamp(.75rem, 2vw, 1.5rem);
+.lb__x, .lb__nav {
   width: 46px; height: 46px;
-  background: none; border: 1px solid var(--hair-d);
-  color: var(--paper);
+  background: none;
+  border: 1px solid rgba(255,255,255,.28);
+  color: #fff;
   font-size: 1.5rem; line-height: 1;
   cursor: pointer;
   transition: border-color .3s var(--ease), color .3s var(--ease);
 }
-.lb__x:hover { border-color: var(--gold); color: var(--gold); }
+.lb__x { position: absolute; top: clamp(.75rem, 2vw, 1.5rem); right: clamp(.75rem, 2vw, 1.5rem); }
+.lb__nav { flex: none; }
+.lb__x:hover, .lb__nav:hover { border-color: var(--chartreuse); color: var(--chartreuse); }
 
-.lb__nav {
-  flex: none;
-  width: 46px; height: 46px;
-  background: none; border: 1px solid var(--hair-d);
-  color: var(--paper);
-  font-size: 1.5rem; line-height: 1;
-  cursor: pointer;
-  transition: border-color .3s var(--ease), color .3s var(--ease);
-}
-.lb__nav:hover { border-color: var(--gold); color: var(--gold); }
-
-/* ---------- 16. Odhalování při scrollu ---------- */
+/* ---------- 19. Odhalování při scrollu ---------- */
 .rv { opacity: 0; transform: translateY(22px); }
 .rv.is-in {
   opacity: 1; transform: none;
   transition: opacity .8s var(--ease), transform .8s var(--ease);
 }
 
-/* ---------- 17. Responzivita ---------- */
+/* ---------- 20. Responzivita ---------- */
 @media (max-width: 900px) {
   .hero__in { grid-template-columns: 1fr; }
   .hero__photo { order: -1; max-width: 420px; }
@@ -756,12 +872,12 @@ button { font: inherit; color: inherit; }
     flex-direction: column; gap: 0;
     margin: 0;
     padding: 0 var(--pad);
-    background: var(--paper);
+    background: var(--bg);
     border-bottom: 1px solid var(--hair-l);
     max-height: 0; overflow: hidden;
     transition: max-height .4s var(--ease);
   }
-  .nav.is-open { max-height: 22rem; }
+  .nav.is-open { max-height: 26rem; }
   .nav a { padding: .95rem 0; border-bottom: 1px solid var(--hair-l); font-size: .95rem; }
   .nav a:last-child { border-bottom: 0; }
   .nav a::after { display: none; }
@@ -770,12 +886,11 @@ button { font: inherit; color: inherit; }
   .fact__l { display: block; min-width: 0; margin-bottom: .15rem; }
   .grid { grid-template-columns: repeat(2, 1fr); }
   .shot--feature { grid-column: auto; grid-row: auto; aspect-ratio: 3 / 4; }
-  .foot__bar { flex-direction: column; }
+  .form__grid { grid-template-columns: 1fr; }
+  .tbl td { white-space: normal; }
 }
 
 @media (max-width: 620px) {
-  /* i fotka musí přestat sahat přes dva sloupce, jinak si grid
-     dopočítá druhý sloupec a karty se nikdy nesrovnají pod sebe */
   .cards { grid-template-columns: 1fr; }
   .cards__photo { grid-column: auto; }
   .cards__photo img { aspect-ratio: 4 / 3; }
@@ -787,7 +902,7 @@ button { font: inherit; color: inherit; }
   .callbar { padding: .8rem 1.15rem; font-size: .72rem; gap: .4rem; }
 }
 
-/* ---------- 18. Omezený pohyb ---------- */
+/* ---------- 21. Omezený pohyb ---------- */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {
@@ -795,14 +910,14 @@ button { font: inherit; color: inherit; }
     animation-iteration-count: 1 !important;
     transition-duration: .001ms !important;
   }
-  .hero__glow { opacity: 1; }
+  .hero__shadow { animation: none; }
   .rv { opacity: 1; transform: none; }
 }
 
-/* ---------- 19. Tisk ---------- */
+/* ---------- 22. Tisk ---------- */
 @media print {
-  .site-head, .hero__glow, .lb, .burger, .contact__map, .callbar { display: none !important; }
+  .site-head, .hero__shadow, .lb, .burger, .contact__map, .callbar, .form { display: none !important; }
   body { background: #fff; color: #000; }
-  .sec--bark, .sec--petrol, .hero, .foot { background: #fff !important; color: #000 !important; }
+  .sec--green, .hero, .foot { background: #fff !important; color: #000 !important; }
   .sec__title--light, .hero__mark, .tier__price, .story__q { color: #000 !important; }
 }

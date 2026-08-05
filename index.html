@@ -7,27 +7,30 @@
 
 <meta name="description" content="Květinářství Charm of Flowers na Pražské 43 v Plzni. Kytice na míru, svatební floristika, kurzy vázání a rozvoz květin po Plzni každý den od 9:00 do 20:00.">
 <meta name="author" content="Charm of Flowers — Nataliia Ivasiuk">
-<link rel="canonical" href="https://charmofflowers.cz/">
-<link rel="alternate" hreflang="cs" href="https://charmofflowers.cz/">
-<link rel="alternate" hreflang="uk" href="https://charmofflowers.cz/?lang=uk">
-<link rel="alternate" hreflang="x-default" href="https://charmofflowers.cz/">
+<!-- Po připojení domény charmofflowers.cz vyměnit všechny absolutní URL níže -->
+<link rel="canonical" href="https://vorthys.github.io/charmofflowers/">
+<link rel="alternate" hreflang="cs" href="https://vorthys.github.io/charmofflowers/">
+<link rel="alternate" hreflang="uk" href="https://vorthys.github.io/charmofflowers/?lang=uk">
+<link rel="alternate" hreflang="x-default" href="https://vorthys.github.io/charmofflowers/">
+<!-- Google Search Console: až se web ověří, vložit sem verifikační meta tag -->
 
 <meta property="og:type" content="website">
 <meta property="og:locale" content="cs_CZ">
 <meta property="og:site_name" content="Charm of Flowers">
 <meta property="og:title" content="Charm of Flowers — květinářství v Plzni">
 <meta property="og:description" content="Kytice na míru, svatební floristika a kurzy vázání. Pražská 43, Plzeň. Rozvoz každý den 9:00–20:00.">
-<meta property="og:image" content="assets/img/gallery/kytice-09.jpg">
+<meta property="og:url" content="https://vorthys.github.io/charmofflowers/">
+<meta property="og:image" content="https://vorthys.github.io/charmofflowers/assets/img/gallery/kytice-04.jpg">
 <meta name="twitter:card" content="summary_large_image">
 
-<meta name="theme-color" content="#241B15">
+<meta name="theme-color" content="#102713">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="assets/img/logo-charm-of-flowers.jpg">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Pinyon+Script&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Jost:ital,wght@0,300;0,400;0,500;1,400&family=Pinyon+Script&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css?v=2">
 
 <script type="application/ld+json">
 {
@@ -35,10 +38,10 @@
   "@type": "Florist",
   "name": "Charm of Flowers",
   "description": "Květinářství v Plzni. Kytice na míru, svatební floristika, kurzy vázání a rozvoz květin po Plzni.",
-  "image": "https://charmofflowers.cz/assets/img/gallery/kytice-09.jpg",
+  "image": "https://vorthys.github.io/charmofflowers/assets/img/gallery/kytice-04.jpg",
   "telephone": "+420723477375",
   "email": "charmofflowers.cz@gmail.com",
-  "url": "https://charmofflowers.cz/",
+  "url": "https://vorthys.github.io/charmofflowers/",
   "knowsLanguage": ["cs", "uk", "en"],
   "address": {
     "@type": "PostalAddress",
@@ -58,16 +61,46 @@
   ]
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Jak rychle uvážete kytici?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Zavolejte nebo napište — domluvíme se, kdy bude kytice připravená. U větších vazeb a květinových boxů počítejte raději den či dva dopředu." } },
+    { "@type": "Question", "name": "Rozvážíte květiny v konkrétní čas?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Ano, rozvážíme po Plzni každý den od 9:00 do 20:00. Čas doručení si zarezervujte předem, cenu rozvozu potvrdíme podle vzdálenosti." } },
+    { "@type": "Question", "name": "Kdy se ozvat kvůli svatební kytici?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Čím dřív, tím líp — termíny rezervujeme s předstihem. Na konzultaci probereme styl, barvy i výzdobu obřadu a tabule." } },
+    { "@type": "Question", "name": "Domluvím se u vás ukrajinsky nebo anglicky?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Ano. Domluvíte se česky, anglicky i ukrajinsky — v obchodě, po telefonu i na Instagramu." } },
+    { "@type": "Question", "name": "Jak probíhají kurzy vázání?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Vážeme ve skupině i jeden na jednoho — pro začátečníky, party i firmy. Aktuální termíny najdete na našem Instagramu, nebo se ozvěte." } }
+  ]
+}
+</script>
 </head>
 
 <body>
 <a class="skip" href="#obsah" data-i18n="skip">Přejít k obsahu</a>
 
+<!-- Dekorativní znak z brand guide — tulipán, použit přes <use> -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="orn-tulip" viewBox="0 0 120 96">
+    <path d="M60 6C51 20 50 38 60 52C70 38 69 20 60 6Z"/>
+    <path d="M60 52C50 46 42 32 44 16C55 26 60 38 60 52Z"/>
+    <path d="M60 52C70 46 78 32 76 16C65 26 60 38 60 52Z"/>
+    <path d="M58 54C44 60 30 58 22 48C14 38 20 28 30 30C37 31.5 39 40 33 43"/>
+    <path d="M62 54C76 60 90 58 98 48C106 38 100 28 90 30C83 31.5 81 40 87 43"/>
+    <path d="M60 58C58 63 58 68 60 73C62 68 62 63 60 58Z"/>
+  </symbol>
+</svg>
+
 <!-- ============ HEADER ============ -->
 <header class="site-head" id="top">
   <div class="site-head__in">
     <a class="site-head__logo" href="#top" data-i18n-aria="logoAria" aria-label="Charm of Flowers — úvod">
-      <span class="mark mark--sm" aria-hidden="true">
+      <span class="mark mark--sm mark--on-light" aria-hidden="true">
         <span class="mark__a">Charm</span>
         <span class="mark__of">of</span>
         <span class="mark__b">flowers</span>
@@ -76,7 +109,7 @@
 
     <nav class="nav" id="nav" data-i18n-aria="navAria" aria-label="Hlavní navigace">
       <a href="#sluzby" data-i18n="navServices">Služby</a>
-      <a href="#rozpocet" data-i18n="navBudget">Rozpočet</a>
+      <a href="#cenik" data-i18n="navBudget">Ceník</a>
       <a href="#galerie" data-i18n="navGallery">Galerie</a>
       <a href="#pribeh" data-i18n="navStory">Příběh</a>
       <a href="#kontakt" data-i18n="navContact">Kontakt</a>
@@ -101,13 +134,23 @@
 
 <main id="obsah">
 
-<!-- ============ HERO — rekonstrukce světelné cedule ============ -->
+<!-- ============ HERO — světlo, vzduch, stín listů ============ -->
 <section class="hero">
-  <div class="hero__glow" aria-hidden="true"></div>
+  <svg class="hero__shadow" viewBox="0 0 400 600" aria-hidden="true" focusable="false">
+    <g fill="currentColor">
+      <path d="M210 590C190 480 200 380 250 260 290 170 330 110 370 70 330 180 300 280 280 380 265 460 245 530 210 590Z"/>
+      <ellipse cx="150" cy="420" rx="46" ry="24" transform="rotate(-34 150 420)"/>
+      <ellipse cx="230" cy="330" rx="42" ry="22" transform="rotate(-18 230 330)"/>
+      <ellipse cx="300" cy="220" rx="44" ry="22" transform="rotate(-40 300 220)"/>
+      <ellipse cx="200" cy="500" rx="40" ry="20" transform="rotate(-52 200 500)"/>
+      <ellipse cx="330" cy="130" rx="36" ry="18" transform="rotate(-24 330 130)"/>
+      <ellipse cx="120" cy="520" rx="34" ry="17" transform="rotate(-10 120 520)"/>
+    </g>
+  </svg>
 
   <div class="hero__in">
     <div class="hero__text">
-      <p class="eyebrow eyebrow--gold" data-i18n="heroEyebrow">Květinářství &middot; Pražská 43, Plzeň</p>
+      <p class="eyebrow" data-i18n="heroEyebrow">Květinářství &middot; Pražská 43, Plzeň</p>
 
       <h1 class="hero__mark">
         <span class="mark mark--xl" aria-hidden="true">
@@ -122,8 +165,8 @@
       <p class="hero__sub" data-i18n="heroSub">Vážeme na míru — od malé kytice do bytu po svatební výzdobu. Co nestihnete vyzvednout, přivezeme.</p>
 
       <div class="hero__cta">
-        <a class="btn btn--gold" href="tel:+420723477375" data-i18n="heroCta1">Objednat telefonicky</a>
-        <a class="btn btn--outline" href="https://www.instagram.com/charmofflowers.cz/" target="_blank" rel="noopener" data-i18n="heroCta2">Napsat na Instagramu</a>
+        <a class="btn btn--solid" href="#kontakt" data-i18n="heroCta1">Nezávazná poptávka</a>
+        <a class="btn btn--outline" href="tel:+420723477375" data-i18n="heroCta2">Zavolat 723 477 375</a>
       </div>
 
       <ul class="hero__facts">
@@ -135,15 +178,19 @@
 
     <figure class="hero__photo">
       <span class="hero__frame">
-        <img src="assets/img/gallery/kytice-09.jpg" width="480" height="640" data-i18n-alt="heroAlt" alt="Velká kytice růžových pivoňkových růží před vchodem do květinářství" fetchpriority="high" decoding="async">
+        <svg class="orn hero__orn" aria-hidden="true" focusable="false"><use href="#orn-tulip"/></svg>
+        <picture>
+          <source srcset="assets/img/gallery/kytice-04.webp" type="image/webp">
+          <img src="assets/img/gallery/kytice-04.jpg" width="512" height="640" data-i18n-alt="heroAlt" alt="Velká pastelová kytice z růží, karafiátů a bílé chryzantémy" fetchpriority="high" decoding="async">
+        </picture>
       </span>
-      <figcaption data-i18n="heroCap">Pivoňkové růže &middot; autorská kytice</figcaption>
+      <figcaption data-i18n="heroCap">Autorská kytice na přání</figcaption>
     </figure>
   </div>
 </section>
 
 <!-- ============ SLUŽBY ============ -->
-<section class="sec sec--paper" id="sluzby">
+<section class="sec sec--white" id="sluzby">
   <div class="wrap">
     <header class="sec__head">
       <p class="eyebrow" data-i18n="svcEyebrow">Co u nás pořídíte</p>
@@ -172,18 +219,21 @@
       </article>
 
       <figure class="cards__photo">
-        <img src="assets/img/gallery/kytice-08.jpg" width="360" height="640" loading="lazy" decoding="async" data-i18n-alt="svcAlt" alt="Podzimní kytice z růží, karafiátů a eukalyptu převázaná hedvábnou stuhou">
+        <picture>
+          <source srcset="assets/img/gallery/kytice-08.webp" type="image/webp">
+          <img src="assets/img/gallery/kytice-08.jpg" width="360" height="640" loading="lazy" decoding="async" data-i18n-alt="svcAlt" alt="Podzimní kytice z růží, karafiátů a eukalyptu převázaná hedvábnou stuhou">
+        </picture>
       </figure>
     </div>
   </div>
 </section>
 
-<!-- ============ ROZPOČET — členění převzaté z jejího Instagramu ============ -->
-<section class="sec sec--bark" id="rozpocet">
+<!-- ============ CENÍK ============ -->
+<section class="sec sec--light" id="cenik">
   <div class="wrap">
     <header class="sec__head sec__head--center">
-      <p class="eyebrow eyebrow--gold" data-i18n="budEyebrow">Jak si objednat</p>
-      <h2 class="sec__title sec__title--light" data-i18n="budTitle">Stačí nám rozpočet</h2>
+      <p class="eyebrow" data-i18n="budEyebrow">Jak si objednat</p>
+      <h2 class="sec__title" data-i18n="budTitle">Stačí nám rozpočet</h2>
       <p class="sec__lede" data-i18n="budLede">Nemusíte vybírat konkrétní květiny. Řekněte, kolik chcete utratit a pro koho kytice je — složíme ji z toho nejlepšího, co ten den máme.</p>
     </header>
 
@@ -192,28 +242,44 @@
         <p class="tier__cap" data-i18n="t1C">Malá pozornost</p>
         <p class="tier__price" data-i18n="t1V">do 1 000 Kč</p>
         <p class="tier__p" data-i18n="t1P">Kytice na návštěvu, do bytu nebo jen tak. Rychle a bez objednávky předem.</p>
-        <a class="tier__go" href="tel:+420723477375"><span data-i18n="order">Objednat</span><span class="tier__arrow" aria-hidden="true">&rarr;</span></a>
+        <a class="tier__go" href="#kontakt"><span data-i18n="order">Objednat</span><span class="tier__arrow" aria-hidden="true">&rarr;</span></a>
       </article>
 
       <article class="tier tier--flag">
         <p class="tier__cap" data-i18n="t2C">Nejčastější volba</p>
         <p class="tier__price" data-i18n="t2V">1 000 – 2 000 Kč</p>
         <p class="tier__p" data-i18n="t2P">Narozeniny, výročí, poděkování. Velikost, u které se většina zákazníků zastaví.</p>
-        <a class="tier__go" href="tel:+420723477375"><span data-i18n="order">Objednat</span><span class="tier__arrow" aria-hidden="true">&rarr;</span></a>
+        <a class="tier__go" href="#kontakt"><span data-i18n="order">Objednat</span><span class="tier__arrow" aria-hidden="true">&rarr;</span></a>
       </article>
 
       <article class="tier">
         <p class="tier__cap" data-i18n="t3C">Autorská kytice</p>
         <p class="tier__price" data-i18n="t3V">od 2 000 Kč</p>
         <p class="tier__p" data-i18n="t3P">Velké vazby a květinové boxy, které jsou vidět už ode dveří.</p>
-        <a class="tier__go" href="tel:+420723477375"><span data-i18n="order">Objednat</span><span class="tier__arrow" aria-hidden="true">&rarr;</span></a>
+        <a class="tier__go" href="#kontakt"><span data-i18n="order">Objednat</span><span class="tier__arrow" aria-hidden="true">&rarr;</span></a>
       </article>
+    </div>
+
+    <div class="pricelist">
+      <h3 class="pricelist__t" data-i18n="prT">Kompletní ceník</h3>
+      <table class="tbl">
+        <tbody>
+          <tr><th scope="row" data-i18n="pr1">Kytice z denní nabídky</th><td data-i18n="pr1v">do 1 000 Kč</td></tr>
+          <tr><th scope="row" data-i18n="pr2">Kytice na přání</th><td data-i18n="pr2v">1 000 – 2 000 Kč</td></tr>
+          <tr><th scope="row" data-i18n="pr3">Autorská kytice, květinový box</th><td data-i18n="pr3v">od 2 000 Kč</td></tr>
+          <tr><th scope="row" data-i18n="pr4">Svatební kytice</th><td data-i18n="pr4v">individuálně</td></tr>
+          <tr><th scope="row" data-i18n="pr5">Výzdoba svatby či akce</th><td data-i18n="pr5v">individuálně</td></tr>
+          <tr><th scope="row" data-i18n="pr6">Kurz vázání, workshop</th><td data-i18n="pr6v">na dotaz</td></tr>
+          <tr><th scope="row" data-i18n="pr7">Rozvoz po Plzni (9–20 h)</th><td data-i18n="pr7v">podle vzdálenosti</td></tr>
+        </tbody>
+      </table>
+      <p class="tbl__note" data-i18n="prNote">Přesnou cenu vždy potvrdíme předem — telefonicky nebo ve formuláři níže.</p>
     </div>
   </div>
 </section>
 
 <!-- ============ GALERIE ============ -->
-<section class="sec sec--paper" id="galerie">
+<section class="sec sec--white" id="galerie">
   <div class="wrap">
     <header class="sec__head sec__head--split">
       <div>
@@ -227,28 +293,61 @@
     </header>
 
     <div class="grid" id="grid">
-      <button class="shot shot--feature" type="button"><img src="assets/img/gallery/kytice-04.jpg" width="512" height="640" loading="lazy" decoding="async" data-i18n-alt="g1" alt="Velká kytice z růží, karafiátů a bílé chryzantémy v pudrově růžovém papíru"></button>
-      <button class="shot" type="button"><img src="assets/img/gallery/kytice-05.jpg" width="480" height="640" loading="lazy" decoding="async" data-i18n-alt="g2" alt="Dvě kytice modrých hortenzií zabalené v bílém papíru"></button>
-      <button class="shot" type="button"><img src="assets/img/gallery/kytice-06.jpg" width="512" height="640" loading="lazy" decoding="async" data-i18n-alt="g3" alt="Nevěsta se svatební kyticí z krémových růží"></button>
-      <button class="shot" type="button"><img src="assets/img/gallery/kytice-07.jpg" width="360" height="640" loading="lazy" decoding="async" data-i18n-alt="g4" alt="Květinový box Charm of Flowers s růžemi, hortenzií a gerberami"></button>
-      <button class="shot" type="button"><img src="assets/img/gallery/kytice-01.jpg" width="512" height="640" loading="lazy" decoding="async" data-i18n-alt="g5" alt="Kytice z anthurií, růží a kopretin před vchodem do květinářství"></button>
-      <button class="shot" type="button"><img src="assets/img/gallery/kytice-02.jpg" width="512" height="640" loading="lazy" decoding="async" data-i18n-alt="g6" alt="Svatební kytice z bílých eustom a eukalyptu v rukou nevěsty"></button>
-      <button class="shot" type="button"><img src="assets/img/gallery/kytice-03.jpg" width="361" height="640" loading="lazy" decoding="async" data-i18n-alt="g7" alt="Kytice bílých pivoňkových růží na pultu prodejny"></button>
-      <button class="shot" type="button"><img src="assets/img/gallery/kytice-10.jpg" width="360" height="640" loading="lazy" decoding="async" data-i18n-alt="g8" alt="Zákaznice s kyticí gerber a růží v prodejně pod světelným logem"></button>
-      <button class="shot" type="button"><img src="assets/img/gallery/kytice-12.jpg" width="360" height="640" loading="lazy" decoding="async" data-i18n-alt="g9" alt="Květinová výzdoba na stolcích v kosmetickém salonu"></button>
+      <button class="shot shot--feature" type="button"><picture><source srcset="assets/img/gallery/kytice-09.webp" type="image/webp"><img src="assets/img/gallery/kytice-09.jpg" width="480" height="640" loading="lazy" decoding="async" data-i18n-alt="g1" alt="Velká kytice růžových pivoňkových růží před vchodem do květinářství"></picture></button>
+      <button class="shot" type="button"><picture><source srcset="assets/img/gallery/kytice-05.webp" type="image/webp"><img src="assets/img/gallery/kytice-05.jpg" width="480" height="640" loading="lazy" decoding="async" data-i18n-alt="g2" alt="Dvě kytice modrých hortenzií zabalené v bílém papíru"></picture></button>
+      <button class="shot" type="button"><picture><source srcset="assets/img/gallery/kytice-06.webp" type="image/webp"><img src="assets/img/gallery/kytice-06.jpg" width="512" height="640" loading="lazy" decoding="async" data-i18n-alt="g3" alt="Nevěsta se svatební kyticí z krémových růží"></picture></button>
+      <button class="shot" type="button"><picture><source srcset="assets/img/gallery/kytice-07.webp" type="image/webp"><img src="assets/img/gallery/kytice-07.jpg" width="360" height="640" loading="lazy" decoding="async" data-i18n-alt="g4" alt="Květinový box Charm of Flowers s růžemi, hortenzií a gerberami"></picture></button>
+      <button class="shot" type="button"><picture><source srcset="assets/img/gallery/kytice-01.webp" type="image/webp"><img src="assets/img/gallery/kytice-01.jpg" width="512" height="640" loading="lazy" decoding="async" data-i18n-alt="g5" alt="Kytice z anthurií, růží a kopretin před vchodem do květinářství"></picture></button>
+      <button class="shot" type="button"><picture><source srcset="assets/img/gallery/kytice-02.webp" type="image/webp"><img src="assets/img/gallery/kytice-02.jpg" width="512" height="640" loading="lazy" decoding="async" data-i18n-alt="g6" alt="Svatební kytice z bílých eustom a eukalyptu v rukou nevěsty"></picture></button>
+      <button class="shot" type="button"><picture><source srcset="assets/img/gallery/kytice-03.webp" type="image/webp"><img src="assets/img/gallery/kytice-03.jpg" width="361" height="640" loading="lazy" decoding="async" data-i18n-alt="g7" alt="Kytice bílých pivoňkových růží na pultu prodejny"></picture></button>
+      <button class="shot" type="button"><picture><source srcset="assets/img/gallery/kytice-10.webp" type="image/webp"><img src="assets/img/gallery/kytice-10.jpg" width="360" height="640" loading="lazy" decoding="async" data-i18n-alt="g8" alt="Zákaznice s kyticí gerber a růží v prodejně pod světelným logem"></picture></button>
+      <button class="shot" type="button"><picture><source srcset="assets/img/gallery/kytice-12.webp" type="image/webp"><img src="assets/img/gallery/kytice-12.jpg" width="360" height="640" loading="lazy" decoding="async" data-i18n-alt="g9" alt="Květinová výzdoba na stolcích v kosmetickém salonu"></picture></button>
     </div>
   </div>
 </section>
 
+<!-- ============ RECENZE ============ -->
+<section class="sec sec--light" id="recenze">
+  <div class="wrap">
+    <header class="sec__head sec__head--center">
+      <p class="eyebrow" data-i18n="rvEyebrow">Co říkají zákazníci</p>
+      <h2 class="sec__title" data-i18n="rvTitle">Recenze</h2>
+    </header>
+
+    <div class="reviews">
+      <blockquote class="review">
+        <svg class="orn review__orn" aria-hidden="true" focusable="false"><use href="#orn-tulip"/></svg>
+        <p class="review__q" data-i18n="rv1">„Majitelka váže moc krásné kytice za velmi příznivé ceny."</p>
+        <p class="review__src" data-i18n="rv1src">recenze zákazníka · Živéfirmy.cz</p>
+      </blockquote>
+
+      <blockquote class="review">
+        <svg class="orn review__orn" aria-hidden="true" focusable="false"><use href="#orn-tulip"/></svg>
+        <p class="review__q" data-i18n="rv2">„Elegantní obchod plný krásných vonících květin."</p>
+        <p class="review__src" data-i18n="rv2src">recenze zákazníka · Živéfirmy.cz</p>
+      </blockquote>
+    </div>
+
+    <p class="reviews__cta">
+      <a class="btn btn--outline" href="https://www.google.com/search?q=Charm+of+flowers+Plze%C5%88+recenze" target="_blank" rel="noopener" data-i18n="rvCta">Další recenze na Googlu</a>
+    </p>
+  </div>
+</section>
+
 <!-- ============ PŘÍBĚH ============ -->
-<section class="sec sec--petrol" id="pribeh">
+<section class="sec sec--green" id="pribeh">
   <div class="wrap story">
+    <svg class="orn story__orn" aria-hidden="true" focusable="false"><use href="#orn-tulip"/></svg>
+
     <figure class="story__photo">
-      <img src="assets/img/gallery/kytice-11.jpg" width="480" height="640" loading="lazy" decoding="async" data-i18n-alt="stAlt" alt="Floristka za pultem prodejny se dvěma kyticemi ze slunečnic">
+      <picture>
+        <source srcset="assets/img/gallery/kytice-11.webp" type="image/webp">
+        <img src="assets/img/gallery/kytice-11.jpg" width="480" height="640" loading="lazy" decoding="async" data-i18n-alt="stAlt" alt="Floristka za pultem prodejny se dvěma kyticemi ze slunečnic">
+      </picture>
     </figure>
 
     <div class="story__text">
-      <p class="eyebrow eyebrow--gold" data-i18n="stEyebrow">Příběh za jménem</p>
+      <p class="eyebrow eyebrow--light" data-i18n="stEyebrow">Příběh za jménem</p>
       <h2 class="sec__title sec__title--light" data-i18n="stTitle">Květinářství, které začalo podruhé</h2>
 
       <p data-i18n-html="stP1">Charm of Flowers vede <strong>Nataliia Ivasiuk</strong>. Vlastní květinářství měla už na Ukrajině — než ho kvůli válce musela nechat za sebou.</p>
@@ -267,8 +366,41 @@
   </div>
 </section>
 
+<!-- ============ ČASTÉ DOTAZY ============ -->
+<section class="sec sec--white" id="otazky">
+  <div class="wrap">
+    <header class="sec__head sec__head--center">
+      <p class="eyebrow" data-i18n="faqEyebrow">Než se zeptáte</p>
+      <h2 class="sec__title" data-i18n="faqTitle">Časté dotazy</h2>
+    </header>
+
+    <div class="faq" id="faq">
+      <details class="faq__item">
+        <summary data-i18n="q1">Jak rychle uvážete kytici?</summary>
+        <p class="faq__a" data-i18n="a1">Zavolejte nebo napište — domluvíme se, kdy bude kytice připravená. U větších vazeb a květinových boxů počítejte raději den či dva dopředu.</p>
+      </details>
+      <details class="faq__item">
+        <summary data-i18n="q2">Rozvážíte květiny v konkrétní čas?</summary>
+        <p class="faq__a" data-i18n="a2">Ano, rozvážíme po Plzni každý den od 9:00 do 20:00. Čas doručení si zarezervujte předem, cenu rozvozu potvrdíme podle vzdálenosti.</p>
+      </details>
+      <details class="faq__item">
+        <summary data-i18n="q3">Kdy se ozvat kvůli svatební kytici?</summary>
+        <p class="faq__a" data-i18n="a3">Čím dřív, tím líp — termíny rezervujeme s předstihem. Na konzultaci probereme styl, barvy i výzdobu obřadu a tabule.</p>
+      </details>
+      <details class="faq__item">
+        <summary data-i18n="q4">Domluvím se u vás ukrajinsky nebo anglicky?</summary>
+        <p class="faq__a" data-i18n="a4">Ano. Domluvíte se česky, anglicky i ukrajinsky — v obchodě, po telefonu i na Instagramu.</p>
+      </details>
+      <details class="faq__item">
+        <summary data-i18n="q5">Jak probíhají kurzy vázání?</summary>
+        <p class="faq__a" data-i18n="a5">Vážeme ve skupině i jeden na jednoho — pro začátečníky, party i firmy. Aktuální termíny najdete na našem Instagramu, nebo se ozvěte.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
 <!-- ============ KONTAKT ============ -->
-<section class="sec sec--paper" id="kontakt">
+<section class="sec sec--light" id="kontakt">
   <div class="wrap">
     <header class="sec__head">
       <p class="eyebrow" data-i18n="coEyebrow">Kde nás najdete</p>
@@ -276,6 +408,51 @@
     </header>
 
     <div class="contact">
+      <!-- Formulář: FormSubmit doručí na e-mail, honeypot proti spamu.
+           První odeslání vyžaduje potvrzení v e-mailu majitelky. -->
+      <form class="form" method="POST" action="https://formsubmit.co/charmofflowers.cz@gmail.com" id="form">
+        <h3 class="form__t" data-i18n="fmT">Nezávazná poptávka</h3>
+        <p class="form__ok" id="formOk" hidden data-i18n="fmOk">Děkujeme! Poptávka odešla — ozveme se co nejdřív.</p>
+        <p class="form__note" data-i18n="fmNote">Napište, co slavíte a kolik chcete utratit. Ozveme se s návrhem — telefonicky nebo zprávou.</p>
+
+        <input type="hidden" name="_subject" value="Nová poptávka z webu Charm of Flowers">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://vorthys.github.io/charmofflowers/?sent=1#kontakt">
+        <input type="text" name="_honey" class="form__hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+        <div class="form__grid">
+          <div class="form__row">
+            <label for="f-name" data-i18n="fmName">Jméno</label>
+            <input id="f-name" name="Jméno" type="text" required autocomplete="name">
+          </div>
+          <div class="form__row">
+            <label for="f-phone" data-i18n="fmPhone">Telefon</label>
+            <input id="f-phone" name="Telefon" type="tel" required autocomplete="tel">
+          </div>
+          <div class="form__row">
+            <label for="f-date" data-i18n="fmDate">Na kdy</label>
+            <input id="f-date" name="Termín" type="date">
+          </div>
+          <div class="form__row">
+            <label for="f-budget" data-i18n="fmBudget">Rozpočet</label>
+            <select id="f-budget" name="Rozpočet">
+              <option data-i18n="fmOpt1">do 1 000 Kč</option>
+              <option data-i18n="fmOpt2">1 000 – 2 000 Kč</option>
+              <option data-i18n="fmOpt3">od 2 000 Kč</option>
+              <option data-i18n="fmOpt4">svatba — individuálně</option>
+              <option data-i18n="fmOpt5">ještě nevím</option>
+            </select>
+          </div>
+          <div class="form__row form__row--full">
+            <label for="f-msg" data-i18n="fmMsg">Vzkaz</label>
+            <textarea id="f-msg" name="Vzkaz" data-i18n-ph="fmMsgPh" placeholder="Co slavíte, jaké barvy má ráda, kam doručit…"></textarea>
+          </div>
+        </div>
+
+        <button class="btn btn--solid form__send" type="submit" data-i18n="fmSend">Odeslat poptávku</button>
+      </form>
+
       <div class="contact__info">
         <div class="info">
           <h3 class="info__t" data-i18n="coAddrT">Adresa</h3>
@@ -375,7 +552,7 @@
   <button class="lb__nav lb__nav--next" id="lbNext" type="button" data-i18n-aria="lbNext" aria-label="Další fotka">&#8250;</button>
 </div>
 
-<script src="assets/js/i18n.js" defer></script>
-<script src="assets/js/main.js" defer></script>
+<script src="assets/js/i18n.js?v=2" defer></script>
+<script src="assets/js/main.js?v=2" defer></script>
 </body>
 </html>

@@ -7,6 +7,7 @@
      data-i18n-alt="klic"    → alt
      data-i18n-aria="klic"   → aria-label
      data-i18n-title="klic"  → title
+     data-i18n-ph="klic"     → placeholder
    Úprava textu = úprava jednoho řádku níž, ne hledání po šabloně.   */
 (function () {
   'use strict';
@@ -22,7 +23,7 @@
       skip: 'Přejít k obsahu',
       logoAria: 'Charm of Flowers — úvod',
       navServices: 'Služby',
-      navBudget: 'Rozpočet',
+      navBudget: 'Ceník',
       navGallery: 'Galerie',
       navStory: 'Příběh',
       navContact: 'Kontakt',
@@ -35,20 +36,20 @@
       heroH1: 'Charm of Flowers — květinářství v Plzni',
       heroLede: 'Každá kytice má svůj příběh.',
       heroSub: 'Vážeme na míru — od malé kytice do bytu po svatební výzdobu. Co nestihnete vyzvednout, přivezeme.',
-      heroCta1: 'Objednat telefonicky',
-      heroCta2: 'Napsat na Instagramu',
+      heroCta1: 'Nezávazná poptávka',
+      heroCta2: 'Zavolat 723 477 375',
       fact1L: 'Obchod',
       fact1V: 'Po–So 9:00–18:00 · Ne 10:00–15:00',
       fact2L: 'Rozvoz po Plzni',
       fact2V: 'každý den 9:00–20:00',
       fact3L: 'Domluvíme se',
       fact3V: 'česky · anglicky · ukrajinsky',
-      heroCap: 'Pivoňkové růže · autorská kytice',
-      heroAlt: 'Velká kytice růžových pivoňkových růží před vchodem do květinářství',
+      heroCap: 'Autorská kytice na přání',
+      heroAlt: 'Velká pastelová kytice z růží, karafiátů a bílé chryzantémy',
 
       /* --- služby --- */
       svcEyebrow: 'Co u nás pořídíte',
-      svcTitle: 'Čtyři důvody, proč zajít na Pražskou',
+      svcTitle: 'Čtyři důvody, proč zajít na Pražskou',
       svc1T: 'Kytice na míru',
       svc1P: 'Řekněte nám příležitost a rozpočet — zbytek vymyslíme. Vážeme z toho, co je zrovna nejčerstvější.',
       svc2T: 'Svatební floristika',
@@ -59,7 +60,7 @@
       svc4P: 'Vozíme každý den od 9:00 do 20:00. Čas doručení si zarezervujete dopředu, ať kytice dorazí ve správnou chvíli.',
       svcAlt: 'Podzimní kytice z růží, karafiátů a eukalyptu převázaná hedvábnou stuhou',
 
-      /* --- rozpočet --- */
+      /* --- ceník --- */
       budEyebrow: 'Jak si objednat',
       budTitle: 'Stačí nám rozpočet',
       budLede: 'Nemusíte vybírat konkrétní květiny. Řekněte, kolik chcete utratit a pro koho kytice je — složíme ji z toho nejlepšího, co ten den máme.',
@@ -74,11 +75,21 @@
       t3P: 'Velké vazby a květinové boxy, které jsou vidět už ode dveří.',
       order: 'Objednat',
 
+      prT: 'Kompletní ceník',
+      pr1: 'Kytice z denní nabídky', pr1v: 'do 1 000 Kč',
+      pr2: 'Kytice na přání', pr2v: '1 000 – 2 000 Kč',
+      pr3: 'Autorská kytice, květinový box', pr3v: 'od 2 000 Kč',
+      pr4: 'Svatební kytice', pr4v: 'individuálně',
+      pr5: 'Výzdoba svatby či akce', pr5v: 'individuálně',
+      pr6: 'Kurz vázání, workshop', pr6v: 'na dotaz',
+      pr7: 'Rozvoz po Plzni (9–20 h)', pr7v: 'podle vzdálenosti',
+      prNote: 'Přesnou cenu vždy potvrdíme předem — telefonicky nebo ve formuláři níže.',
+
       /* --- galerie --- */
       galEyebrow: 'Poslední práce',
       galTitle: 'Z naší dílny',
       zoom: 'Zvětšit fotku',
-      g1: 'Velká kytice z růží, karafiátů a bílé chryzantémy v pudrově růžovém papíru',
+      g1: 'Velká kytice růžových pivoňkových růží před vchodem do květinářství',
       g2: 'Dvě kytice modrých hortenzií zabalené v bílém papíru',
       g3: 'Nevěsta se svatební kyticí z krémových růží',
       g4: 'Květinový box Charm of Flowers s růžemi, hortenzií a gerberami',
@@ -87,6 +98,15 @@
       g7: 'Kytice bílých pivoňkových růží na pultu prodejny',
       g8: 'Zákaznice s kyticí gerber a růží v prodejně pod světelným logem',
       g9: 'Květinová výzdoba na stolcích v kosmetickém salonu',
+
+      /* --- recenze --- */
+      rvEyebrow: 'Co říkají zákazníci',
+      rvTitle: 'Recenze',
+      rv1: '„Majitelka váže moc krásné kytice za velmi příznivé ceny."',
+      rv1src: 'recenze zákazníka · Živéfirmy.cz',
+      rv2: '„Elegantní obchod plný krásných vonících květin."',
+      rv2src: 'recenze zákazníka · Živéfirmy.cz',
+      rvCta: 'Další recenze na Googlu',
 
       /* --- příběh --- */
       stEyebrow: 'Příběh za jménem',
@@ -99,7 +119,21 @@
       stN3: 'jazyky za pultem',
       stAlt: 'Floristka za pultem prodejny se dvěma kyticemi ze slunečnic',
 
-      /* --- kontakt --- */
+      /* --- FAQ --- */
+      faqEyebrow: 'Než se zeptáte',
+      faqTitle: 'Časté dotazy',
+      q1: 'Jak rychle uvážete kytici?',
+      a1: 'Zavolejte nebo napište — domluvíme se, kdy bude kytice připravená. U větších vazeb a květinových boxů počítejte raději den či dva dopředu.',
+      q2: 'Rozvážíte květiny v konkrétní čas?',
+      a2: 'Ano, rozvážíme po Plzni každý den od 9:00 do 20:00. Čas doručení si zarezervujte předem, cenu rozvozu potvrdíme podle vzdálenosti.',
+      q3: 'Kdy se ozvat kvůli svatební kytici?',
+      a3: 'Čím dřív, tím líp — termíny rezervujeme s předstihem. Na konzultaci probereme styl, barvy i výzdobu obřadu a tabule.',
+      q4: 'Domluvím se u vás ukrajinsky nebo anglicky?',
+      a4: 'Ano. Domluvíte se česky, anglicky i ukrajinsky — v obchodě, po telefonu i na Instagramu.',
+      q5: 'Jak probíhají kurzy vázání?',
+      a5: 'Vážeme ve skupině i jeden na jednoho — pro začátečníky, party i firmy. Aktuální termíny najdete na našem Instagramu, nebo se ozvěte.',
+
+      /* --- kontakt + formulář --- */
       coEyebrow: 'Kde nás najdete',
       coTitle: 'Pražská 43, kousek od náměstí',
       coAddrT: 'Adresa',
@@ -115,6 +149,22 @@
       coFollowT: 'Sledujte nás',
       coLinks: 'Všechny odkazy',
       mapTitle: 'Mapa — Charm of Flowers, Pražská 38/43, Plzeň',
+
+      fmT: 'Nezávazná poptávka',
+      fmNote: 'Napište, co slavíte a kolik chcete utratit. Ozveme se s návrhem — telefonicky nebo zprávou.',
+      fmName: 'Jméno',
+      fmPhone: 'Telefon',
+      fmDate: 'Na kdy',
+      fmBudget: 'Rozpočet',
+      fmMsg: 'Vzkaz',
+      fmMsgPh: 'Co slavíte, jaké barvy má ráda, kam doručit…',
+      fmOpt1: 'do 1 000 Kč',
+      fmOpt2: '1 000 – 2 000 Kč',
+      fmOpt3: 'od 2 000 Kč',
+      fmOpt4: 'svatba — individuálně',
+      fmOpt5: 'ještě nevím',
+      fmSend: 'Odeslat poptávku',
+      fmOk: 'Děkujeme! Poptávka odešla — ozveme se co nejdřív.',
 
       /* --- patička --- */
       ftShop: 'Prodejna',
@@ -139,7 +189,7 @@
       skip: 'Перейти до вмісту',
       logoAria: 'Charm of Flowers — на початок',
       navServices: 'Послуги',
-      navBudget: 'Бюджет',
+      navBudget: 'Ціни',
       navGallery: 'Галерея',
       navStory: 'Історія',
       navContact: 'Контакти',
@@ -151,19 +201,19 @@
       heroH1: 'Charm of Flowers — квіткова крамниця у Пльзні',
       heroLede: 'Кожен букет має свою історію.',
       heroSub: 'В’яжемо на замовлення — від невеликого букета додому до весільного оформлення. Що не встигнете забрати, привеземо.',
-      heroCta1: 'Замовити телефоном',
-      heroCta2: 'Написати в Instagram',
+      heroCta1: 'Залишити запит',
+      heroCta2: 'Подзвонити 723 477 375',
       fact1L: 'Магазин',
       fact1V: 'Пн–Сб 9:00–18:00 · Нд 10:00–15:00',
       fact2L: 'Доставка по Пльзні',
       fact2V: 'щодня 9:00–20:00',
       fact3L: 'Спілкуємось',
       fact3V: 'чеською · англійською · українською',
-      heroCap: 'Півонієві троянди · авторський букет',
-      heroAlt: 'Великий букет рожевих півонієвих троянд перед входом до квіткової крамниці',
+      heroCap: 'Авторський букет на замовлення',
+      heroAlt: 'Великий пастельний букет із троянд, гвоздик і білої хризантеми',
 
       svcEyebrow: 'Що у нас є',
-      svcTitle: 'Чотири причини завітати до нас',
+      svcTitle: 'Чотири причини завітати до нас',
       svc1T: 'Букети на замовлення',
       svc1P: 'Скажіть привід і бюджет — решту придумаємо. В’яжемо з того, що зараз найсвіжіше.',
       svc2T: 'Весільна флористика',
@@ -188,10 +238,20 @@
       t3P: 'Великі композиції та квіткові коробки, які видно вже від дверей.',
       order: 'Замовити',
 
+      prT: 'Повний прайс',
+      pr1: 'Букет із денної пропозиції', pr1v: 'до 1 000 Kč',
+      pr2: 'Букет на замовлення', pr2v: '1 000 – 2 000 Kč',
+      pr3: 'Авторський букет, квіткова коробка', pr3v: 'від 2 000 Kč',
+      pr4: 'Весільний букет', pr4v: 'індивідуально',
+      pr5: 'Оформлення весілля чи події', pr5v: 'індивідуально',
+      pr6: 'Курс в’язання, воркшоп', pr6v: 'за запитом',
+      pr7: 'Доставка по Пльзні (9–20)', pr7v: 'залежно від відстані',
+      prNote: 'Точну ціну завжди підтверджуємо заздалегідь — телефоном або у формі нижче.',
+
       galEyebrow: 'Останні роботи',
       galTitle: 'З нашої майстерні',
       zoom: 'Збільшити фото',
-      g1: 'Великий букет із троянд, гвоздик і білої хризантеми в пудрово-рожевому папері',
+      g1: 'Великий букет рожевих півонієвих троянд перед входом до квіткової крамниці',
       g2: 'Два букети блакитних гортензій, загорнуті в білий папір',
       g3: 'Наречена з весільним букетом із кремових троянд',
       g4: 'Квіткова коробка Charm of Flowers із трояндами, гортензією та герберами',
@@ -200,6 +260,14 @@
       g7: 'Букет білих півонієвих троянд на прилавку магазину',
       g8: 'Покупчиня з букетом гербер і троянд у магазині під світловим логотипом',
       g9: 'Квіткове оформлення на столиках у косметичному салоні',
+
+      rvEyebrow: 'Що кажуть клієнти',
+      rvTitle: 'Відгуки',
+      rv1: '«Господиня в’яже дуже гарні букети за дуже приємними цінами.»',
+      rv1src: 'відгук клієнта · Živéfirmy.cz',
+      rv2: '«Елегантна крамниця, повна гарних запашних квітів.»',
+      rv2src: 'відгук клієнта · Živéfirmy.cz',
+      rvCta: 'Більше відгуків у Google',
 
       stEyebrow: 'Історія за назвою',
       stTitle: 'Квіткова крамниця, що почалася вдруге',
@@ -210,6 +278,19 @@
       stN2: 'букетів в Instagram',
       stN3: 'мови за прилавком',
       stAlt: 'Флористка за прилавком магазину з двома букетами із соняшників',
+
+      faqEyebrow: 'Перш ніж спитати',
+      faqTitle: 'Часті запитання',
+      q1: 'Як швидко зв’яжете букет?',
+      a1: 'Подзвоніть або напишіть — домовимось, коли букет буде готовий. Для великих композицій і квіткових коробок краще день-два наперед.',
+      q2: 'Чи доставляєте квіти на конкретний час?',
+      a2: 'Так, розвозимо по Пльзні щодня з 9:00 до 20:00. Час доставки бронюйте заздалегідь, ціну підтвердимо залежно від відстані.',
+      q3: 'Коли звертатися щодо весільного букета?',
+      a3: 'Що раніше, то краще — дати бронюємо заздалегідь. На консультації обговоримо стиль, кольори та оформлення церемонії і столів.',
+      q4: 'Чи можна спілкуватися українською або англійською?',
+      a4: 'Так. Спілкуємось чеською, англійською та українською — у крамниці, телефоном і в Instagram.',
+      q5: 'Як проходять курси в’язання?',
+      a5: 'В’яжемо у групі або індивідуально — для початківців, компаній і фірм. Актуальні дати на нашому Instagram, або напишіть нам.',
 
       coEyebrow: 'Де нас знайти',
       coTitle: 'Pražská 43, поруч із площею',
@@ -226,6 +307,22 @@
       coFollowT: 'Стежте за нами',
       coLinks: 'Усі посилання',
       mapTitle: 'Карта — Charm of Flowers, Pražská 38/43, Пльзень',
+
+      fmT: 'Запит без зобов’язань',
+      fmNote: 'Напишіть, що святкуєте і скільки хочете витратити. Відповімо з пропозицією — телефоном або повідомленням.',
+      fmName: 'Ім’я',
+      fmPhone: 'Телефон',
+      fmDate: 'На коли',
+      fmBudget: 'Бюджет',
+      fmMsg: 'Повідомлення',
+      fmMsgPh: 'Що святкуєте, які кольори любить, куди доставити…',
+      fmOpt1: 'до 1 000 Kč',
+      fmOpt2: '1 000 – 2 000 Kč',
+      fmOpt3: 'від 2 000 Kč',
+      fmOpt4: 'весілля — індивідуально',
+      fmOpt5: 'ще не знаю',
+      fmSend: 'Надіслати запит',
+      fmOk: 'Дякуємо! Запит надіслано — відповімо якнайшвидше.',
 
       ftShop: 'Магазин',
       ftContact: 'Контакти',
@@ -287,6 +384,9 @@
     });
     document.querySelectorAll('[data-i18n-title]').forEach(function (el) {
       el.setAttribute('title', t(el.getAttribute('data-i18n-title')));
+    });
+    document.querySelectorAll('[data-i18n-ph]').forEach(function (el) {
+      el.setAttribute('placeholder', t(el.getAttribute('data-i18n-ph')));
     });
 
     /* fotky v galerii: popisek je alt, tlačítko říká i co udělá */

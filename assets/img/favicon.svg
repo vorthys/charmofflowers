@@ -1,7 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Charm of Flowers">
-  <rect width="64" height="64" rx="10" fill="#241b15"/>
-  <text x="32" y="45" text-anchor="middle"
-        font-family="Georgia, 'Times New Roman', serif" font-size="42" fill="#e4cfa1">C</text>
-  <path d="M44 40c-3.4 0-5.6 2.3-5.6 4.6 0 1.7 1.2 2.9 2.9 2.9 2.4 0 4-2 4-4.4 0-1.6-.8-2.6-2-2.6"
-        fill="none" stroke="#c2c878" stroke-width="2.4" stroke-linecap="round"/>
+  <rect width="64" height="64" rx="10" fill="#102713"/>
+  <g fill="none" stroke="#DBD986" stroke-width="2.6" stroke-linecap="round" transform="translate(2 6) scale(.5)">
+    <path d="M60 6C51 20 50 38 60 52C70 38 69 20 60 6Z"/>
+    <path d="M60 52C50 46 42 32 44 16C55 26 60 38 60 52Z"/>
+    <path d="M60 52C70 46 78 32 76 16C65 26 60 38 60 52Z"/>
+    <path d="M58 54C44 60 30 58 22 48C14 38 20 28 30 30C37 31.5 39 40 33 43"/>
+    <path d="M62 54C76 60 90 58 98 48C106 38 100 28 90 30C83 31.5 81 40 87 43"/>
+    <path d="M60 58C58 63 58 68 60 73C62 68 62 63 60 58Z"/>
+  </g>
 </svg>
