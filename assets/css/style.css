@@ -129,12 +129,13 @@ section[id], [id="kontakt"] { scroll-margin-top: 84px; }
   /* vnější <svg> nemá viewBox (nese ho <symbol>) — poměr stran drží CSS */
   aspect-ratio: 200 / 201;
   height: auto;
-  fill: none; stroke: currentColor; stroke-width: 3.5; stroke-linecap: round;
+  fill: none; stroke: currentColor; stroke-width: 4; stroke-linecap: round;
 }
 .orn--divider {
-  width: 44px; height: auto;
+  width: 58px; height: auto;
   margin: 0 auto;
-  color: var(--greige);
+  color: var(--moss);
+  opacity: .55;
 }
 
 /* ---------- 4. Utility typografie ---------- */
@@ -358,8 +359,8 @@ section[id], [id="kontakt"] { scroll-margin-top: 84px; }
 /* znak sedí NAD fotkou v bílém poli rámečku — žádná "záplata" přes roh */
 .hero__orn {
   position: absolute;
-  right: -8px; top: -44px; z-index: 2;
-  width: 54px;
+  right: -8px; top: -56px; z-index: 2;
+  width: 66px;
   color: var(--moss);
 }
 .hero__photo figcaption {
@@ -559,7 +560,7 @@ section[id], [id="kontakt"] { scroll-margin-top: 84px; }
   background: var(--card);
   border: 1px solid var(--greige);
 }
-.review__orn { width: 34px; margin-bottom: 1.2rem; color: var(--moss); opacity: .8; }
+.review__orn { width: 42px; margin-bottom: 1.2rem; color: var(--moss); opacity: .8; }
 .review__q {
   margin: 0 0 1.4rem;
   font-family: var(--ff-disp);
@@ -1087,7 +1088,7 @@ section[id], [id="kontakt"] { scroll-margin-top: 84px; }
 
   /* menší logotyp v hero, ať se nadpis nezalamuje přes tři řádky */
   .mark--xl { font-size: clamp(2.9rem, 16vw, 4.2rem); }
-  .hero__orn { top: -38px; right: 0; width: 46px; }
+  .hero__orn { top: -48px; right: 0; width: 56px; }
 }
 
 @media (max-width: 620px) {
