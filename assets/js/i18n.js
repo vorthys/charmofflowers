@@ -20,8 +20,12 @@
       ogLocale: 'cs_CZ',
 
       /* --- navigace --- */
+      katDocTitle: 'Katalog kytic — Charm of Flowers Plzeň',
+      katDocDesc: 'Katalog kytic květinářství Charm of Flowers v Plzni. Kytice od 1 000 Kč, květinové boxy, svatební floristika. Rozvoz po Plzni od 30 do 60 minut.',
+
       skip: 'Přejít k obsahu',
       logoAria: 'Charm of Flowers — úvod',
+      navCatalog: 'Katalog',
       navServices: 'Služby',
       navBudget: 'Ceník',
       navGallery: 'Galerie',
@@ -44,8 +48,8 @@
       fact2V: 'každý den 9:00–20:00',
       fact3L: 'Domluvíme se',
       fact3V: 'česky · anglicky · ukrajinsky',
-      heroCap: 'Autorská kytice na přání',
-      heroAlt: 'Velká pastelová kytice z růží, karafiátů a bílé chryzantémy',
+      heroCap: 'Hortenzie · sezónní kytice',
+      heroAlt: 'Dvě kytice modrých hortenzií zabalené v bílém papíru',
 
       /* --- služby --- */
       svcEyebrow: 'Co u nás pořídíte',
@@ -98,6 +102,55 @@
       g7: 'Kytice bílých pivoňkových růží na pultu prodejny',
       g8: 'Zákaznice s kyticí gerber a růží v prodejně pod světelným logem',
       g9: 'Květinová výzdoba na stolcích v kosmetickém salonu',
+      g10: 'Velká pastelová kytice z růží a karafiátů — koláž se záběrem páru s bílou kyticí',
+
+      /* --- katalog --- */
+      katEyebrow: 'Katalog',
+      katTitle: 'Vyberte si kytici',
+      katLede: 'Ceny jsou orientační — každá kytice je originál z toho, co je ten den nejčerstvější. Vyberte fotku, pošlete poptávku a my se ozveme.',
+      chipsAria: 'Filtr katalogu',
+      chAll: 'Vše',
+      chT1: 'do 1 000 Kč',
+      chT2: '1 000 – 2 000 Kč',
+      chT3: 'od 2 000 Kč',
+      chWed: 'Svatební',
+      chBox: 'Boxy a výzdoba',
+      kp1: 'do 1 000 Kč',
+      kp2: '1 000 – 2 000 Kč',
+      kp3: 'od 2 000 Kč',
+      kpInd: 'individuálně',
+      katCta: 'Chci tuhle',
+      katNote: 'Každá kytice je originál — složení se mění podle sezóny a denní nabídky, fotky jsou ilustrační. Styl a barevnost vždy zachováme.',
+      tagSeason: 'Sezónní',
+      tagWedding: 'Svatební',
+      tagBox: 'Box',
+      tagDecor: 'Výzdoba',
+      kn01: 'Kytice s anthurii', kf01: 'anthurie · růže · kopretiny',
+      kn02: 'Svatební kytice z eustom', kf02: 'eustomy · frézie · eukalyptus',
+      kn03: 'Bílé pivoňkové růže', kf03: 'trsové růže v bílé',
+      kn05: 'Hortenzie v bílém', kf05: 'hortenzie · bílé balení',
+      kn06: 'Svatební kytice z růží', kf06: 'krémové růže · frézie',
+      kn07: 'Květinový box', kf07: 'růže · hortenzie · gerbery · vzkaz',
+      kn08: 'Podzimní vazba se stuhou', kf08: 'růže · karafiáty · eukalyptus',
+      kn09: 'Pivoňkové růže grand', kf09: 'trsové pivoňkové růže',
+      kn10: 'Gerbery a růže', kf10: 'gerbery · růže · zeleň',
+      kn11: 'Slunečnice', kf11: 'slunečnice · delphinium · heřmánek',
+      kn12: 'Květinová výzdoba prostoru', kf12: 'salony · kavárny · akce',
+      kn13: 'Jiřiny v letním balení', kf13: 'jiřiny · sezónní nabídka',
+      ka13: 'Kytice oranžových jiřin v růžovém balení se stuhou Charm of Flowers',
+      knFl: 'Nechám to na floristce', kfFl: 'řeknete rozpočet a příležitost — květiny vybereme my',
+      kpFl: 'dle rozpočtu',
+      stepsEyebrow: 'Jak to funguje',
+      stepsTitle: 'Objednávka ve třech krocích',
+      st1T: 'Vyberte si',
+      st1P: 'Z katalogu, z Instagramu, nebo jen řekněte rozpočet a příležitost — zbytek vymyslíme.',
+      st2T: 'Zavolejte nebo napište',
+      st2P: 'Telefon 723 477 375, zpráva na Instagramu, nebo poptávkový formulář. Domluvíme detaily a cenu.',
+      st3T: 'Vyzvednete, nebo doručíme',
+      st3P: 'Na Pražské 43, nebo rozvoz po Plzni a okolí — šetrně a s péčí, od 30 do 60 minut.',
+      katFormBtn: 'Poslat poptávku',
+      katIgBtn: 'Aktuální kytice na Instagramu',
+      katLinkBtn: 'Prohlédnout katalog kytic',
 
       /* --- recenze --- */
       rvEyebrow: 'Co říkají zákazníci',
@@ -125,7 +178,7 @@
       q1: 'Jak rychle uvážete kytici?',
       a1: 'Zavolejte nebo napište — domluvíme se, kdy bude kytice připravená. U větších vazeb a květinových boxů počítejte raději den či dva dopředu.',
       q2: 'Rozvážíte květiny v konkrétní čas?',
-      a2: 'Ano, rozvážíme po Plzni každý den od 9:00 do 20:00. Čas doručení si zarezervujte předem, cenu rozvozu potvrdíme podle vzdálenosti.',
+      a2: 'Ano, rozvážíme po Plzni a okolí každý den od 9:00 do 20:00 — obvykle do 30 až 60 minut. Čas doručení si zarezervujte předem, cenu rozvozu potvrdíme podle vzdálenosti.',
       q3: 'Kdy se ozvat kvůli svatební kytici?',
       a3: 'Čím dřív, tím líp — termíny rezervujeme s předstihem. Na konzultaci probereme styl, barvy i výzdobu obřadu a tabule.',
       q4: 'Domluvím se u vás ukrajinsky nebo anglicky?',
@@ -182,6 +235,9 @@
     },
 
     uk: {
+      katDocTitle: 'Каталог букетів — Charm of Flowers Пльзень',
+      katDocDesc: 'Каталог букетів квіткової крамниці Charm of Flowers у Пльзні. Букети від 1 000 Kč, квіткові коробки, весільна флористика. Доставка по Пльзні від 30 до 60 хвилин.',
+      navCatalog: 'Каталог',
       docTitle: 'Charm of Flowers — квіти у Пльзні | Букети на замовлення та доставка',
       docDesc: 'Квіткова крамниця Charm of Flowers на Pražská 43 у Пльзні. Букети на замовлення, весільна флористика, курси в’язання та доставка квітів по Пльзні щодня з 9:00 до 20:00.',
       ogLocale: 'uk_UA',
@@ -209,8 +265,8 @@
       fact2V: 'щодня 9:00–20:00',
       fact3L: 'Спілкуємось',
       fact3V: 'чеською · англійською · українською',
-      heroCap: 'Авторський букет на замовлення',
-      heroAlt: 'Великий пастельний букет із троянд, гвоздик і білої хризантеми',
+      heroCap: 'Гортензії · сезонний букет',
+      heroAlt: 'Два букети блакитних гортензій, загорнуті в білий папір',
 
       svcEyebrow: 'Що у нас є',
       svcTitle: 'Чотири причини завітати до нас',
@@ -260,6 +316,54 @@
       g7: 'Букет білих півонієвих троянд на прилавку магазину',
       g8: 'Покупчиня з букетом гербер і троянд у магазині під світловим логотипом',
       g9: 'Квіткове оформлення на столиках у косметичному салоні',
+      g10: 'Великий пастельний букет із троянд і гвоздик — колаж із кадром пари з білим букетом',
+
+      katEyebrow: 'Каталог',
+      katTitle: 'Оберіть букет',
+      katLede: 'Ціни орієнтовні — кожен букет оригінальний, з найсвіжішого того дня. Оберіть фото, надішліть запит — і ми відповімо.',
+      chipsAria: 'Фільтр каталогу',
+      chAll: 'Усі',
+      chT1: 'до 1 000 Kč',
+      chT2: '1 000 – 2 000 Kč',
+      chT3: 'від 2 000 Kč',
+      chWed: 'Весільні',
+      chBox: 'Коробки та оформлення',
+      kp1: 'до 1 000 Kč',
+      kp2: '1 000 – 2 000 Kč',
+      kp3: 'від 2 000 Kč',
+      kpInd: 'індивідуально',
+      katCta: 'Хочу цей',
+      katNote: 'Кожен букет — оригінал: склад змінюється залежно від сезону та денної пропозиції, фото ілюстративні. Стиль і кольори завжди збережемо.',
+      tagSeason: 'Сезонний',
+      tagWedding: 'Весільний',
+      tagBox: 'Коробка',
+      tagDecor: 'Оформлення',
+      kn01: 'Букет з антуріумами', kf01: 'антуріуми · троянди · ромашки',
+      kn02: 'Весільний букет з еустом', kf02: 'еустоми · фрезії · евкаліпт',
+      kn03: 'Білі півонієві троянди', kf03: 'кущові троянди в білому',
+      kn05: 'Гортензія в білому', kf05: 'гортензія · біле пакування',
+      kn06: 'Весільний букет із троянд', kf06: 'кремові троянди · фрезії',
+      kn07: 'Квіткова коробка', kf07: 'троянди · гортензія · гербери · листівка',
+      kn08: 'Осіння композиція зі стрічкою', kf08: 'троянди · гвоздики · евкаліпт',
+      kn09: 'Півонієві троянди гранд', kf09: 'кущові півонієві троянди',
+      kn10: 'Гербери та троянди', kf10: 'гербери · троянди · зелень',
+      kn11: 'Соняшники', kf11: 'соняшники · дельфіній · ромашка',
+      kn12: 'Квіткове оформлення простору', kf12: 'салони · кав’ярні · події',
+      kn13: 'Жоржини в літньому пакуванні', kf13: 'жоржини · сезонна пропозиція',
+      ka13: 'Букет помаранчевих жоржин у рожевому пакуванні зі стрічкою Charm of Flowers',
+      knFl: 'Довірюсь флористці', kfFl: 'назвіть бюджет і привід — квіти оберемо ми',
+      kpFl: 'за бюджетом',
+      stepsEyebrow: 'Як це працює',
+      stepsTitle: 'Замовлення у три кроки',
+      st1T: 'Оберіть',
+      st1P: 'З каталогу, з Instagram, або просто назвіть бюджет і привід — решту придумаємо.',
+      st2T: 'Подзвоніть або напишіть',
+      st2P: 'Телефон 723 477 375, повідомлення в Instagram або форма запиту. Узгодимо деталі й ціну.',
+      st3T: 'Заберіть або доставимо',
+      st3P: 'На Pražská 43, або доставка по Пльзні та околицях — дбайливо, від 30 до 60 хвилин.',
+      katFormBtn: 'Надіслати запит',
+      katIgBtn: 'Актуальні букети в Instagram',
+      katLinkBtn: 'Переглянути каталог букетів',
 
       rvEyebrow: 'Що кажуть клієнти',
       rvTitle: 'Відгуки',
@@ -284,7 +388,7 @@
       q1: 'Як швидко зв’яжете букет?',
       a1: 'Подзвоніть або напишіть — домовимось, коли букет буде готовий. Для великих композицій і квіткових коробок краще день-два наперед.',
       q2: 'Чи доставляєте квіти на конкретний час?',
-      a2: 'Так, розвозимо по Пльзні щодня з 9:00 до 20:00. Час доставки бронюйте заздалегідь, ціну підтвердимо залежно від відстані.',
+      a2: 'Так, розвозимо по Пльзні та околицях щодня з 9:00 до 20:00 — зазвичай за 30–60 хвилин. Час доставки бронюйте заздалегідь, ціну підтвердимо залежно від відстані.',
       q3: 'Коли звертатися щодо весільного букета?',
       a3: 'Що раніше, то краще — дати бронюємо заздалегідь. На консультації обговоримо стиль, кольори та оформлення церемонії і столів.',
       q4: 'Чи можна спілкуватися українською або англійською?',
@@ -364,10 +468,14 @@
     var t = function (k) { return d[k] != null ? d[k] : k; };
 
     document.documentElement.lang = lang === 'uk' ? 'uk' : 'cs';
-    document.title = t('docTitle');
-    meta('meta[name="description"]', t('docDesc'));
-    meta('meta[property="og:title"]', t('docTitle'));
-    meta('meta[property="og:description"]', t('docDesc'));
+    /* katalog.html má vlastní titulek — pozná se podle <body data-page> */
+    var page = document.body.getAttribute('data-page');
+    var titleKey = page === 'katalog' ? 'katDocTitle' : 'docTitle';
+    var descKey = page === 'katalog' ? 'katDocDesc' : 'docDesc';
+    document.title = t(titleKey);
+    meta('meta[name="description"]', t(descKey));
+    meta('meta[property="og:title"]', t(titleKey));
+    meta('meta[property="og:description"]', t(descKey));
     meta('meta[property="og:locale"]', t('ogLocale'));
 
     document.querySelectorAll('[data-i18n]').forEach(function (el) {

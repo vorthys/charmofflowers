@@ -22,7 +22,8 @@ Pak otevřete <http://localhost:5173>.
 
 ```
 .
-├── index.html                  # celá stránka
+├── index.html                  # hlavní stránka
+├── katalog.html                # katalog kytic (filtr, předvyplnění poptávky)
 ├── robots.txt / sitemap.xml    # SEO (balíček Standard)
 ├── assets/
 │   ├── css/style.css           # design systém + layout
@@ -128,6 +129,20 @@ formuláře), `sitemap.xml`, `robots.txt`. Přidat soubor `CNAME`.
 - **Živéfirmy.cz** — IČO, adresa, recenze
 - **PR Deník** — příběh Nataliie Ivasiuk
 - **Brand Guide** (Priakha Svitlana) — barvy, typografie, logo, znak
+
+## Katalog (katalog.html)
+
+Karty kytic s orientačními cenami podle cenových pásem, která klientka
+sama používá v Instagram highlights (do 1 000 / 1 000–2 000 / od 2 000 Kč).
+Filtry čipy, karta „Nechám to na floristce" (vzor ověřený u konkurence),
+tlačítko „Chci tuhle" předvyplní poptávkový formulář na hlavní stránce
+(`?kytice=Název`). Fakt „rozvoz od 30 do 60 minut" pochází z popisku
+jejich vlastního postu na Instagramu.
+
+Úprava položek: HTML karty v `katalog.html` + texty v `i18n.js`
+(klíče `kn*`/`kf*`). Sezónní obměna = výměna fotky a dvou řádků.
+
+---
 
 ## Co potvrdit s klientkou
 

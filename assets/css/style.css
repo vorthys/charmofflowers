@@ -80,6 +80,9 @@ picture { display: contents; }
   clip-path: inset(50%); overflow: hidden; white-space: nowrap;
 }
 
+/* kotvy nesmí zajíždět pod přilepenou hlavičku */
+section[id], [id="kontakt"] { scroll-margin-top: 84px; }
+
 .skip {
   position: absolute; left: 1rem; top: -4rem; z-index: 200;
   background: var(--green); color: var(--chartreuse);
@@ -119,7 +122,13 @@ picture { display: contents; }
 .mark--on-light .mark__of { color: var(--moss); }
 
 /* ---------- 3b. Dekorativní znak (tulipán z brand guide) ---------- */
-.orn { display: block; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; }
+.orn {
+  display: block;
+  /* vnější <svg> nemá viewBox (nese ho <symbol>) — poměr stran drží CSS */
+  aspect-ratio: 120 / 96;
+  height: auto;
+  fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round;
+}
 .orn--divider {
   width: 44px; height: auto;
   margin: 0 auto;
@@ -344,13 +353,12 @@ picture { display: contents; }
   aspect-ratio: 4 / 5;
   object-fit: cover;
 }
+/* znak sedí NAD fotkou v bílém poli rámečku — žádná "záplata" přes roh */
 .hero__orn {
   position: absolute;
-  right: -10px; top: -26px; z-index: 2;
-  width: 58px;
+  right: -8px; top: -44px; z-index: 2;
+  width: 54px;
   color: var(--moss);
-  background: var(--bg);
-  padding: 6px;
 }
 .hero__photo figcaption {
   margin-top: 1.6rem;
@@ -676,7 +684,7 @@ picture { display: contents; }
   border: 1px solid var(--greige);
   border-radius: 0;
   font: inherit;
-  font-size: .95rem;
+  font-size: 1rem; /* min. 16 px — jinak iOS při fokusu zazoomuje */
   color: var(--ink);
   transition: border-color .25s var(--ease), background .25s var(--ease);
 }
@@ -744,6 +752,139 @@ picture { display: contents; }
   border: 0;
   filter: grayscale(.5) sepia(.08);
 }
+
+/* ---------- 15b. Katalog ---------- */
+.kat-head { padding: clamp(3rem, 6vw, 4.5rem) 0 0; }
+.kat-head .sec__lede { max-width: 52ch; }
+
+.chips {
+  display: flex; flex-wrap: wrap; gap: .5rem;
+  margin: clamp(1.8rem, 4vw, 2.6rem) 0 0;
+}
+.chip {
+  padding: .55rem 1.05rem;
+  background: var(--card);
+  border: 1px solid var(--greige);
+  border-radius: 999px;
+  font-size: .78rem; font-weight: 400;
+  letter-spacing: .06em;
+  color: var(--ink-60);
+  cursor: pointer;
+  transition: background .3s var(--ease), color .3s var(--ease), border-color .3s var(--ease);
+}
+.chip:hover { border-color: var(--moss); color: var(--ink); }
+.chip.is-on {
+  background: var(--green); border-color: var(--green); color: #fff;
+}
+
+.kat {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: clamp(1rem, 2.2vw, 1.6rem);
+  margin-top: clamp(1.8rem, 4vw, 2.6rem);
+}
+.kat-item {
+  display: flex; flex-direction: column;
+  background: var(--card);
+  border: 1px solid var(--greige);
+  transition: transform .4s var(--ease), border-color .4s var(--ease);
+}
+.kat-item:hover { transform: translateY(-4px); border-color: var(--moss); }
+.kat-item.is-hidden { display: none; }
+.kat-item__photo { position: relative; margin: 0; overflow: hidden; }
+.kat-item__photo img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  transition: transform .8s var(--ease);
+}
+.kat-item:hover .kat-item__photo img { transform: scale(1.05); }
+.kat-item__tag {
+  position: absolute; left: .75rem; top: .75rem;
+  padding: .3rem .7rem;
+  background: rgba(239,239,239,.92);
+  font-size: .64rem; font-weight: 500;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--green);
+}
+.kat-item__body {
+  display: flex; flex-direction: column; flex: 1;
+  padding: 1.1rem 1.2rem 1.25rem;
+}
+.kat-item__t {
+  margin: 0 0 .25rem;
+  font-family: var(--ff-disp);
+  font-size: 1.18rem;
+  font-weight: 400;
+}
+.kat-item__f { margin: 0 0 .9rem; font-size: .84rem; color: var(--ink-40); }
+.kat-item__row {
+  display: flex; align-items: baseline; justify-content: space-between; gap: .8rem;
+  margin-top: auto;
+  padding-top: .8rem;
+  border-top: 1px solid var(--hair-l);
+}
+.kat-item__price {
+  font-family: var(--ff-disp);
+  font-size: 1.12rem;
+  color: var(--green);
+  white-space: nowrap;
+}
+.kat-item__go {
+  font-size: .72rem; font-weight: 500;
+  letter-spacing: .12em; text-transform: uppercase;
+  text-decoration: none;
+  color: var(--moss);
+  border-bottom: 1px solid transparent;
+  transition: border-color .3s var(--ease);
+}
+.kat-item__go:hover { border-bottom-color: var(--moss); }
+
+/* grafická karta "nechám to na floristce" — tulipán místo fotky */
+.kat-item--fl { background: var(--green); border-color: var(--green); }
+.kat-item--fl .kat-item__orn {
+  display: flex; align-items: center; justify-content: center;
+  aspect-ratio: 4 / 5;
+  color: var(--chartreuse);
+}
+.kat-item--fl .kat-item__orn .orn { width: 46%; height: auto; }
+.kat-item--fl .kat-item__t, .kat-item--fl .kat-item__price { color: #fff; }
+.kat-item--fl .kat-item__f { color: rgba(255,255,255,.62); }
+.kat-item--fl .kat-item__go { color: var(--chartreuse); }
+.kat-item--fl .kat-item__go:hover { border-bottom-color: var(--chartreuse); }
+.kat-item--fl .kat-item__row { border-top-color: rgba(219,217,134,.25); }
+.kat-item--fl:hover { border-color: var(--chartreuse); }
+
+.kat-note {
+  margin: clamp(1.6rem, 3vw, 2.2rem) 0 0;
+  padding: 1rem 1.2rem;
+  background: rgba(219,217,134,.18);
+  border-left: 2px solid var(--chartreuse);
+  font-size: .9rem;
+  color: var(--ink-60);
+  max-width: 62ch;
+}
+
+/* jak objednat — tři kroky vedle katalogu */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1px;
+  background: var(--greige);
+  border: 1px solid var(--greige);
+  counter-reset: krok;
+}
+.step { background: var(--card); padding: clamp(1.5rem, 3vw, 2.2rem); counter-increment: krok; }
+.step::before {
+  content: counter(krok, decimal-leading-zero);
+  display: block;
+  margin-bottom: .8rem;
+  font-family: var(--ff-disp);
+  font-size: 1.5rem;
+  color: var(--moss);
+}
+.step__t { margin: 0 0 .5rem; font-weight: 500; font-size: 1rem; }
+.step__p { margin: 0; font-size: .9rem; color: var(--ink-60); }
 
 /* ---------- 16. Patička ---------- */
 .foot {
@@ -888,6 +1029,24 @@ picture { display: contents; }
   .shot--feature { grid-column: auto; grid-row: auto; aspect-ratio: 3 / 4; }
   .form__grid { grid-template-columns: 1fr; }
   .tbl td { white-space: normal; }
+
+  /* cenové karty: místo dlouhého sloupce vodorovné listování se zarážkami */
+  .tiers {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: .8rem;
+    margin-inline: calc(-1 * var(--pad));
+    padding-inline: var(--pad);
+    padding-bottom: .5rem;
+    scrollbar-width: none;
+  }
+  .tiers::-webkit-scrollbar { display: none; }
+  .tier { flex: 0 0 min(78vw, 320px); scroll-snap-align: center; }
+
+  /* menší logotyp v hero, ať se nadpis nezalamuje přes tři řádky */
+  .mark--xl { font-size: clamp(2.9rem, 16vw, 4.2rem); }
+  .hero__orn { top: -38px; right: 0; width: 46px; }
 }
 
 @media (max-width: 620px) {

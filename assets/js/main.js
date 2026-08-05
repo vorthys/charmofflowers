@@ -66,6 +66,43 @@
     sections.forEach(function (s) { spy.observe(s); });
   }
 
+  /* ---- katalog: filtr přes čipy ---- */
+  var chips = document.getElementById('chips');
+  var kat = document.getElementById('kat');
+  if (chips && kat) {
+    chips.addEventListener('click', function (e) {
+      var chip = e.target.closest('.chip');
+      if (!chip) return;
+      var f = chip.getAttribute('data-f');
+      chips.querySelectorAll('.chip').forEach(function (c) {
+        c.classList.toggle('is-on', c === chip);
+      });
+      kat.querySelectorAll('.kat-item').forEach(function (item) {
+        var tier = item.getAttribute('data-tier');
+        var cat = item.getAttribute('data-cat');
+        var show;
+        if (f === 'all') show = true;
+        else if (f === 'svatba') show = cat === 'svatba';
+        else if (f === 'boxdecor') show = cat === 'box' || cat === 'vyzdoba';
+        else show = tier === f || (tier === 'any' && cat === 'kytice');
+        item.classList.toggle('is-hidden', !show);
+      });
+    });
+  }
+
+  /* ---- předvyplnění poptávky z katalogu (?kytice=…) ---- */
+  var msgField = document.getElementById('f-msg');
+  var wanted = new URLSearchParams(location.search).get('kytice');
+  if (msgField && wanted) {
+    var d = document.documentElement.lang === 'uk'
+      ? 'Мене цікавить: '
+      : 'Mám zájem o: ';
+    if (!msgField.value) msgField.value = d + wanted + '\n';
+    var u2 = new URL(location.href);
+    u2.searchParams.delete('kytice');
+    history.replaceState(null, '', u2);
+  }
+
   /* ---- potvrzení po odeslání formuláře (návrat z FormSubmit) ---- */
   var formOk = document.getElementById('formOk');
   if (formOk && new URLSearchParams(location.search).get('sent') === '1') {
