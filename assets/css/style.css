@@ -378,8 +378,10 @@ section[id], main[id], [id="kontakt"] { scroll-margin-top: 84px; }
   aspect-ratio: 4 / 5;
   object-fit: cover;
 }
-/* znak sedí NAD fotkou v bílém poli rámečku — žádná "záplata" přes roh */
+/* znak sedí NAD fotkou v bílém poli rámečku — žádná "záplata" přes roh.
+   Dočasně skryto na přání (pro návrat smazat display: none). */
 .hero__orn {
+  display: none;
   position: absolute;
   right: -8px; top: -56px; z-index: 2;
   width: 66px;
