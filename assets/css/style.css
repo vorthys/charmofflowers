@@ -629,27 +629,28 @@ section[id], main[id], [id="kontakt"] { scroll-margin-top: 84px; }
 
 /* Google badge nad recenzemi — čísla se upravují v adminu (Texty) */
 .gbadge {
-  display: flex; align-items: baseline; justify-content: center; gap: .9rem;
+  display: flex; align-items: baseline; justify-content: center; gap: .8rem;
   flex-wrap: wrap;
   margin: 0 auto clamp(1.8rem, 3.5vw, 2.6rem);
-  padding: 1.1rem 1.6rem;
-  max-width: 460px;
-  background: var(--green);
+  padding: .9rem 1.4rem;
+  max-width: 430px;
+  background: var(--card);
+  border: 1px solid var(--greige);
   text-decoration: none;
-  transition: background .3s var(--ease);
+  transition: border-color .3s var(--ease);
 }
-.gbadge:hover { background: var(--green-2); }
+.gbadge:hover { border-color: var(--moss); }
 .gbadge__num {
   font-family: var(--ff-disp);
-  font-size: 2rem; line-height: 1;
-  color: #fff;
+  font-size: 1.7rem; line-height: 1;
+  color: var(--green);
 }
-.gbadge__stars { color: var(--chartreuse); letter-spacing: .18em; font-size: 1rem; }
+.gbadge__stars { color: var(--moss); letter-spacing: .16em; font-size: .92rem; }
 .gbadge__count {
-  font-size: .8rem; letter-spacing: .08em;
-  color: rgba(255,255,255,.75);
-  border-bottom: 1px solid rgba(219,217,134,.4);
-  padding-bottom: .15rem;
+  font-size: .78rem; letter-spacing: .08em;
+  color: var(--ink-60);
+  border-bottom: 1px solid var(--greige);
+  padding-bottom: .1rem;
 }
 
 /* ---------- 13. Příběh ---------- */
@@ -1174,8 +1175,15 @@ section[id], main[id], [id="kontakt"] { scroll-margin-top: 84px; }
   .nav a:last-child { border-bottom: 0; }
   .nav a::after { display: none; }
 
+  .hero__cta { gap: .6rem; }
+  .hero__cta .btn { flex: 1 1 100%; justify-content: center; }
   .hero__facts li { display: block; }
-  .fact__l { display: block; min-width: 0; margin-bottom: .15rem; }
+  .fact__l { display: inline; min-width: 0; margin-right: .45rem; }
+  .review { padding: 1.3rem 1.2rem; }
+  .review__orn { display: none; }
+  .review__q { font-size: 1.02rem; }
+  .gbadge { padding: .75rem 1rem; gap: .6rem; }
+  .gbadge__num { font-size: 1.4rem; }
   .grid { grid-template-columns: repeat(2, 1fr); }
   .form__grid { grid-template-columns: 1fr; }
   .tbl td { white-space: normal; }
