@@ -627,6 +627,31 @@ section[id], main[id], [id="kontakt"] { scroll-margin-top: 84px; }
 .review__src { margin: 0; font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-60); }
 .reviews__cta { margin-top: clamp(1.8rem, 3.5vw, 2.6rem); text-align: center; }
 
+/* Google badge nad recenzemi — čísla se upravují v adminu (Texty) */
+.gbadge {
+  display: flex; align-items: baseline; justify-content: center; gap: .9rem;
+  flex-wrap: wrap;
+  margin: 0 auto clamp(1.8rem, 3.5vw, 2.6rem);
+  padding: 1.1rem 1.6rem;
+  max-width: 460px;
+  background: var(--green);
+  text-decoration: none;
+  transition: background .3s var(--ease);
+}
+.gbadge:hover { background: var(--green-2); }
+.gbadge__num {
+  font-family: var(--ff-disp);
+  font-size: 2rem; line-height: 1;
+  color: #fff;
+}
+.gbadge__stars { color: var(--chartreuse); letter-spacing: .18em; font-size: 1rem; }
+.gbadge__count {
+  font-size: .8rem; letter-spacing: .08em;
+  color: rgba(255,255,255,.75);
+  border-bottom: 1px solid rgba(219,217,134,.4);
+  padding-bottom: .15rem;
+}
+
 /* ---------- 13. Příběh ---------- */
 .story {
   position: relative;
