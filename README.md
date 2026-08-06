@@ -1,6 +1,6 @@
 # Charm of Flowers — web
 
-Jednostránkový web pro květinářství **Charm of Flowers**, Pražská 38/43, Plzeň.
+Dvoustránkový web (úvod + katalog) pro květinářství **Charm of Flowers**, Pražská 38/43, Plzeň.
 Statické HTML, CSS a JavaScript — žádný build, žádné závislosti.
 
 **Náhled naživo:** <https://vorthys.github.io/charmofflowers/>
@@ -89,11 +89,11 @@ zobrazí česky.
 
 ## Balíček Standard — co je hotové
 
-- [x] Vše na jedné stránce
+- [x] Vše podstatné na jedné stránce + samostatný katalog
 - [x] **Ceník v přehledné tabulce** (sekce Ceník)
 - [x] **Druhý jazyk s parametrem v adrese** (`?lang=uk`)
 - [x] **Poptávkový formulář na e-mail** — FormSubmit.co, honeypot proti spamu
-- [x] **Sekce recenzí** — 2 reálné recenze ze Živéfirmy.cz (viz níže)
+- [x] **Sekce recenzí** — Google badge 4,9/137 + tři přeložené recenze z Google profilu
 - [x] **Sekce častých dotazů** + FAQPage strukturovaná data
 - [x] **Rozšířené SEO** — sitemap.xml, robots.txt, hreflang, struktura nadpisů
 - [x] **Business data pro Google** — Schema.org Florist (adresa, hodiny, kontakty)
@@ -164,7 +164,7 @@ do 1–2 minut.
 Token vložit v admin.html; volitelně se pamatuje v prohlížeči.
 Bez tokenu funguje admin jen pro čtení + export/import JSON.
 
-Stránka je v `robots.txt` a má `noindex` — není v navigaci, jen na
+Stránka má `noindex` — není v navigaci, jen na
 přímé adrese `/admin.html`.
 
 **Nové fotky:** zmenšit na ~800 px šířky, uložit `.jpg` + `.webp` se
@@ -173,7 +173,7 @@ bez přípony. (WebP: `python -c "from PIL import Image; im=Image.open('f.jpg');
 
 ## Živý Instagram feed (galerie na hlavní stránce)
 
-Galerie „Z naší dílny" se umí sama plnit posledními příspěvky
+Instagram blok (@charmofflowers.cz) se umí sám plnit posledními příspěvky
 z Instagramu: GitHub Action (`.github/workflows/instagram.yml`) denně
 v 6:17 UTC stáhne přes oficiální Instagram API posledních 6 fotek,
 zmenší je, uloží do repozitáře (`assets/img/ig/` + 
@@ -212,7 +212,7 @@ Kdyby časem bylo potřeba víc, kandidát je český **Smartsupp**
 
 ## Co potvrdit s klientkou
 
-- [ ] **Recenze** — dvě převzaté ze Živéfirmy.cz; ať je potvrdí, nebo dodá vlastní
+- [ ] **Recenze** — tři přeložené z Google profilu; ať je potvrdí, nebo vybere jiné
 - [ ] **Ceník** — řádky „individuálně / na dotaz / podle vzdálenosti" doplnit
       skutečnými cenami, až je klientka dodá
 - [ ] **Ukrajinské texty** — dát vyčíst rodilé mluvčí (vše v `i18n.js`)
