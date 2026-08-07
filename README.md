@@ -16,6 +16,13 @@ python -m http.server 5173
 
 Pak otevřete <http://localhost:5173>.
 
+> **Pozor při lokálním náhledu:** web odkazuje na katalog adresou bez
+> přípony (`/katalog`). GitHub Pages ji sám přeloží na `katalog.html`,
+> ale `python -m http.server` ne — lokálně na ten odkaz dostanete 404.
+> Otevřete si `katalog.html` přímo. Na ostrém webu je vše v pořádku.
+> (`.htaccess` sem nepatří — to je soubor Apache, GitHub Pages ho
+> ignoruje.)
+
 ---
 
 ## Struktura
@@ -23,7 +30,7 @@ Pak otevřete <http://localhost:5173>.
 ```
 .
 ├── index.html                  # hlavní stránka
-├── katalog.html                # katalog kytic (skládá se z katalog.json)
+├── katalog.html                # katalog kytic (adresa /katalog, skládá se z katalog.json)
 ├── admin.html                  # ★ správa katalogu (viz níže)
 ├── robots.txt / sitemap.xml    # SEO (balíček Standard)
 ├── assets/

@@ -180,7 +180,7 @@
         var alt = (it.alt && (it.alt[L] || it.alt.cs)) || '';
         var tagKey = TAGS[it.tag];
         var tag = tagKey ? '<span class="kat-item__tag">' + esc(TAG_TX[tagKey][L]) + '</span>' : '';
-        var cta = 'index.html?kytice=' + encodeURIComponent(name) + '#kontakt';
+        var cta = './?kytice=' + encodeURIComponent(name) + '#kontakt';
 
         var photo;
         if (it.img) {
