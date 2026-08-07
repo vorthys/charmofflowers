@@ -1078,6 +1078,23 @@ section[id], main[id], [id="kontakt"] { scroll-margin-top: 84px; }
 .chat__link--ig { font-weight: 500; }
 .chat__link--ig svg { fill: var(--green); }
 
+/* živý chat — hlavní volba v panelu; je to <button>, ne odkaz */
+.chat__link--live {
+  width: 100%;
+  margin-bottom: .2rem;
+  padding: .8rem .9rem;
+  border: 0; border-radius: 2px;
+  background: var(--green);
+  color: #fff;
+  font-family: inherit; font-size: .92rem; font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition: background .3s var(--ease);
+}
+.chat__link--live svg { fill: var(--chartreuse); }
+.chat__link--live:hover { background: var(--green-2); color: #fff; }
+.chat__link--live.is-loading { opacity: .7; pointer-events: none; }
+
 /* ---------- 18. Lightbox ---------- */
 .lb {
   position: fixed; inset: 0; z-index: 300;

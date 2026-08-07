@@ -200,13 +200,29 @@ přestal jet, stačí vygenerovat nový token a přepsat secret.
 
 ## Chat
 
-Plovoucí bublina vpravo dole — **žádný cizí widget**, jen skutečné
-kanály obchodu: Instagram DM (`ig.me/m/…`, jejich hlavní objednávkový
-kanál dle bia), Messenger (`m.me/…`), telefon, formulář. Zero skriptů
-třetích stran = žádná cookie lišta. Analýza konkurence: 4 z 5 webů
-živý chat nemají; Meta svůj vestavěný widget ukončila v 2024.
-Kdyby časem bylo potřeba víc, kandidát je český **Smartsupp**
-(vyžaduje registraci a závazek klientky odpovídat).
+Plovoucí bublina vpravo dole — jediná na stránce. V panelu jsou
+skutečné kanály obchodu: **živý chat**, Instagram DM (`ig.me/m/…`,
+hlavní objednávkový kanál dle bia), Messenger (`m.me/…`), telefon,
+formulář.
+
+### Živý chat (Smartsupp) — bez cookie lišty
+
+Skript Smartsuppu se **nestahuje při načtení stránky, ale až když
+návštěvník klikne na „Živý chat"** (`main.js`, blok *živý chat*).
+Do té doby web neukládá žádné cookie třetí strany, takže nepotřebuje
+lištu souhlasu — návštěvník si chat vyžádá sám. Zároveň 
+nezatěžuje načítání webu těm, kdo chat nepoužijí.
+
+Nastavení v kódu: `hideWidget` (vlastní bublina Smartsuppu se
+nezobrazuje), `color` = firemní zeleň, `privacyNoticeEnabled`,
+jazyk podle `<html lang>` (cs/uk). Po zavření chatu se přes událost
+`messenger_close` skryje i bublina Smartsuppu — jinak by sedla přesně
+na naši a ostatní kanály by byly nedostupné.
+
+Účet: app.smartsupp.com, tarif Free = **25 konverzací měsíčně**,
+historie 14 dní, 1 operátor. Klientka odpovídá z mobilní aplikace;
+dokud je v ní přihlášená, chat na webu svítí „online" — mimo
+pracovní dobu je potřeba se odhlásit nebo přepnout stav.
 
 ---
 

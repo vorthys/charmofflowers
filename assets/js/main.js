@@ -68,6 +68,48 @@
     document.addEventListener('click', function (e) {
       if (!chatPanel.hidden && !e.target.closest('.chat')) chatSet(false);
     });
+
+    /* ---- živý chat (Smartsupp) ----
+       Skript se stahuje AŽ na kliknutí. Do té doby web neukládá žádné
+       cookie třetí strany, takže nepotřebuje lištu souhlasu — návštěvník
+       si chat vyžádá sám. Vlastní bublina Smartsuppu je skrytá
+       (hideWidget), aby v rohu nebyly dvě. */
+    var liveBtn = document.getElementById('liveChat');
+    if (liveBtn) {
+      var ssLoaded = false;
+      liveBtn.addEventListener('click', function () {
+        if (!ssLoaded) {
+          ssLoaded = true;
+          liveBtn.classList.add('is-loading');
+          setTimeout(function () { liveBtn.classList.remove('is-loading'); }, 2500);
+
+          window._smartsupp = window._smartsupp || {};
+          window._smartsupp.key = '0f089ed21494eb556856f382d2873d177853118b';
+          window._smartsupp.hideWidget = true;
+          window._smartsupp.color = '#102713';
+          window._smartsupp.privacyNoticeEnabled = true;
+
+          (function (d) {
+            var s, c, o = window.smartsupp = function () { o._.push(arguments); };
+            o._ = [];
+            s = d.getElementsByTagName('script')[0];
+            c = d.createElement('script');
+            c.type = 'text/javascript'; c.charset = 'utf-8'; c.async = true;
+            c.src = 'https://www.smartsuppchat.com/loader.js?';
+            s.parentNode.insertBefore(c, s);
+          })(document);
+
+          window.smartsupp('language', document.documentElement.lang === 'uk' ? 'uk' : 'cs');
+          /* Až návštěvník chat zavře, schováme i bublinu Smartsuppu —
+             jinak by sedla přesně na naši a naše kanály by byly nedostupné. */
+          window.smartsupp('on', 'messenger_close', function () { window.smartsupp('chat:hide'); });
+        }
+
+        window.smartsupp('chat:show');
+        window.smartsupp('chat:open');
+        chatSet(false);
+      });
+    }
   }
 
   /* ---- katalog z JSON ----
