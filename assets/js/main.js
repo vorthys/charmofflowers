@@ -260,6 +260,18 @@
     history.replaceState(null, '', u);
   }
 
+  /* ---- dojezd na kotvu z adresy (#kontakt) ----
+     i18n.js i blok výše volají history.replaceState kvůli ?lang / ?kytice
+     a prohlížeč tím zruší svůj vlastní skok na kotvu. Doskočíme sami. */
+  if (location.hash.length > 1) {
+    var anchor = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if (anchor) {
+      requestAnimationFrame(function () {
+        anchor.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+      });
+    }
+  }
+
   /* ---- FAQ: otevřená vždy jen jedna otázka ---- */
   var faq = document.getElementById('faq');
   if (faq) {

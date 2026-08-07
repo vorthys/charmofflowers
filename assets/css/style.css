@@ -611,6 +611,9 @@ section[id], main[id], [id="kontakt"] { scroll-margin-top: 84px; }
   gap: clamp(1rem, 2.5vw, 2rem);
 }
 .review {
+  /* <blockquote> má v prohlížeči vlastní margin 40px — na mobilu to
+     ukrajovalo čtvrtinu šířky karty (255 z 335 px). */
+  margin: 0;
   padding: clamp(1.9rem, 3vw, 2.6rem);
   background: var(--card);
   border: 1px solid var(--greige);
