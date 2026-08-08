@@ -7,7 +7,14 @@
   'use strict';
 
   var IBAN = 'CZ9408000000005391596093';   /* 5391596093/0800, Česká spořitelna */
-  var ZALOHA = 500;                        /* minimální záloha dle klientky */
+
+  /* Výši zálohy si klientka mění sama v adminu (Texty → Záloha a QR platba).
+     Hodnota přijde ze slovníku do skrytého #zaDefault, odtud si ji bereme. */
+  function defaultAmount() {
+    var el = document.getElementById('zaDefault');
+    var n = el ? parseFloat(String(el.textContent).replace(/[^\d.,]/g, '').replace(',', '.')) : NaN;
+    return (isFinite(n) && n > 0) ? n : 500;
+  }
 
   var $ = function (id) { return document.getElementById(id); };
   var box = $('qrBox');
@@ -112,17 +119,24 @@
     });
   });
 
-  amountEl.addEventListener('input', render);
+  var touched = false;
+  amountEl.addEventListener('input', function () { touched = true; render(); });
   msgEl.addEventListener('input', render);
-  document.addEventListener('langchange', render);
+  /* slovník i přepisy z adminu dorazí až po fetchi — když do částky
+     zatím nikdo nesáhl, převezmeme novou výchozí zálohu */
+  document.addEventListener('langchange', function () {
+    if (!touched && !qHasAmount) amountEl.value = defaultAmount();
+    render();
+  });
 
   /* Předvyplnění z adresy: /zaloha?castka=3500&zprava=SVATBA NOVAKOVI
      Klientka pošle zákazníkovi hotový odkaz a ten už jen naskenuje —
      nic nepřepisuje, takže se nemůže splést v částce. */
   var q = new URLSearchParams(location.search);
   var qAmount = parseFloat(String(q.get('castka') || q.get('amount') || '').replace(',', '.'));
+  var qHasAmount = isFinite(qAmount) && qAmount > 0;
   var qMsg = q.get('zprava') || q.get('msg');
-  amountEl.value = (isFinite(qAmount) && qAmount > 0) ? qAmount : ZALOHA;
+  amountEl.value = qHasAmount ? qAmount : defaultAmount();
   if (qMsg) msgEl.value = qMsg;
   render();
 
