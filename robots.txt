@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /_src/
 
-Sitemap: https://vorthys.github.io/charmofflowers/sitemap.xml
+Sitemap: https://charmofflowers.cz/sitemap.xml

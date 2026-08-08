@@ -3,8 +3,8 @@
 Dvoustránkový web (úvod + katalog) pro květinářství **Charm of Flowers**, Pražská 38/43, Plzeň.
 Statické HTML, CSS a JavaScript — žádný build, žádné závislosti.
 
-**Náhled naživo:** <https://vorthys.github.io/charmofflowers/>
-Ukrajinsky: <https://vorthys.github.io/charmofflowers/?lang=uk>
+**Náhled naživo:** <https://charmofflowers.cz/>
+Ukrajinsky: <https://charmofflowers.cz/?lang=uk>
 
 ---
 
@@ -119,15 +119,18 @@ potvrzovací lišta.
 ### Google Search Console — postup
 
 1. <https://search.google.com/search-console> → Přidat službu → „Prefix adresy URL"
-2. Zadat `https://vorthys.github.io/charmofflowers/` (později doménu)
+2. Zadat `https://charmofflowers.cz/` (později doménu)
 3. Ověření: HTML tag → vložit meta tag do `<head>` (místo je označené komentářem)
 4. Po ověření odeslat `sitemap.xml`
 
-### Po připojení domény charmofflowers.cz
+### Doména charmofflowers.cz — hotovo
 
-Vyměnit `https://vorthys.github.io/charmofflowers/` za doménu v:
-`index.html` (canonical, hreflang, og:url, og:image, JSON-LD, `_next`
-formuláře), `sitemap.xml`, `robots.txt`. Přidat soubor `CNAME`.
+Web běží na vlastní doméně (registrace WEDOS 8. 8. 2026, držitel
+Nataliia Ivasiuk). V DNS jsou 4× A a 4× AAAA na GitHub Pages a CNAME
+`www` → `vorthys.github.io`. V repozitáři je soubor `CNAME`.
+Všechny absolutní adresy (canonical, hreflang, og:url, JSON-LD,
+`_next` formuláře, sitemap, robots) míří na doménu.
+Stará adresa `vorthys.github.io/charmofflowers/` se na ni přesměruje.
 
 ---
 
