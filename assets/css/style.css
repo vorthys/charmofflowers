@@ -1327,6 +1327,19 @@ section[id], main[id], [id="kontakt"] { scroll-margin-top: 84px; }
   .nav a:last-child { border-bottom: 0; }
   .nav a::after { display: none; }
 
+  /* Tři čísla v Příběhu se na telefonu lámala 2 + 1: dvě vedle sebe
+     a třetí osamocené na dalším řádku, každé jinak široké. Mřížka
+     o třech stejných sloupcích je srovná do jedné řady — čísla proto
+     menší a popisky užší, aby se do 103 px vešly. */
+  .story__nums {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: .8rem;
+    align-items: start;
+  }
+  .story__nums dt { font-size: 1.5rem; }
+  .story__nums dd { font-size: .65rem; letter-spacing: .08em; margin-top: .35rem; }
+
   .hero__cta { gap: .6rem; }
   .hero__cta .btn { flex: 1 1 100%; justify-content: center; }
   .hero__facts li { display: block; }
