@@ -23,7 +23,6 @@
   h2 { font:400 1.35rem/1.2 "Playfair Display",serif; margin:0 0 .8rem; }
   h3 { font:400 1.05rem/1.2 "Playfair Display",serif; margin:1.4rem 0 .6rem; }
   .hint { color:var(--ink60); font-size:.88rem; }
-  .hint--ru { color:var(--ink40); font-size:.8rem; }
   .box { background:var(--card); border:1px solid var(--greige); padding:1.2rem; margin-top:1rem; }
   label { display:block; font-size:.68rem; letter-spacing:.12em; text-transform:uppercase; color:var(--moss); margin:0 0 .25rem; }
   input[type=text], input[type=password], select, textarea {
@@ -92,13 +91,23 @@
   #log { font-size:.85rem; white-space:pre-wrap; max-height:150px; overflow:auto; background:var(--green); color:var(--chartreuse); padding:.8rem 1rem; margin-top:.8rem; display:none; }
   #log.show { display:block; }
   .ok { color:#2f6b33; }
+  .head { display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap; }
+  .lang { display:flex; border:1px solid var(--greige); background:var(--card); }
+  .lang__b { padding:.45rem .8rem; background:none; border:0; font:inherit; font-size:.8rem;
+    letter-spacing:.1em; color:var(--ink40); cursor:pointer; }
+  .lang__b.is-on { background:var(--green); color:#fff; }
 </style>
 </head>
 <body data-page="admin">
 <div class="wrap">
-  <h1>Správa webu</h1>
+  <div class="head">
+    <h1>Správa webu</h1>
+    <div class="lang" role="group" aria-label="Jazyk / Мова">
+      <button type="button" class="lang__b is-on" data-lang="cs">CZ</button>
+      <button type="button" class="lang__b" data-lang="uk">UA</button>
+    </div>
+  </div>
   <p class="hint">Katalog, texty a fotky webu <a href="./" target="_blank" rel="noopener">Charm of Flowers</a>. Uložené změny se na webu projeví do 1–2 minut.</p>
-  <p class="hint--ru">Панель управления: каталог, все тексты сайта и фото. Токен выдаёт Vorthys — вкладка «Nápověda».</p>
 
   <div class="box">
     <div class="row" style="align-items:end">
@@ -114,7 +123,7 @@
         </label>
       </div>
     </div>
-    <p class="hint" style="margin:.4rem 0 0">Bez klíče jde vše prohlížet, ale ne ukládat. Klíč se drží jen do zavření prohlížeče; po 20 minutách nečinnosti se panel sám zamkne. <b>Na cizím počítači nezaškrtávejte „pamatovat".</b> <span class="hint--ru">Без ключа — только просмотр. Ключ живёт до закрытия браузера, через 20 минут простоя панель запирается сама. На чужом компьютере «запомнить» не отмечайте.</span></p>
+    <p class="hint" style="margin:.4rem 0 0">Bez klíče se nedá nic prohlížet ani ukládat — panel je celý pod klíčem. Klíč se drží jen do zavření prohlížeče; po 20 minutách nečinnosti se panel sám zamkne. <b>Na cizím počítači nezaškrtávejte „pamatovat".</b></p>
   </div>
 
   <div id="app" style="display:none">
@@ -129,7 +138,7 @@
     <section class="pane is-on" id="pane-katalog">
       <div class="box">
         <h2>Příležitosti (čipy filtru)</h2>
-        <p class="hint">Nová příležitost se hned nabídne u každé kytice. <span class="hint--ru">Новые «поводы» сразу станут фильтрами.</span></p>
+        <p class="hint">Nová příležitost se hned nabídne u každé kytice.</p>
         <div id="occList"></div>
       </div>
 
@@ -142,7 +151,7 @@
     <!-- ============ TEXTY ============ -->
     <section class="pane" id="pane-texty">
       <p class="hint" style="margin-top:1rem">Každé pole má dvě verze: <b>CZ</b> česky a <b>UA</b> ukrajinsky.
-        Prázdné pole = použije se původní text. <span class="hint--ru">Пустое поле — останется исходный текст.</span></p>
+        Prázdné pole = použije se původní text.</p>
       <div id="textGroups"></div>
     </section>
 
@@ -184,19 +193,16 @@
         <p><b>Odkaz s hotovou částkou</b> pro konkrétní objednávku:<br>
         <code>charmofflowers.cz/zaloha?castka=3500&amp;zprava=SVATBA NOVAKOVI</code><br>
         Zákazník ho otevře a rovnou skenuje — nic nepřepisuje, nemůže se splést.</p>
-        <p class="hint--ru">Сумма аванса меняется во вкладке «Texty webu» → «Záloha a QR platba». Ссылку с готовой суммой отправляйте так: /zaloha?castka=3500&amp;zprava=SVATBA. Кнопка «Stáhnout QR obrázek» сохранит код картинкой — для печати или сторис.</p>
 
         <h3>Bezpečnost</h3>
         <p>Klíč se drží jen do zavření prohlížeče. Po <b>20 minutách nečinnosti</b> se panel sám zamkne (rozdělanou práci nezahodí — čeká, dokud změny neuložíte). Tlačítkem <b>Odhlásit</b> klíč z prohlížeče smažete hned.</p>
         <p>Volbu <i>pamatovat 30 dní</i> zaškrtávejte jen na vlastním počítači nebo telefonu. Kdyby se klíč přesto někam dostal, ozvěte se — Vorthys ho během minuty zneplatní a vystaví nový. Klíč nikomu neposílejte, ani e-mailem.</p>
-        <p class="hint--ru">Ключ живёт до закрытия браузера, через 20 минут простоя панель запирается сама. «Odhlásit» стирает ключ сразу. «Запомнить на 30 дней» — только на своём устройстве. Если ключ куда-то утёк, напишите: отзовём за минуту и выдадим новый.</p>
 
         <h3>Statistiky návštěvnosti</h3>
         <p><b>Návštěvy webu:</b> <a href="https://charmofflowers.goatcounter.com" target="_blank" rel="noopener">charmofflowers.goatcounter.com</a> — kolik lidí přišlo, odkud (Instagram, Google…) a na kterou stránku. Bez cookies, přihlášení máte v e-mailu.<br>
         <b>Vyhledávání Google:</b> <a href="https://search.google.com/search-console" target="_blank" rel="noopener">Search Console</a> — na jaká slova vás lidé hledají a kolikrát klikli.</p>
         <h3>Kontakt</h3>
         <p>Cokoliv dalšího (telefon, adresa, nové sekce, doména): <b>Vorthys</b> — web studio, Plzeň.</p>
-        <p class="hint--ru">Новый букет: «Fotky» → загрузить фото → «Katalog» → «+ Přidat kytici» → выбрать фото из списка, заполнить название и цену (обе колонки CZ и UA) → «Uložit změny» внизу. Скрыть сезонный букет: раскрыть его и «Viditelnost: skrýt». Часы работы и цены — вкладка «Texty webu». Статистика посещений: charmofflowers.goatcounter.com.</p>
       </div>
     </section>
 
@@ -212,7 +218,7 @@
 
 <datalist id="photoList"></datalist>
 
-<script src="assets/js/i18n.js?v=35"></script>
+<script src="assets/js/i18n.js?v=39"></script>
 <script>
 (function () {
   'use strict';
@@ -228,8 +234,82 @@
   var dirty = { kat: false, txt: false };
   var photos = [];
 
+
+  /* ---------- jazyk panelu: čeština / українська ----------
+     Překládá se podle zdrojového českého řetězce, takže není potřeba
+     sahat na devadesát popisků ve skupinách ani na hlášky v kódu.
+     Po každém překreslení projde stromem tr() a vymění, co zná. */
+  var UA_DICT = {"Správa webu": "Керування сайтом", "Katalog, texty a fotky webu": "Каталог, тексти та фото сайту", ". Uložené změny se na webu projeví do 1–2 minut.": ". Збережені зміни з'являться на сайті за 1–2 хвилини.", "GitHub token (přístupový klíč)": "GitHub token (ключ доступу)", "Načíst web": "Завантажити сайт", "Odhlásit": "Вийти", "pamatovat 30 dní na tomto zařízení": "запам'ятати на 30 днів на цьому пристрої", "Na cizím počítači nezaškrtávejte „pamatovat\".": "На чужому комп'ютері «запам'ятати» не позначайте.", "Bez klíče se nedá nic prohlížet ani ukládat — panel je celý pod klíčem. Klíč se drží jen do zavření prohlížeče; po 20 minutách nečinnosti se panel sám zamkne.": "Без ключа нічого не видно й не зберігається — панель повністю під ключем. Ключ живе до закриття браузера; через 20 хвилин бездіяльності панель замикається сама.", "Katalog": "Каталог", "Texty webu": "Тексти сайту", "Fotky": "Фото", "Nápověda": "Довідка", "Příležitosti (čipy filtru)": "Приводи (фільтри)", "Nová příležitost se hned nabídne u každé kytice.": "Новий привід одразу з'явиться у кожного букета.", "Kytice": "Букети", "Klikněte na řádek pro úpravy. Šipkami měníte pořadí, „skrýt\" schová kytici mimo sezónu (nesmaže ji).": "Натисніть на рядок, щоб редагувати. Стрілками змінюєте порядок, «сховати» прибирає букет поза сезоном (не видаляє).", "+ Přidat kytici": "+ Додати букет", "+ přidat příležitost": "+ додати привід", "(bez názvu)": "(без назви)", "↑ výš": "↑ вище", "↓ níž": "↓ нижче", "Název (CZ)": "Назва (CZ)", "Cena — text (CZ)": "Ціна — текст (CZ)", "Květiny (CZ)": "Квіти (CZ)", "Popis fotky pro nevidomé (CZ)": "Опис фото для незрячих (CZ)", "Fotka (vyberte ze seznamu)": "Фото (оберіть зі списку)", "Cenové pásmo (filtr)": "Цінова категорія (фільтр)", "Štítek na fotce": "Позначка на фото", "Příležitosti (filtr)": "Приводи (фільтр)", "Viditelnost": "Видимість", "zobrazit": "показати", "skrýt": "сховати", "žádný": "немає", "— žádné": "— немає", "Sezónní": "Сезонний", "Svatební": "Весільний", "Box": "Коробка", "Výzdoba": "Оформлення", "do 1 000 Kč": "до 1 000 Kč", "1 000 – 2 000 Kč": "1 000 – 2 000 Kč", "od 2 000 Kč": "від 2 000 Kč", "individuálně": "індивідуально", "Každé pole má dvě verze:": "Кожне поле має дві версії:", "česky a": "чеською та", "ukrajinsky.\n        Prázdné pole = použije se původní text.": "українською.\n        Порожнє поле = залишиться початковий текст.", "Nahrát novou fotku": "Завантажити нове фото", "Fotka se sama zmenší a převede do správných formátů (JPG + WebP). Pak ji vyberete u kytice v záložce Katalog.": "Фото само зменшиться і перетвориться у потрібні формати (JPG + WebP). Потім оберете його для букета у вкладці «Каталог».", "Název souboru (bez diakritiky)": "Назва файлу (без діакритики)", "Soubor": "Файл", "Nahrát": "Завантажити", "smazat": "видалити", "Jak panel funguje": "Як працює панель", "Přístupový klíč (token)": "Ключ доступу (токен)", "Běžné úkony": "Звичайні дії", "Nová kytice:": "Новий букет:", "Kytice mimo sezónu:": "Букет поза сезоном:", "Změna otevírací doby či cen:": "Зміна годин роботи чи цін:", "Ukrajinská verze:": "Українська версія:", "každé pole má sloupec UA — vyplňte oba.": "кожне поле має колонку UA — заповніть обидві.", "Záloha a QR platba": "Аванс та оплата за QR", "Stránka": "Сторінка", "Výši zálohy měníte sami:": "Суму авансу міняєте самі:", "záložka": "вкладка", "Odkaz s hotovou částkou": "Посилання з готовою сумою", "pro konkrétní objednávku:": "для конкретного замовлення:", "Zákazník ho otevře a rovnou skenuje — nic nepřepisuje, nemůže se splést.": "Покупець відкриє його і одразу сканує — нічого не переписує, помилитися не може.", "Bezpečnost": "Безпека", "20 minutách nečinnosti": "20 хвилинах бездіяльності", "klíč z prohlížeče smažete hned.": "ключ з браузера зітреться одразу.", "Volbu": "Позначку", "pamatovat 30 dní": "запам'ятати на 30 днів", "Statistiky návštěvnosti": "Статистика відвідувань", "Návštěvy webu:": "Відвідування сайту:", "Vyhledávání Google:": "Пошук Google:", "Kontakt": "Контакт", "Cokoliv dalšího (telefon, adresa, nové sekce, doména):": "Будь-що інше (телефон, адреса, нові розділи, домен):", "— web studio, Plzeň.": "— веб-студія, Пльзень.", "Uložit změny": "Зберегти зміни", "Záloha (stáhnout)": "Резервна копія (завантажити)", "otevřít web ↗": "відкрити сайт ↗", "Načteno z GitHubu — ukládání povoleno.": "Завантажено з GitHub — збереження дозволено.", "Bez klíče panel nic nenačte. Vložte přístupový klíč.": "Без ключа панель нічого не завантажить. Вставте ключ доступу.", "Ukládám katalog…": "Зберігаю каталог…", "Ukládám texty…": "Зберігаю тексти…", "Katalog uložen ✓": "Каталог збережено ✓", "Texty uloženy ✓": "Тексти збережено ✓", "Hotovo — web se přegeneruje do 1–2 minut.": "Готово — сайт оновиться за 1–2 хвилини.", "Žádné změny k uložení.": "Немає змін для збереження.", "Mazání vyžaduje klíč.": "Видалення потребує ключа.", "Nahrávání vyžaduje klíč.": "Завантаження потребує ключа.", "Vyplňte název a vyberte soubor.": "Заповніть назву і оберіть файл.", "Soubor se nepodařilo přečíst jako obrázek.": "Не вдалося прочитати файл як зображення.", "Tento prohlížeč neumí WebP — pošlete fotku Vorthysovi, připraví ji.": "Цей браузер не вміє WebP — надішліть фото Vorthys, він підготує.", "Panel se zamkl po 20 minutách nečinnosti — kvůli bezpečnosti.": "Панель замкнулася після 20 хвилин бездіяльності — задля безпеки.", "Odhlášeno. Klíč byl z tohoto prohlížeče smazán.": "Ви вийшли. Ключ стерто з цього браузера.", "Panel zamknut. Vložte klíč a načtěte web znovu.": "Панель замкнено. Вставте ключ і завантажте сайт знову.", "uložení selhalo": "не вдалося зберегти", "Úvod (hero)": "Початок (hero)", "Hlavní slogan": "Головне гасло", "Podtitulek": "Підзаголовок", "Popisek fotky": "Підпис фото", "Otevírací doba": "Години роботи", "Rozvoz — řádek": "Доставка — рядок", "Jazyky — řádek": "Мови — рядок", "Služby": "Послуги", "Nadpis sekce": "Заголовок розділу", "Ceník": "Ціни", "Úvodní text": "Вступний текст", "Tabulka — nadpis": "Таблиця — заголовок", "Poznámka pod tabulkou": "Примітка під таблицею", "Recenze": "Відгуки", "Google — hodnocení (např. 4,9)": "Google — оцінка (напр. 4,9)", "Google — počet recenzí": "Google — кількість відгуків", "Příběh": "Історія", "Nadpis": "Заголовок", "Citát": "Цитата", "Časté dotazy": "Часті запитання", "Kontakt a formulář": "Контакти та форма", "Hodiny Po–So": "Години Пн–Сб", "Hodiny Ne": "Години Нд", "Rozvoz — hodnota v hodinách": "Доставка — години", "Poznámka u objednávek": "Примітка до замовлень", "Formulář — nadpis": "Форма — заголовок", "Formulář — úvod": "Форма — вступ", "Formulář — nápověda ve vzkazu": "Форма — підказка у повідомленні", "Hláška po odeslání": "Повідомлення після відправлення", "Stránka Katalog": "Сторінка «Каталог»", "Poznámka pod katalogem": "Примітка під каталогом", "Kroky — nadpis": "Кроки — заголовок", "Výše zálohy v Kč — jen číslo, např. 500": "Сума авансу в Kč — лише число, напр. 500", "Nadpis stránky": "Заголовок сторінки", "Tlačítko rychlé volby": "Кнопка швидкого вибору", "Nápověda u zprávy": "Підказка біля повідомлення", "Poznámka pod kódem": "Примітка під кодом", "Chat a SEO": "Чат і SEO", "SEO titulek hlavní stránky": "SEO заголовок головної", "SEO popis hlavní stránky": "SEO опис головної", "Odstavec 1 (může obsahovat <strong>)": "Абзац 1 (може містити <strong>)", "Odstavec 2": "Абзац 2", "Odpověď 6 (může obsahovat odkaz)": "Відповідь 6 (може містити посилання)", "Řádek 1": "Рядок 1", "Řádek 1 — cena": "Рядок 1 — ціна", "Řádek 2": "Рядок 2", "Řádek 2 — cena": "Рядок 2 — ціна", "Řádek 3": "Рядок 3", "Řádek 3 — cena": "Рядок 3 — ціна", "Řádek 4": "Рядок 4", "Řádek 4 — cena": "Рядок 4 — ціна", "Řádek 5": "Рядок 5", "Řádek 5 — cena": "Рядок 5 — ціна", "Řádek 6": "Рядок 6", "Řádek 6 — cena": "Рядок 6 — ціна", "Řádek 7": "Рядок 7", "Řádek 7 — cena": "Рядок 7 — ціна", "Řádek 8": "Рядок 8", "Řádek 8 — cena": "Рядок 8 — ціна", "Služba 1 — název": "Послуга 1 — назва", "Služba 1 — popis": "Послуга 1 — опис", "Služba 2 — název": "Послуга 2 — назва", "Služba 2 — popis": "Послуга 2 — опис", "Služba 3 — název": "Послуга 3 — назва", "Služba 3 — popis": "Послуга 3 — опис", "Služba 4 — název": "Послуга 4 — назва", "Služba 4 — popis": "Послуга 4 — опис", "Služba 5 — název": "Послуга 5 — назва", "Služba 5 — popis": "Послуга 5 — опис", "Karta 1 — štítek": "Картка 1 — позначка", "Karta 1 — cena": "Картка 1 — ціна", "Karta 1 — popis": "Картка 1 — опис", "Recenze 1": "Відгук 1", "Recenze 1 — zdroj": "Відгук 1 — джерело", "Číslo 1 — popisek": "Число 1 — підпис", "Krok 1 — název": "Крок 1 — назва", "Krok 1 — text": "Крок 1 — текст", "Karta 2 — štítek": "Картка 2 — позначка", "Karta 2 — cena": "Картка 2 — ціна", "Karta 2 — popis": "Картка 2 — опис", "Recenze 2": "Відгук 2", "Recenze 2 — zdroj": "Відгук 2 — джерело", "Číslo 2 — popisek": "Число 2 — підпис", "Krok 2 — název": "Крок 2 — назва", "Krok 2 — text": "Крок 2 — текст", "Karta 3 — štítek": "Картка 3 — позначка", "Karta 3 — cena": "Картка 3 — ціна", "Karta 3 — popis": "Картка 3 — опис", "Recenze 3": "Відгук 3", "Recenze 3 — zdroj": "Відгук 3 — джерело", "Číslo 3 — popisek": "Число 3 — підпис", "Krok 3 — název": "Крок 3 — назва", "Krok 3 — text": "Крок 3 — текст", "Otázka 1": "Запитання 1", "Odpověď 1": "Відповідь 1", "Rozpočet — volba 1": "Бюджет — варіант 1", "Otázka 2": "Запитання 2", "Odpověď 2": "Відповідь 2", "Rozpočet — volba 2": "Бюджет — варіант 2", "Otázka 3": "Запитання 3", "Odpověď 3": "Відповідь 3", "Rozpočet — volba 3": "Бюджет — варіант 3", "Otázka 4": "Запитання 4", "Odpověď 4": "Відповідь 4", "Rozpočet — volba 4": "Бюджет — варіант 4", "Otázka 5": "Запитання 5", "Odpověď 5": "Відповідь 5", "Rozpočet — volba 5": "Бюджет — варіант 5", "Otázka 6": "Запитання 6", "Odpověď 6": "Відповідь 6", "Rozpočet — volba 6": "Бюджет — варіант 6", "Řádek 8 — předplatné": "Рядок 8 — передплата"};
+  var uiLang = 'cs';
+  try { uiLang = localStorage.getItem('cof-admin-lang') === 'uk' ? 'uk' : 'cs'; } catch (e) {}
+
+  /* i18n.js webu prepisuje titulek podle jazyka — panel si ho drzi svuj */
+  function pinTitle() {
+    document.title = (uiLang === 'uk' ? 'Керування сайтом' : 'Správa webu') + ' — Charm of Flowers';
+  }
+  setInterval(pinTitle, 1000);
+
+  function t(str) {
+    if (uiLang !== 'uk') return str;
+    var k = String(str == null ? '' : str);
+    return UA_DICT[k] || UA_DICT[k.trim()] || str;
+  }
+
+  var trBusy = false;
+  function tr(root) {
+    if (uiLang !== 'uk' || trBusy) return;
+    trBusy = true;
+    try {
+      var w = document.createTreeWalker(root || document.body, NodeFilter.SHOW_TEXT, null);
+      var n, hits = [];
+      while ((n = w.nextNode())) {
+        var raw = n.nodeValue;
+        if (!raw || !raw.trim()) continue;
+        var key = raw.trim();
+        var hit = UA_DICT[key] || UA_DICT[raw];
+        if (hit && hit !== key) hits.push([n, raw.replace(key, hit)]);
+      }
+      hits.forEach(function (h) { h[0].nodeValue = h[1]; });
+      root && root.querySelectorAll && root.querySelectorAll('[placeholder]').forEach(function (el) {
+        var v = el.getAttribute('placeholder');
+        if (UA_DICT[v]) el.setAttribute('placeholder', UA_DICT[v]);
+      });
+    } finally { trBusy = false; }
+  }
+
+  /* pozorovatel překládá i to, co se dokreslí později (karty, fotky, texty) */
+  var trTimer = null;
+  new MutationObserver(function () {
+    if (trBusy) return;
+    clearTimeout(trTimer);
+    trTimer = setTimeout(function () { tr(document.body); }, 40);
+  }).observe(document.body, { childList: true, subtree: true });
+
+  document.querySelector('.lang').addEventListener('click', function (e) {
+    var b = e.target.closest('.lang__b');
+    if (!b) return;
+    uiLang = b.getAttribute('data-lang') === 'uk' ? 'uk' : 'cs';
+    try { localStorage.setItem('cof-admin-lang', uiLang); } catch (err) {}
+    document.querySelectorAll('.lang__b').forEach(function (x) {
+      x.classList.toggle('is-on', x.getAttribute('data-lang') === uiLang);
+    });
+    /* zpět do češtiny = původní HTML, proto stránku prostě načteme znovu */
+    pinTitle();
+    if (uiLang === 'cs') location.reload();
+    else { document.documentElement.lang = 'uk'; tr(document.body); }
+  });
+
+  if (uiLang === 'uk') {
+    document.documentElement.lang = 'uk';
+    document.querySelectorAll('.lang__b').forEach(function (x) {
+      x.classList.toggle('is-on', x.getAttribute('data-lang') === 'uk');
+    });
+    tr(document.body);
+  }
+  pinTitle();
+
   var $ = function (id) { return document.getElementById(id); };
-  function log(m) { var el = $('log'); el.classList.add('show'); el.textContent += m + '\n'; el.scrollTop = el.scrollHeight; }
+  function log(m) { var el = $('log'); el.classList.add('show'); el.textContent += t(m) + '\n'; el.scrollTop = el.scrollHeight; }
   function markDirty(which) {
     dirty[which] = true;
     $('dirty').textContent = 'Neuložené změny: ' + (dirty.kat ? 'katalog ' : '') + (dirty.txt ? 'texty' : '');
@@ -337,17 +417,16 @@
        jinak by po chybě zůstal klíč uložený a nebylo by ho čím smazat */
     $('logoutBtn').hidden = !token();
 
+    /* Panel je celý pod klíčem — bez něj se nic nenačte ani nezobrazí. */
+    if (!token()) { log(t('Bez klíče panel nic nenačte. Vložte přístupový klíč.')); return; }
+
     var getFile = function (path) {
-      if (token()) {
-        return fetch(API + path + '?ref=' + BRANCH, { headers: headers() })
-          .then(function (r) {
-            if (r.status === 404) return { missing: true };
-            if (!r.ok) throw new Error('GitHub ' + r.status + ' u ' + path);
-            return r.json().then(function (j) { return { sha: j.sha, data: JSON.parse(b64d(j.content)) }; });
-          });
-      }
-      return fetch(path + '?nc=' + Math.random())
-        .then(function (r) { return r.ok ? r.json().then(function (d) { return { data: d }; }) : { missing: true }; });
+      return fetch(API + path + '?ref=' + BRANCH, { headers: headers() })
+        .then(function (r) {
+          if (r.status === 404) return { missing: true };
+          if (!r.ok) throw new Error('GitHub ' + r.status + ' u ' + path);
+          return r.json().then(function (j) { return { sha: j.sha, data: JSON.parse(b64d(j.content)) }; });
+        });
     };
 
     Promise.all([getFile(F_KAT), getFile(F_TXT)]).then(function (res) {
@@ -365,9 +444,7 @@
       $('logoutBtn').hidden = !token();
       armIdle();
       renderKat(); renderTexts();
-      log(token()
-        ? 'Načteno z GitHubu — ukládání povoleno.'
-        : 'Načteno jen pro čtení (bez klíče nejde ukládat).');
+      log('Načteno z GitHubu — ukládání povoleno.');
     }).catch(function (e) { log('Chyba: ' + e.message); });
   });
 
