@@ -30,7 +30,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Didact+Gothic&family=Pinyon+Script&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=26">
+<link rel="stylesheet" href="assets/css/style.css?v=29">
 
 <script type="application/ld+json">
 {
@@ -275,7 +275,7 @@
           <tr><th scope="row" data-i18n="pr4">Svatební kytice</th><td data-i18n="pr4v">individuálně</td></tr>
           <tr><th scope="row" data-i18n="pr5">Výzdoba svatby či akce</th><td data-i18n="pr5v">individuálně</td></tr>
           <tr><th scope="row" data-i18n="pr6">Kurz vázání, workshop</th><td data-i18n="pr6v">na dotaz</td></tr>
-          <tr><th scope="row" data-i18n="pr7">Rozvoz po Plzni (9–20 h)</th><td data-i18n="pr7v">od 2 000 Kč zdarma · jinak dle vzdálenosti</td></tr>
+          <tr class="tbl__hi"><th scope="row" data-i18n="pr7">Rozvoz po Plzni (9–20 h)</th><td data-i18n="pr7v">od 2 000 Kč zdarma · jinak dle vzdálenosti</td></tr>
               <tr><th scope="row" data-i18n="pr8">Květinové předplatné (2–4× měsíčně)</th><td data-i18n="pr8v">S 750 · M 1 200 · L 1 500 Kč</td></tr>
         </tbody>
       </table>
@@ -310,13 +310,14 @@
     </div>
 
     <p class="gal-follow">
+      <a class="btn btn--solid" href="#kontakt" data-i18n="heroCta1">Nezávazná poptávka</a>
       <a class="btn btn--outline" href="https://www.instagram.com/charmofflowers.cz/" target="_blank" rel="noopener" data-i18n="igFollow">Sledovat na Instagramu</a>
     </p>
   </div>
 </section>
 
 <!-- ============ RECENZE ============ -->
-<section class="sec sec--light" id="recenze">
+<section class="sec sec--greige" id="recenze">
   <div class="wrap">
     <header class="sec__head sec__head--center">
       <p class="eyebrow" data-i18n="rvEyebrow">Co říkají zákazníci</p>
@@ -349,11 +350,17 @@
       </blockquote>
     </div>
 
+    <!-- recenze = vrchol důvěry; do téhle chvíle byl nejbližší
+         objednávkový prvek přes pět obrazovek daleko -->
+    <p class="reviews__cta">
+      <a class="btn btn--solid" href="#kontakt" data-i18n="heroCta1">Nezávazná poptávka</a>
+    </p>
   </div>
 </section>
 
 <!-- ============ PŘÍBĚH ============ -->
 <section class="sec sec--green" id="pribeh">
+  <div class="sec__light" aria-hidden="true"></div>
   <div class="wrap story">
     <!-- velký vodoznak: přesný znak z brand guide (vektor z trasování) -->
     <div class="story__orn story__orn--znak" aria-hidden="true"></div>
@@ -597,8 +604,8 @@
   <button class="lb__nav lb__nav--next" id="lbNext" type="button" data-i18n-aria="lbNext" aria-label="Další fotka">&#8250;</button>
 </div>
 
-<script src="assets/js/i18n.js?v=26" defer></script>
-<script src="assets/js/main.js?v=26" defer></script>
+<script src="assets/js/i18n.js?v=29" defer></script>
+<script src="assets/js/main.js?v=29" defer></script>
 <!-- Statistiky návštěvnosti — GoatCounter: bez cookies, bez GDPR lišty. Přehled: https://charmofflowers.goatcounter.com -->
 <script data-goatcounter="https://charmofflowers.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>

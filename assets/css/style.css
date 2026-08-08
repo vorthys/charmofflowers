@@ -90,6 +90,16 @@ picture { display: contents; }
 
 ::selection { background: var(--chartreuse); color: var(--green); }
 
+/* jemné zrno přes celý web — „фактура" z moodboardu.
+   Inline SVG, tedy 0 kB navíc; dlaždice 120 px se rasterizuje jednou. */
+body::after {
+  content: "";
+  position: fixed; inset: 0; z-index: 400;
+  pointer-events: none;
+  opacity: .035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
 :focus-visible {
   outline: 2px solid var(--moss);
   outline-offset: 3px;
@@ -167,7 +177,18 @@ section[id], main[id], [id="kontakt"] { scroll-margin-top: 84px; }
   text-transform: uppercase;
   color: var(--moss);
 }
+/* chartreuse z brand guide se dosud objevoval jen na tmavých plochách,
+   takže na 96 % webu chyběl — krátká značka nad nadpisem ho vrací
+   do světlých sekcí, aniž by ubrala na střídmosti */
+.eyebrow::before {
+  content: "";
+  display: block;
+  width: 34px; height: 3px;
+  margin: 0 0 .95rem;
+  background: var(--chartreuse);
+}
 .eyebrow--light { color: var(--chartreuse); }
+.eyebrow--light::before { background: rgba(219, 217, 134, .55); }
 
 .sec__title {
   font-family: var(--ff-disp);
@@ -397,7 +418,30 @@ section[id], main[id], [id="kontakt"] { scroll-margin-top: 84px; }
 .sec { padding-block: var(--sec-y); }
 .sec--light { background: var(--bg); }
 .sec--white { background: var(--card); }
-.sec--green { background: var(--green); color: rgba(255,255,255,.82); }
+/* třetí tón z palety jako plnohodnotná plocha — bez něj se web
+   scvrkne na dvě šedé a působí jako šablona, ne jako květinová studie */
+.sec--greige { background: var(--greige); }
+.sec--greige .review { border-color: rgba(16, 39, 19, .08); }
+.sec--greige .gbadge { border-color: rgba(16, 39, 19, .1); }
+.sec--green {
+  background: var(--green); color: rgba(255,255,255,.82);
+  position: relative; overflow: hidden; isolation: isolate;
+}
+/* pomalu putující světlo po tmavé stěně — moodboard: „яскраве світло
+   падає на квіти", „тіні". Jen gradient, žádný obrázek. */
+.sec--green .sec__light {
+  position: absolute; z-index: 0;
+  left: -20%; top: -35%;
+  width: 85%; height: 170%;
+  pointer-events: none;
+  background: radial-gradient(closest-side, rgba(219, 217, 134, .16), rgba(219, 217, 134, 0) 72%);
+  animation: light-drift 64s ease-in-out infinite alternate;
+}
+.sec--green > * { position: relative; z-index: 1; }
+@keyframes light-drift {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to   { transform: translate3d(38%, 9%, 0) scale(1.18); }
+}
 
 /* ---------- 9. Služby ---------- */
 .cards {
@@ -521,6 +565,11 @@ section[id], main[id], [id="kontakt"] { scroll-margin-top: 84px; }
   font-weight: 300;
 }
 .tbl th { color: var(--ink); }
+/* doprava zdarma je jejich nejsilnější argument — chartreuse ji zvýrazní
+   a zároveň vrací firemní akcent na světlou plochu */
+.tbl__hi th, .tbl__hi td { background: rgba(219, 217, 134, .42); }
+.tbl__hi th { box-shadow: inset 3px 0 0 var(--chartreuse); padding-left: .8rem; }
+.tbl__hi td { color: var(--ink); padding-right: .8rem; }
 .tbl td {
   text-align: right;
   color: var(--ink-60);
@@ -600,7 +649,10 @@ section[id], main[id], [id="kontakt"] { scroll-margin-top: 84px; }
   text-transform: uppercase;
   color: var(--ink-60);
 }
-.gal-follow { margin-top: clamp(1.8rem, 3.5vw, 2.6rem); text-align: center; }
+.gal-follow {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: .7rem;
+  margin-top: clamp(1.8rem, 3.5vw, 2.6rem);
+}
 
 
 
@@ -873,8 +925,11 @@ section[id], main[id], [id="kontakt"] { scroll-margin-top: 84px; }
   transition: background .3s var(--ease), color .3s var(--ease), border-color .3s var(--ease);
 }
 .chip:hover { border-color: var(--moss); color: var(--ink); }
+/* aktivní filtr chartreuse — kontrast tmavé zeleně na chartreuse je
+   vysoký a barva konečně pracuje i na světlém pozadí */
 .chip.is-on {
-  background: var(--green); border-color: var(--green); color: #fff;
+  background: var(--chartreuse); border-color: var(--chartreuse); color: var(--green);
+  font-weight: 500;
 }
 
 .kat {
@@ -1157,16 +1212,28 @@ section[id], main[id], [id="kontakt"] { scroll-margin-top: 84px; }
   :root { --sec-y: 3.4rem; }
 
   .burger { display: block; }
-  .site-head__cta { display: none; }
+  /* telefon byl na mobilu schovaný — a přitom u květinářství je hovor
+     hlavní objednávkový kanál. Zůstává jako ikona 44×44. */
+  .site-head__cta {
+    display: inline-flex; justify-content: center;
+    width: 44px; height: 42px; padding: 0;
+    margin-left: .1rem;
+  }
+  .site-head__cta span { display: none; }
+  .site-head__cta svg { width: 1.15em; height: 1.15em; }
   .foot { padding-bottom: 5.5rem; }
   .chat__fab span { display: none; }
   .chat__fab { padding: .95rem; }
   .chat__ico { width: 1.5em; height: 1.5em; }
 
-  .hero__in { padding-top: 2.2rem; padding-bottom: 3rem; gap: 1.8rem; }
-  .hero__frame img { aspect-ratio: 4 / 3.2; }
-  .hero__facts { margin-top: 1.6rem; padding-top: 1.1rem; }
-  .hero__photo figcaption { margin-top: 1rem; }
+  /* hero stlačené tak, aby tlačítka padla na první obrazovku —
+     na iPhonu začínala až ~65 px pod ohybem */
+  .hero__in { padding-top: 1.6rem; padding-bottom: 2.6rem; gap: 1.4rem; }
+  .hero__frame img { aspect-ratio: 4 / 2.85; }
+  .hero__lede { margin-bottom: .35rem; }
+  .hero__sub { margin-bottom: 1.4rem; }
+  .hero__facts { margin-top: 1.4rem; padding-top: 1rem; }
+  .hero__photo figcaption { margin-top: .8rem; }
 
   .card { padding: 1.25rem 1.2rem; }
   .story__photo img { aspect-ratio: 4 / 3; }
@@ -1243,7 +1310,10 @@ section[id], main[id], [id="kontakt"] { scroll-margin-top: 84px; }
   .lb__nav--next { right: .75rem; }
 
   .cards { grid-template-columns: 1fr; }
-  .cards__photo { grid-column: auto; }
+  /* kytice je svislá kompozice — 16/9 z ní na telefonu ukrajovalo
+     přes polovinu výšky a nechávalo střed stonků */
+  .cards__photo { grid-column: auto; aspect-ratio: 4 / 5; }
+  .cards__photo img { object-position: center 38%; }
 
   /* katalog: 2 kompaktní sloupce místo jednoho obřího */
   .kat { grid-template-columns: repeat(2, 1fr); gap: .6rem; }
@@ -1265,7 +1335,8 @@ section[id], main[id], [id="kontakt"] { scroll-margin-top: 84px; }
 }
 
 @media (max-width: 420px) {
-  .btn { padding: .85rem 1.25rem; font-size: .72rem; }
+  /* .72rem = 11,5 px působilo jako poznámka pod čarou, ne jako akce */
+  .btn { padding: .85rem 1.2rem; font-size: .8rem; letter-spacing: .1em; }
   .grid { grid-template-columns: 1fr 1fr; gap: .5rem; }
 }
 
@@ -1277,7 +1348,8 @@ section[id], main[id], [id="kontakt"] { scroll-margin-top: 84px; }
     animation-iteration-count: 1 !important;
     transition-duration: .001ms !important;
   }
-  .hero__shadow { animation: none; }
+  .hero__shadow, .sec--green .sec__light { animation: none; }
+  body::after { display: none; }
   .rv { opacity: 1; transform: none; }
 }
 

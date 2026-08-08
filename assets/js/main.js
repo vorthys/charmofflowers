@@ -326,6 +326,19 @@
     }, true);
   }
 
+  /* ---- pozadí v pohybu se zastaví, jakmile zmizí z obrazovky ----
+     stín v hero i světlo v tmavé sekci jinak běží pořád dokola
+     i o deset obrazovek níž — zbytečně ubírají baterku na mobilu */
+  var moving = document.querySelectorAll('.hero__shadow, .sec--green .sec__light');
+  if (!reduce && moving.length && 'IntersectionObserver' in window) {
+    var mo = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        en.target.style.animationPlayState = en.isIntersecting ? 'running' : 'paused';
+      });
+    }, { rootMargin: '120px' });
+    moving.forEach(function (el) { mo.observe(el); });
+  }
+
   /* ---- odhalování bloků při scrollu ---- */
   var revealables = document.querySelectorAll(
     '.sec__head, .card, .tier, .pricelist, .shot, .review, .reviews__cta, ' +
