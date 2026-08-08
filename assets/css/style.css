@@ -177,18 +177,7 @@ section[id], main[id], [id="kontakt"] { scroll-margin-top: 84px; }
   text-transform: uppercase;
   color: var(--moss);
 }
-/* chartreuse z brand guide se dosud objevoval jen na tmavých plochách,
-   takže na 96 % webu chyběl — krátká značka nad nadpisem ho vrací
-   do světlých sekcí, aniž by ubrala na střídmosti */
-.eyebrow::before {
-  content: "";
-  display: block;
-  width: 34px; height: 3px;
-  margin: 0 0 .95rem;
-  background: var(--chartreuse);
-}
 .eyebrow--light { color: var(--chartreuse); }
-.eyebrow--light::before { background: rgba(219, 217, 134, .55); }
 
 .sec__title {
   font-family: var(--ff-disp);
