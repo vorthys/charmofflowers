@@ -1187,6 +1187,85 @@ section[id], main[id], [id="kontakt"] { scroll-margin-top: 84px; }
   transition: opacity .8s var(--ease), transform .8s var(--ease);
 }
 
+/* ---------- 19b. Záloha / QR platba ---------- */
+.pay {
+  display: grid;
+  grid-template-columns: minmax(0, 320px) minmax(0, 1fr);
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: start;
+  margin-top: clamp(1.8rem, 3.5vw, 2.6rem);
+}
+.pay__code {
+  padding: clamp(1.2rem, 3vw, 1.8rem);
+  background: var(--card);
+  border: 1px solid var(--greige);
+  text-align: center;
+}
+.pay__qr { display: block; }
+.pay__qr img {
+  width: 100%; max-width: 260px;
+  height: auto; margin-inline: auto;
+  image-rendering: pixelated;   /* QR musí zůstat ostrý i po zvětšení */
+}
+.pay__sum {
+  margin: .9rem 0 1rem;
+  font-family: var(--ff-disp);
+  font-size: 1.5rem;
+  font-variant-numeric: tabular-nums;
+}
+.btn--sm { padding: .6rem 1.1rem; font-size: .72rem; }
+
+.pay__q {
+  margin: 0 0 .6rem;
+  font-size: .68rem; font-weight: 500;
+  letter-spacing: .16em; text-transform: uppercase;
+  color: var(--moss);
+}
+.pay__quick { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.6rem; }
+
+.field { margin-bottom: 1.2rem; }
+.field label {
+  display: block; margin-bottom: .35rem;
+  font-size: .68rem; font-weight: 500;
+  letter-spacing: .16em; text-transform: uppercase;
+  color: var(--moss);
+}
+.field input {
+  width: 100%;
+  padding: .85rem 1rem;
+  background: var(--card);
+  border: 1px solid var(--greige);
+  border-radius: 0;
+  color: var(--ink);
+  font: inherit; font-size: 1rem;   /* 16 px, jinak iOS při psaní zoomuje */
+  transition: border-color .25s var(--ease);
+}
+.field input:focus { outline: none; border-color: var(--moss); }
+.field small { display: block; margin-top: .35rem; font-size: .78rem; color: var(--ink-60); }
+.field small.is-warn { color: #8a2a2a; }
+
+.pay__acc {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: .35rem 1.1rem;
+  margin: 1.8rem 0 0; padding-top: 1.4rem;
+  border-top: 1px solid var(--greige);
+  font-size: .9rem;
+}
+.pay__acc dt {
+  color: var(--moss);
+  font-size: .68rem; font-weight: 500;
+  letter-spacing: .14em; text-transform: uppercase;
+  align-self: center;
+}
+.pay__acc dd { margin: 0; font-variant-numeric: tabular-nums; }
+
+@media (max-width: 760px) {
+  .pay { grid-template-columns: 1fr; }
+  .pay__code { order: 2; }
+  .pay__form { order: 1; }
+}
+
 /* ---------- 20. Responzivita ---------- */
 @media (max-width: 900px) {
   .hero__in { grid-template-columns: 1fr; }

@@ -20,6 +20,31 @@
       ogLocale: 'cs_CZ',
 
       /* --- navigace --- */
+      zaDocTitle: 'Záloha a QR platba — Charm of Flowers',
+      zaDocDesc: 'Zaplaťte zálohu nebo objednávku u Charm of Flowers naskenováním QR kódu. Platba přímo na účet, bez poplatků.',
+      zaEyebrow: 'Platba',
+      zaTitle: 'Záloha a QR platba',
+      zaLede: 'Naskenujte kód v aplikaci své banky — částka, účet i zpráva se vyplní samy. Platí se běžným převodem, bez jakýchkoli poplatků navíc.',
+      zaDownload: 'Stáhnout QR obrázek',
+      zaQuickL: 'Rychlá volba',
+      zaQuick500: 'Záloha 500 Kč',
+      zaAmount: 'Částka v Kč',
+      zaMsg: 'Zpráva pro příjemce',
+      zaMsgHint: 'Napište sem své jméno — podle něj poznáme, čí objednávka to je.',
+      zaMsgWarn: 'Banky ve zprávě přečtou jen latinku bez háčků — napište jméno bez diakritiky.',
+      zaAcc: 'Číslo účtu',
+      zaOwner: 'Majitel účtu',
+      zaNoJs: 'QR kód se vykresluje v prohlížeči a potřebuje JavaScript. Můžete poslat běžný převod na účet 5391596093/0800.',
+      zaNote: 'Záloha 500 Kč platí u objednávek na míru — svatby, velké vazby a kurzy. Zbytek doplatíte při převzetí. Peníze chodí přímo na účet studia, platbu nikde neevidujeme a QR kód žádná třetí strana nevidí.',
+      zaHowEyebrow: 'Jak zaplatit',
+      zaHowTitle: 'Tři kroky',
+      za1T: 'Otevřete aplikaci banky',
+      za1P: 'V mobilním bankovnictví najděte „Platba QR kódem" — má ji Česká spořitelna, ČSOB, KB, Air Bank, Fio, Moneta i Revolut.',
+      za2T: 'Naskenujte kód',
+      za2P: 'Účet, částka i zpráva se doplní samy. Nic nepřepisujete, takže nehrozí překlep v čísle účtu.',
+      za3T: 'Potvrďte platbu',
+      za3P: 'Hotovo. Ozvěte se nám na Instagram nebo telefon, ať víme, že je záloha na cestě.',
+      zaBackBtn: 'Zpět na objednávku',
       katDocTitle: 'Katalog kytic — Charm of Flowers Plzeň',
       katDocDesc: 'Katalog kytic květinářství Charm of Flowers v Plzni. Kytice do 1 000 Kč i autorské vazby od 2 000 Kč, boxy, svatební floristika. Rozvoz po Plzni od 30 do 60 minut.',
 
@@ -154,6 +179,8 @@
       a3: 'Čím dřív, tím líp — termíny rezervujeme s předstihem. Na konzultaci probereme styl, barvy i výzdobu obřadu a tabule.',
       q4: 'Domluvím se u vás ukrajinsky nebo anglicky?',
       a4: 'Ano. Domluvíte se česky, anglicky i ukrajinsky — v obchodě, po telefonu i na Instagramu.',
+      q6: 'Platí se u větších objednávek záloha?',
+      a6: 'Ano, u zakázek na míru — svatby, velké vazby a kurzy — vybíráme zálohu 500 Kč. Zaplatíte ji za pár vteřin naskenováním <a href="zaloha">QR kódu</a>, zbytek doplatíte při převzetí.',
       q5: 'Jak probíhají kurzy vázání?',
       a5: 'Vážeme ve skupině i jeden na jednoho — pro začátečníky, party i firmy. Aktuální termíny najdete na našem Instagramu, nebo se ozvěte.',
 
@@ -218,6 +245,31 @@
     },
 
     uk: {
+      zaDocTitle: 'Аванс та оплата за QR — Charm of Flowers',
+      zaDocDesc: 'Оплатіть аванс або замовлення у Charm of Flowers, відсканувавши QR-код. Платіж прямо на рахунок, без комісій.',
+      zaEyebrow: 'Оплата',
+      zaTitle: 'Аванс та оплата за QR',
+      zaLede: 'Відскануйте код у застосунку свого банку — сума, рахунок і повідомлення заповняться самі. Це звичайний переказ, без жодних додаткових комісій.',
+      zaDownload: 'Зберегти QR-зображення',
+      zaQuickL: 'Швидкий вибір',
+      zaQuick500: 'Аванс 500 Kč',
+      zaAmount: 'Сума в Kč',
+      zaMsg: 'Повідомлення отримувачу',
+      zaMsgHint: 'Напишіть тут своє ім\'я — так ми зрозуміємо, чиє це замовлення.',
+      zaMsgWarn: 'Банки читають у повідомленні лише латиницю — напишіть ім\'я латинськими літерами.',
+      zaAcc: 'Номер рахунку',
+      zaOwner: 'Власник рахунку',
+      zaNoJs: 'QR-код малюється у браузері й потребує JavaScript. Ви можете зробити звичайний переказ на рахунок 5391596093/0800.',
+      zaNote: 'Аванс 500 Kč діє для замовлень на замовлення — весілля, великі композиції та курси. Решту доплачуєте при отриманні. Гроші йдуть прямо на рахунок студії, платіж ніде не зберігається, і QR-код не бачить жодна третя сторона.',
+      zaHowEyebrow: 'Як оплатити',
+      zaHowTitle: 'Три кроки',
+      za1T: 'Відкрийте застосунок банку',
+      za1P: 'У мобільному банку знайдіть «Платіж за QR-кодом» — він є у Česká spořitelna, ČSOB, KB, Air Bank, Fio, Moneta та Revolut.',
+      za2T: 'Відскануйте код',
+      za2P: 'Рахунок, сума й повідомлення заповняться самі. Нічого не переписуєте, тож помилитися в номері рахунку неможливо.',
+      za3T: 'Підтвердьте платіж',
+      za3P: 'Готово. Напишіть нам в Instagram або зателефонуйте, щоб ми знали, що аванс у дорозі.',
+      zaBackBtn: 'Повернутись до замовлення',
       katDocTitle: 'Каталог букетів — Charm of Flowers Пльзень',
       katDocDesc: 'Каталог букетів квіткової студії Charm of Flowers у Пльзні. Букети до 1 000 Kč та авторські композиції від 2 000 Kč, коробки, весільна флористика. Доставка за 30–60 хвилин.',
       navCatalog: 'Каталог',
@@ -347,6 +399,8 @@
       a3: 'Що раніше, то краще — дати бронюємо заздалегідь. На консультації обговоримо стиль, кольори та оформлення церемонії і столів.',
       q4: 'Чи можна спілкуватися українською або англійською?',
       a4: 'Так. Спілкуємось чеською, англійською та українською — у студії, телефоном і в Instagram.',
+      q6: 'Чи потрібен аванс за великі замовлення?',
+      a6: 'Так, для замовлень на замовлення — весілля, великі композиції та курси — ми беремо аванс 500 Kč. Оплатите його за кілька секунд, відсканувавши <a href="zaloha">QR-код</a>, решту доплатите при отриманні.',
       q5: 'Як проходять курси в’язання?',
       a5: 'В’яжемо у групі або індивідуально — для початківців, компаній і фірм. Актуальні дати на нашому Instagram, або напишіть нам.',
 
@@ -448,8 +502,10 @@
     document.documentElement.lang = lang === 'uk' ? 'uk' : 'cs';
     /* katalog.html má vlastní titulek — pozná se podle <body data-page> */
     var page = document.body.getAttribute('data-page');
-    var titleKey = page === 'katalog' ? 'katDocTitle' : 'docTitle';
-    var descKey = page === 'katalog' ? 'katDocDesc' : 'docDesc';
+    var TITLES = { katalog: ['katDocTitle', 'katDocDesc'], zaloha: ['zaDocTitle', 'zaDocDesc'] };
+    var pair = TITLES[page] || ['docTitle', 'docDesc'];
+    var titleKey = pair[0];
+    var descKey = pair[1];
     document.title = t(titleKey);
     meta('meta[name="description"]', t(descKey));
     meta('meta[property="og:title"]', t(titleKey));

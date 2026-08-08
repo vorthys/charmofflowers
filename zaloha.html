@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Záloha a QR platba — Charm of Flowers</title>
+
+<meta name="description" content="Zaplaťte zálohu nebo objednávku u Charm of Flowers naskenováním QR kódu. Platba přímo na účet, bez poplatků.">
+<meta name="author" content="Charm of Flowers — Nataliia Ivasiuk">
+<!-- provozní stránka pro platby, ne obsah pro vyhledávače -->
+<meta name="robots" content="noindex, follow">
+
+<meta name="theme-color" content="#102713">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Didact+Gothic&family=Pinyon+Script&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css?v=32">
+</head>
+
+<body data-page="zaloha">
+<a class="skip" href="#obsah" data-i18n="skip">Přejít k obsahu</a>
+
+<!-- ============ HEADER ============ -->
+<header class="site-head" id="top">
+  <div class="site-head__in">
+    <a class="site-head__logo" href="./" data-i18n-aria="logoAria" aria-label="Charm of Flowers — úvod">
+      <span class="mark mark--sm mark--on-light" aria-hidden="true">
+        <span class="mark__a">Charm</span>
+        <span class="mark__of">of</span>
+        <span class="mark__b">flowers</span>
+      </span>
+    </a>
+
+    <nav class="nav" id="nav" data-i18n-aria="navAria" aria-label="Hlavní navigace">
+      <a href="./" data-i18n="navHome">Domů</a>
+      <a href="katalog" data-i18n="navCatalog">Katalog</a>
+    </nav>
+
+    <div class="lang" role="group" data-i18n-aria="langAria" aria-label="Volba jazyka">
+      <button class="lang__b is-on" type="button" data-lang="cs" lang="cs" aria-pressed="true">CZ</button>
+      <span class="lang__sep" aria-hidden="true"></span>
+      <button class="lang__b" type="button" data-lang="uk" lang="uk" aria-pressed="false">UA</button>
+    </div>
+
+    <a class="btn btn--ghost site-head__cta" href="tel:+420723477375">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1l-2.3 2.2Z"/></svg>
+      <span>723 477 375</span>
+    </a>
+
+    <button class="burger" id="burger" type="button" data-i18n-aria="menuAria" aria-label="Menu" aria-expanded="false" aria-controls="nav">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="obsah">
+
+<section class="sec sec--light" style="padding-top: clamp(2.5rem, 5vw, 4rem);">
+  <div class="wrap">
+    <p class="eyebrow" data-i18n="zaEyebrow">Platba</p>
+    <h1 class="sec__title" data-i18n="zaTitle">Záloha a QR platba</h1>
+    <p class="sec__lede" data-i18n="zaLede">Naskenujte kód v aplikaci své banky — částka, účet i zpráva se vyplní samy. Platí se běžným převodem, bez jakýchkoli poplatků navíc.</p>
+
+    <div class="pay">
+      <div class="pay__code">
+        <div class="pay__qr" id="qrBox" aria-live="polite"></div>
+        <p class="pay__sum" id="qrOut">500 Kč</p>
+        <button class="btn btn--outline btn--sm" type="button" id="qrDownload" data-i18n="zaDownload">Stáhnout QR obrázek</button>
+      </div>
+
+      <div class="pay__form">
+        <p class="pay__q" data-i18n="zaQuickL">Rychlá volba</p>
+        <div class="pay__quick">
+          <button class="chip" type="button" data-amount="500" data-i18n="zaQuick500">Záloha 500 Kč</button>
+          <button class="chip" type="button" data-amount="1000">1 000 Kč</button>
+          <button class="chip" type="button" data-amount="2000">2 000 Kč</button>
+        </div>
+
+        <div class="field">
+          <label for="qrAmount" data-i18n="zaAmount">Částka v Kč</label>
+          <input type="number" id="qrAmount" inputmode="decimal" min="1" step="1" value="500">
+        </div>
+
+        <div class="field">
+          <label for="qrMsg" data-i18n="zaMsg">Zpráva pro příjemce</label>
+          <input type="text" id="qrMsg" maxlength="60" value="ZALOHA KYTICE">
+          <small id="qrMsgHint" data-i18n="zaMsgHint">Napište sem své jméno — podle něj poznáme, čí objednávka to je.</small>
+          <small id="qrMsgWarn" class="is-warn" data-i18n="zaMsgWarn" hidden>Banky ve zprávě přečtou jen latinku bez háčků — napište jméno bez diakritiky.</small>
+        </div>
+
+        <dl class="pay__acc">
+          <dt data-i18n="zaAcc">Číslo účtu</dt><dd>5391596093/0800</dd>
+          <dt>IBAN</dt><dd>CZ94 0800 0000 0053 9159 6093</dd>
+          <dt data-i18n="zaOwner">Majitel účtu</dt><dd>Nataliia Ivasiuk</dd>
+        </dl>
+      </div>
+    </div>
+
+    <noscript><p class="kat-note" data-i18n="zaNoJs">QR kód se vykresluje v prohlížeči a potřebuje JavaScript. Můžete poslat běžný převod na účet 5391596093/0800.</p></noscript>
+
+    <p class="kat-note" data-i18n="zaNote">Záloha 500 Kč platí u objednávek na míru — svatby, velké vazby a kurzy. Zbytek doplatíte při převzetí. Peníze chodí přímo na účet studia, platbu nikde neevidujeme a QR kód žádná třetí strana nevidí.</p>
+  </div>
+</section>
+
+<!-- ============ JAK TO FUNGUJE ============ -->
+<section class="sec sec--white">
+  <div class="wrap">
+    <header class="sec__head">
+      <p class="eyebrow" data-i18n="zaHowEyebrow">Jak zaplatit</p>
+      <h2 class="sec__title" data-i18n="zaHowTitle">Tři kroky</h2>
+    </header>
+
+    <div class="steps">
+      <div class="step">
+        <p class="step__t" data-i18n="za1T">Otevřete aplikaci banky</p>
+        <p class="step__p" data-i18n="za1P">V mobilním bankovnictví najděte „Platba QR kódem" — má ji Česká spořitelna, ČSOB, KB, Air Bank, Fio, Moneta i Revolut.</p>
+      </div>
+      <div class="step">
+        <p class="step__t" data-i18n="za2T">Naskenujte kód</p>
+        <p class="step__p" data-i18n="za2P">Účet, částka i zpráva se doplní samy. Nic nepřepisujete, takže nehrozí překlep v čísle účtu.</p>
+      </div>
+      <div class="step">
+        <p class="step__t" data-i18n="za3T">Potvrďte platbu</p>
+        <p class="step__p" data-i18n="za3P">Hotovo. Ozvěte se nám na Instagram nebo telefon, ať víme, že je záloha na cestě.</p>
+      </div>
+    </div>
+
+    <p class="reviews__cta" style="margin-top: clamp(2rem, 4vw, 3rem);">
+      <a class="btn btn--solid" href="./#kontakt" data-i18n="zaBackBtn">Zpět na objednávku</a>
+    </p>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="foot">
+  <div class="wrap foot__in">
+    <a class="foot__logo" href="./" data-i18n-aria="toTop" aria-label="Zpět nahoru">
+      <span class="mark mark--sm" aria-hidden="true">
+        <span class="mark__a">Charm</span>
+        <span class="mark__of">of</span>
+        <span class="mark__b">flowers</span>
+      </span>
+    </a>
+    <p class="foot__c">© <span id="rok">2026</span> Charm of Flowers · Pražská 38/43, Plzeň</p>
+  </div>
+</footer>
+
+<script src="assets/js/i18n.js?v=32" defer></script>
+<script src="assets/js/main.js?v=32" defer></script>
+<script src="assets/js/qrcode.js?v=1" defer></script>
+<script src="assets/js/qr.js?v=32" defer></script>
+<!-- Statistiky návštěvnosti — GoatCounter: bez cookies, bez GDPR lišty. -->
+<script data-goatcounter="https://charmofflowers.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</body>
+</html>
