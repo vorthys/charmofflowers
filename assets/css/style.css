@@ -68,7 +68,13 @@
 
 /* ---------- 2. Reset ---------- */
 *, *::before, *::after { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  /* bez toho zmizi pri otevreni lightboxu scrollbar a cela stranka
+     poskoci o 7,5 px do strany */
+  scrollbar-gutter: stable;
+}
 body {
   margin: 0;
   background: var(--bg);
@@ -99,6 +105,11 @@ picture { display: contents; }
   outline-offset: 3px;
   border-radius: 2px;
 }
+/* na tmavé ploše měl mech kontrast 2,18:1 — chartreuse dá 10,81:1,
+   je to totéž pravidlo, které web používá u .eyebrow--light */
+.foot :focus-visible,
+.sec--green :focus-visible,
+.lb :focus-visible { outline-color: var(--chartreuse); }
 
 .vh {
   position: absolute; width: 1px; height: 1px;
@@ -142,7 +153,7 @@ section[id], main[id], [id="kontakt"] { scroll-margin-top: 84px; }
 
 .mark--xl { font-size: clamp(3.2rem, 12vw, 8rem); }
 .mark--md { font-size: clamp(1.9rem, 4.5vw, 2.6rem); }
-.mark--sm { font-size: clamp(1.15rem, 2.4vw, 1.4rem); }
+.mark--sm { font-size: clamp(1.28rem, 2.7vw, 1.65rem); }
 
 /* na světlém pozadí potřebuje skript tmavší tón, aby byl vidět */
 .mark--on-light .mark__of { color: var(--moss); }
@@ -241,7 +252,11 @@ section[id], main[id], [id="kontakt"] { scroll-margin-top: 84px; }
   margin-inline: auto;
   padding: .85rem var(--pad);
 }
-.site-head__logo { text-decoration: none; flex: none; }
+.site-head__logo {
+  text-decoration: none; flex: none;
+  transition: opacity .25s var(--ease);
+}
+.site-head__logo:hover { opacity: .72; }
 
 .nav {
   display: flex; gap: clamp(1rem, 2.2vw, 2rem);
@@ -318,8 +333,10 @@ section[id], main[id], [id="kontakt"] { scroll-margin-top: 84px; }
   right: -6%; top: -10%;
   width: 58%; height: 120%;
   color: var(--green);
-  opacity: .07;
-  filter: blur(26px);
+  /* při .07 a rozostření 26 px byl rozdíl proti pozadí 6 % — pod prahem
+     viditelnosti; moodboard přitom stojí na stínech rostlin */
+  opacity: .17;
+  filter: blur(13px);
   animation: shadow-drift 46s ease-in-out infinite alternate;
   pointer-events: none;
 }
@@ -447,8 +464,9 @@ section[id], main[id], [id="kontakt"] { scroll-margin-top: 84px; }
   transform: scaleX(0); transform-origin: left;
   transition: transform .5s var(--ease);
 }
+/* karty nemají žádný odkaz, takže reakce na najetí slibovala kliknutí,
+   které nikam nevede — zůstává jen jemné projasnění plochy */
 .card:hover { background: #fbfaf9; }
-.card:hover::before { transform: scaleX(1); }
 .card__t {
   margin: 0 0 .9rem;
   font-family: var(--ff-disp);
@@ -468,6 +486,12 @@ section[id], main[id], [id="kontakt"] { scroll-margin-top: 84px; }
   width: 100%; height: 100%;
   object-fit: cover;
   object-position: center 42%;
+}
+
+/* pod 1000 px jsou dva sloupce a fotka se span 2 se vedle páté karty
+   nevejde — v mřížce zůstávalo prázdné greige okno */
+@media (max-width: 999px) {
+  .cards__photo { grid-column: auto; }
 }
 
 @media (min-width: 1000px) {
@@ -633,6 +657,9 @@ section[id], main[id], [id="kontakt"] { scroll-margin-top: 84px; }
 .gal-follow {
   display: flex; flex-wrap: wrap; justify-content: center; gap: .7rem;
   margin-top: clamp(1.8rem, 3.5vw, 2.6rem);
+  /* je to <p>, takze si nese margin-bottom: 1em z resetu a sekce
+     zakoncene tlacitkem konciy o 16 px niz nez ostatni */
+  margin-bottom: 0;
 }
 
 
@@ -660,7 +687,13 @@ section[id], main[id], [id="kontakt"] { scroll-margin-top: 84px; }
   color: var(--ink);
 }
 .review__src { margin: 0; font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-60); }
-.reviews__cta { margin-top: clamp(1.8rem, 3.5vw, 2.6rem); text-align: center; }
+/* Byla psaná pro jedno tlačítko; jakmile v katalogu přibylo druhé,
+   držel je od sebe jen bílý znak mezi značkami — svisle 0,00 px. */
+.reviews__cta {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: .7rem;
+  margin-top: clamp(1.8rem, 3.5vw, 2.6rem);
+  margin-bottom: 0;
+}
 
 /* Google badge nad recenzemi — čísla se upravují v adminu (Texty) */
 .gbadge {
@@ -756,6 +789,7 @@ section[id], main[id], [id="kontakt"] { scroll-margin-top: 84px; }
 .faq__item:first-child { border-top: 1px solid var(--greige); }
 .faq__item summary {
   display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  line-height: 1.3;
   padding: 1.15rem clamp(1.1rem, 2.5vw, 1.7rem);
   font-weight: 400;
   font-size: 1.02rem;
@@ -879,7 +913,9 @@ section[id], main[id], [id="kontakt"] { scroll-margin-top: 84px; }
 }
 
 /* ---------- 15b. Katalog ---------- */
-.kat-head { padding: clamp(3rem, 6vw, 4.5rem) 0 0; }
+/* zkratka "padding: X 0 0" prebijela i spodek z .sec, takze blok koncil
+   presne na hrane dalsi sekce (0,00 px) — jinde je vsude 54,4 px */
+.kat-head { padding-top: clamp(3rem, 6vw, 4.5rem); }
 .kat-head .sec__lede { max-width: 52ch; }
 
 .filters { margin: clamp(1.8rem, 4vw, 2.6rem) 0 0; display: grid; gap: 1rem; }
@@ -925,7 +961,9 @@ section[id], main[id], [id="kontakt"] { scroll-margin-top: 84px; }
 }
 .kat-item:hover { transform: translateY(-4px); border-color: var(--moss); }
 .kat-item.is-hidden { display: none; }
-.kat-item__photo { position: relative; margin: 0; overflow: hidden; }
+/* filtr prekresli mrizku a fotky se nacitaji znovu; bez podkladu
+   svitil pod nimi bily obdelnik — .shot v galerii to resi stejne */
+.kat-item__photo { position: relative; margin: 0; overflow: hidden; background: var(--greige); }
 .kat-item__photo img {
   width: 100%;
   aspect-ratio: 4 / 5;
@@ -1253,6 +1291,11 @@ section[id], main[id], [id="kontakt"] { scroll-margin-top: 84px; }
 
 @media (max-width: 760px) {
   .pay { grid-template-columns: 1fr; }
+  /* v ukrajinštině jsou popisky delší, dvousloupcová definice zúžila
+     hodnotu tak, že se IBAN lámal — a je to jediné číslo, které si
+     člověk opisuje ručně, když mu QR nesedne */
+  .pay__acc { grid-template-columns: 1fr; gap: .1rem; }
+  .pay__acc dd { margin-bottom: .7rem; }
   /* Kód patří na první obrazovku: většina lidí sem přijde s odkazem,
      kde je částka už vyplněná, a chce jen namířit foťák. Když byl
      formulář nahoře, QR začínal až na 820. pixelu — pod ohybem. */
@@ -1306,7 +1349,9 @@ section[id], main[id], [id="kontakt"] { scroll-margin-top: 84px; }
   }
   .site-head__cta span { display: none; }
   .site-head__cta svg { width: 1.15em; height: 1.15em; }
-  .foot { padding-bottom: 5.5rem; }
+  /* odsazení je kvůli plovoucí bublině chatu — na stránce Záloha
+     žádná není, takže tam zbývalo 88 px prázdné tmavé plochy */
+  body:has(.chat) .foot { padding-bottom: 5.5rem; }
   .chat__fab span { display: none; }
   .chat__fab { padding: .95rem; }
   .chat__ico { width: 1.5em; height: 1.5em; }
@@ -1331,6 +1376,16 @@ section[id], main[id], [id="kontakt"] { scroll-margin-top: 84px; }
   .info a, .info__link, .link-ig, .socials a, .tier__go {
     display: inline-flex; align-items: center;
     min-height: 44px;
+    /* dotykový terč 44 px odsunul spodní linku 15 px pod text —
+       podtržení proto kreslíme textem, ne hranou boxu */
+    border-bottom: 0;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: .25em;
+    text-decoration-color: var(--hair-l);
+  }
+  .info a:hover, .info__link:hover, .link-ig:hover, .socials a:hover, .tier__go:hover {
+    text-decoration-color: var(--moss);
   }
   .chip { padding: .65rem 1.05rem; }
   .form__grid { gap: .85rem; }
@@ -1346,9 +1401,9 @@ section[id], main[id], [id="kontakt"] { scroll-margin-top: 84px; }
     border-bottom: 1px solid var(--hair-l);
     max-height: 0; overflow: hidden;
     visibility: hidden;
-    transition: max-height .4s var(--ease), visibility 0s .4s;
+    transition: max-height .28s var(--ease), visibility 0s .28s;
   }
-  .nav.is-open { max-height: 26rem; visibility: visible; transition-delay: 0s; }
+  .nav.is-open { max-height: 15rem; visibility: visible; transition-delay: 0s; }
   .nav a { padding: .95rem 0; border-bottom: 1px solid var(--hair-l); font-size: .92rem; }
   .nav a:last-child { border-bottom: 0; }
   .nav a::after { display: none; }
@@ -1426,11 +1481,20 @@ section[id], main[id], [id="kontakt"] { scroll-margin-top: 84px; }
   /* katalog: 2 kompaktní sloupce místo jednoho obřího */
   .kat { grid-template-columns: repeat(2, 1fr); gap: .6rem; }
   .kat-item__body { padding: .75rem .8rem .85rem; }
-  .kat-item__t { font-size: .92rem; }
+  /* při sjednocování velikostí písma spadly název i cena na .92rem
+     a dlaždice ztratila těžiště — název vede, cena doplňuje */
+  .kat-item__t { font-size: 1.05rem; }
   .kat-item__f { font-size: .72rem; margin-bottom: .6rem; }
-  .kat-item__row { flex-wrap: wrap; gap: .3rem .6rem; padding-top: .55rem; }
-  .kat-item__price { font-size: .92rem; }
-  .kat-item__tag { left: .5rem; top: .5rem; padding: .22rem .5rem; font-size: .58rem; }
+  /* Cena (97 px) a odkaz (86 px) se do 137 px vedle sebe nevejdou —
+     nowrap jen zmackl odkaz na 32 px. Skladame je proto pod sebe
+     zamerne, na jednu levou hranu, misto nahodneho zalomeni. */
+  .kat-item__row {
+    flex-direction: column; align-items: flex-start;
+    flex-wrap: nowrap; gap: 0; padding-top: .5rem;
+  }
+  .kat-item__go { padding-left: 0; }
+  .kat-item__price { font-size: .85rem; color: var(--moss); }
+  .kat-item__tag { left: .5rem; top: .5rem; padding: .22rem .5rem; font-size: .68rem; }
 }
 
 @media (max-width: 480px) {

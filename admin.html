@@ -455,8 +455,10 @@
     targets.forEach(function (pair) {
       var img = $(pair[0]);
       img.onerror = function () {
-        img.style.display = 'none';
-        if (said) return;
+        img.parentNode.style.display = 'none';
+        /* podstranky vraci 404, dokud na ne nikdo neprisel — o tom
+           nema smysl hlasit, poznamka patri jen k celkovemu souctu */
+        if (said || pair[1] !== 'TOTAL') return;
         said = true;
         $('statsNote').textContent = t('Čísla se zatím nenačetla. Účet na goatcounter.com buď ještě není založený, nebo v jeho nastavení chybí zapnutá volba „Allow adding visitor counts on your website". Sledování samo běží dál, jen se sem čísla nepustí.');
       };

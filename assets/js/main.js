@@ -318,11 +318,19 @@
   var faq = document.getElementById('faq');
   if (faq) {
     faq.addEventListener('toggle', function (e) {
-      if (e.target.open) {
-        faq.querySelectorAll('details[open]').forEach(function (dd) {
-          if (dd !== e.target) dd.open = false;
-        });
-      }
+      if (!e.target.open) return;
+      /* Zavření ostatních otázek ubere výšku nad tou otevřenou a ta
+         uskočí pod prstem — na telefonu o 137 px. Držíme ji proto
+         na místě: změříme, kde byla, a o rozdíl posuneme stránku. */
+      var head = e.target.querySelector('summary') || e.target;
+      var before = head.getBoundingClientRect().top;
+      faq.querySelectorAll('details[open]').forEach(function (dd) {
+        if (dd !== e.target) dd.open = false;
+      });
+      var shift = head.getBoundingClientRect().top - before;
+      /* scrollBy tu neposouva (dedi plynule scroll-behavior a v nekterych
+         prohlizecich se zahodi) — absolutni skok bez animace je spolehlivy */
+      if (shift) window.scrollTo({ top: window.scrollY + shift, behavior: 'instant' });
     }, true);
   }
 
