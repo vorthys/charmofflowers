@@ -331,25 +331,8 @@ section[id], main[id], [id="kontakt"] { scroll-margin-top: 84px; }
   isolation: isolate;
 }
 
-/* měkký stín rostliny putující po pozadí (moodboard: "тіні") */
-.hero__shadow {
-  position: absolute; z-index: 0;
-  right: -6%; top: -10%;
-  width: 58%; height: 120%;
-  color: var(--green);
-  /* Puvodne .07 a rozostreni 26 px = pod prahem viditelnosti.
-     Zvyseni na .17 zase udelalo z vyplneneho stonku tmavou skvrnu,
-     proto je stonek prekresleny na linku a hodnoty jsou mezi tim:
-     obrysy listu jsou citelne, ale zustava to stin, ne kresba. */
-  opacity: .12;
-  filter: blur(17px);
-  animation: shadow-drift 46s ease-in-out infinite alternate;
-  pointer-events: none;
-}
-@keyframes shadow-drift {
-  from { transform: translate3d(0, -1.5%, 0) rotate(-2deg); }
-  to   { transform: translate3d(-3%, 2.5%, 0) rotate(2.5deg); }
-}
+/* Dekorativní stín rostliny z hero odstraněn na přání zadavatele:
+   jako výplň působil jako tmavá skvrna a web bez něj nic neztrácí. */
 
 .hero__in {
   position: relative; z-index: 2;
@@ -1553,14 +1536,14 @@ section[id], main[id], [id="kontakt"] { scroll-margin-top: 84px; }
     animation-iteration-count: 1 !important;
     transition-duration: .001ms !important;
   }
-  .hero__shadow, .sec--green .sec__light { animation: none; }
+  .sec--green .sec__light { animation: none; }
   body::after { display: none; }
   .rv { opacity: 1; transform: none; }
 }
 
 /* ---------- 22. Tisk ---------- */
 @media print {
-  .site-head, .hero__shadow, .lb, .burger, .contact__map, .chat, .form { display: none !important; }
+  .site-head, .lb, .burger, .contact__map, .chat, .form { display: none !important; }
   body { background: #fff; color: #000; }
   .sec--green, .hero, .foot { background: #fff !important; color: #000 !important; }
   .sec__title--light, .hero__mark, .tier__price, .story__q { color: #000 !important; }

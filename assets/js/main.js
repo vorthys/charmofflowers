@@ -364,9 +364,9 @@
   }
 
   /* ---- pozadí v pohybu se zastaví, jakmile zmizí z obrazovky ----
-     stín v hero i světlo v tmavé sekci jinak běží pořád dokola
-     i o deset obrazovek níž — zbytečně ubírají baterku na mobilu */
-  var moving = document.querySelectorAll('.hero__shadow, .sec--green .sec__light');
+     světlo v tmavé sekci by jinak běželo pořád dokola i o deset
+     obrazovek níž — zbytečně ubírá baterku na mobilu */
+  var moving = document.querySelectorAll('.sec--green .sec__light');
   if (!reduce && moving.length && 'IntersectionObserver' in window) {
     var mo = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
