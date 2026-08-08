@@ -1253,8 +1253,13 @@ section[id], main[id], [id="kontakt"] { scroll-margin-top: 84px; }
 
 @media (max-width: 760px) {
   .pay { grid-template-columns: 1fr; }
-  .pay__code { order: 2; }
-  .pay__form { order: 1; }
+  /* Kód patří na první obrazovku: většina lidí sem přijde s odkazem,
+     kde je částka už vyplněná, a chce jen namířit foťák. Když byl
+     formulář nahoře, QR začínal až na 820. pixelu — pod ohybem. */
+  .pay__code { order: 1; }
+  .pay__form { order: 2; }
+  .pay__qr img { max-width: 210px; }
+  .pay__sum { margin: .7rem 0 .8rem; font-size: 1.35rem; }
 }
 
 /* ---------- 20. Responzivita ---------- */
