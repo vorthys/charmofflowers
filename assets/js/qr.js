@@ -116,7 +116,14 @@
   msgEl.addEventListener('input', render);
   document.addEventListener('langchange', render);
 
-  amountEl.value = ZALOHA;
+  /* Předvyplnění z adresy: /zaloha?castka=3500&zprava=SVATBA NOVAKOVI
+     Klientka pošle zákazníkovi hotový odkaz a ten už jen naskenuje —
+     nic nepřepisuje, takže se nemůže splést v částce. */
+  var q = new URLSearchParams(location.search);
+  var qAmount = parseFloat(String(q.get('castka') || q.get('amount') || '').replace(',', '.'));
+  var qMsg = q.get('zprava') || q.get('msg');
+  amountEl.value = (isFinite(qAmount) && qAmount > 0) ? qAmount : ZALOHA;
+  if (qMsg) msgEl.value = qMsg;
   render();
 
   /* pro ověření ve vývoji: window.__qrPayload() vrátí aktuální řetězec */
