@@ -1262,6 +1262,27 @@ section[id], main[id], [id="kontakt"] { scroll-margin-top: 84px; }
   .pay__sum { margin: .7rem 0 .8rem; font-size: 1.35rem; }
 }
 
+
+/* ---------- 19c. Stránka 404 ---------- */
+.err {
+  display: flex; align-items: center;
+  min-height: calc(100vh - 70px);
+  padding-block: clamp(3rem, 10vw, 7rem);
+}
+.err__in { max-width: 44ch; }
+.err__title {
+  margin: 0 0 1.1rem;
+  font-family: var(--ff-disp);
+  font-size: clamp(1.7rem, 1.1rem + 2.4vw, 2.8rem);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  line-height: 1.18;
+}
+.err__p { margin: 0 0 2rem; color: var(--ink-60); }
+.err__cta { display: flex; flex-wrap: wrap; gap: .7rem; }
+.err__orn { width: 74px; margin: 0 0 1.8rem; color: var(--moss); opacity: .5; }
+@media (max-width: 420px) { .err__cta .btn { flex: 1 1 100%; justify-content: center; } }
+
 /* ---------- 20. Responzivita ---------- */
 @media (max-width: 900px) {
   .hero__in { grid-template-columns: 1fr; }

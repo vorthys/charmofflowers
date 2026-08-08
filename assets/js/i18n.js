@@ -20,6 +20,12 @@
       ogLocale: 'cs_CZ',
 
       /* --- navigace --- */
+      e404DocTitle: 'Stránka nenalezena — Charm of Flowers',
+      e404Eyebrow: 'Chyba 404',
+      e404Title: 'Tahle stránka tu nekvete',
+      e404Text: 'Adresa buď zanikla, nebo se do ní vloudil překlep. Zkuste to od začátku — nebo rovnou zavolejte, poradíme rychleji než jakýkoliv odkaz.',
+      e404Home: 'Na úvodní stránku',
+      e404Kat: 'Prohlédnout katalog',
       zaDocTitle: 'Záloha a QR platba — Charm of Flowers',
       zaDocDesc: 'Zaplaťte zálohu nebo objednávku u Charm of Flowers naskenováním QR kódu. Platba přímo na účet, bez poplatků.',
       zaEyebrow: 'Platba',
@@ -246,6 +252,12 @@
     },
 
     uk: {
+      e404DocTitle: 'Сторінку не знайдено — Charm of Flowers',
+      e404Eyebrow: 'Помилка 404',
+      e404Title: 'Ця сторінка тут не квітне',
+      e404Text: 'Адреса або зникла, або в неї закралася помилка. Спробуйте спочатку — або просто зателефонуйте, підкажемо швидше за будь-яке посилання.',
+      e404Home: 'На головну',
+      e404Kat: 'Переглянути каталог',
       zaDocTitle: 'Аванс та оплата за QR — Charm of Flowers',
       zaDocDesc: 'Оплатіть аванс або замовлення у Charm of Flowers, відсканувавши QR-код. Платіж прямо на рахунок, без комісій.',
       zaEyebrow: 'Оплата',
@@ -504,7 +516,7 @@
     document.documentElement.lang = lang === 'uk' ? 'uk' : 'cs';
     /* katalog.html má vlastní titulek — pozná se podle <body data-page> */
     var page = document.body.getAttribute('data-page');
-    var TITLES = { katalog: ['katDocTitle', 'katDocDesc'], zaloha: ['zaDocTitle', 'zaDocDesc'] };
+    var TITLES = { katalog: ['katDocTitle', 'katDocDesc'], zaloha: ['zaDocTitle', 'zaDocDesc'], e404: ['e404DocTitle', 'docDesc'] };
     var pair = TITLES[page] || ['docTitle', 'docDesc'];
     var titleKey = pair[0];
     var descKey = pair[1];
