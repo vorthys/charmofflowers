@@ -1299,9 +1299,15 @@ section[id], main[id], [id="kontakt"] { scroll-margin-top: 84px; }
   .contact__map iframe { min-height: 240px; }
 
   .lang__b { padding: .6rem .25rem; }
-  .link-ig, .info__link { padding-block: .4rem; }
-  .socials a { display: inline-block; padding-block: .25rem; }
+  /* Prstem se trefit do řádku vysokého 19 px nejde. Telefon a e-mail
+     v kontaktech, odkazy na sítě i „Objednat" dostávají plných 44 px,
+     jak doporučuje WCAG — u květinářství je hovor hlavní kanál. */
+  .info a, .info__link, .link-ig, .socials a, .tier__go {
+    display: inline-flex; align-items: center;
+    min-height: 44px;
+  }
   .chip { padding: .65rem 1.05rem; }
+  .form__grid { gap: .85rem; }
 
   .lang { margin-left: auto; border-left: 0; padding-left: 0; }
 
@@ -1369,10 +1375,14 @@ section[id], main[id], [id="kontakt"] { scroll-margin-top: 84px; }
   .lb__nav--next { right: .75rem; }
 
   .cards { grid-template-columns: 1fr; }
-  /* kytice je svislá kompozice — 16/9 z ní na telefonu ukrajovalo
-     přes polovinu výšky a nechávalo střed stonků */
-  .cards__photo { grid-column: auto; aspect-ratio: 4 / 5; }
-  .cards__photo img { object-position: center 38%; }
+  /* Na telefonu se z pěti karet stane sloupec skoro stejných textových
+     bloků — fotka proto jde nahoru, aby sekce začala obrazem, ne zdí
+     textu. Poměr 4/3 místo 4/5: kratší pás, ale kytice se ještě
+     neořeže do stonků (16/9 z ní bralo dvě třetiny). */
+  .cards__photo { grid-column: auto; order: -1; aspect-ratio: 4 / 3; }
+  .cards__photo img { object-position: center 36%; }
+  .card { padding: 1.15rem 1.2rem; }
+  .card__t { font-size: 1.2rem; margin-bottom: .55rem; }
 
   /* katalog: 2 kompaktní sloupce místo jednoho obřího */
   .kat { grid-template-columns: repeat(2, 1fr); gap: .6rem; }
