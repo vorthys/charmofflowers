@@ -337,10 +337,12 @@ section[id], main[id], [id="kontakt"] { scroll-margin-top: 84px; }
   right: -6%; top: -10%;
   width: 58%; height: 120%;
   color: var(--green);
-  /* při .07 a rozostření 26 px byl rozdíl proti pozadí 6 % — pod prahem
-     viditelnosti; moodboard přitom stojí na stínech rostlin */
-  opacity: .17;
-  filter: blur(13px);
+  /* Puvodne .07 a rozostreni 26 px = pod prahem viditelnosti.
+     Zvyseni na .17 zase udelalo z vyplneneho stonku tmavou skvrnu,
+     proto je stonek prekresleny na linku a hodnoty jsou mezi tim:
+     obrysy listu jsou citelne, ale zustava to stin, ne kresba. */
+  opacity: .12;
+  filter: blur(17px);
   animation: shadow-drift 46s ease-in-out infinite alternate;
   pointer-events: none;
 }
