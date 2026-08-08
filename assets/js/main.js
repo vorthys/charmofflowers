@@ -170,7 +170,7 @@
       var L = lang();
       var html = '';
       var shown = 0;
-      katData.items.forEach(function (it) {
+      katData.items.forEach(function (it, i) {
         if (it.visible === false) return;
         var vis = matches(it);
         if (vis) shown++;
@@ -205,7 +205,7 @@
         }
 
         html +=
-          '<article class="kat-item' + (it.img ? '' : ' kat-item--fl') + (vis ? '' : ' is-hidden') + '">' +
+          '<article class="kat-item' + (it.img ? '' : ' kat-item--fl') + (vis ? '' : ' is-hidden') + '" data-i="' + i + '">' +
           photo +
           '<div class="kat-item__body">' +
           '<h3 class="kat-item__t">' + esc(name) + '</h3>' +
@@ -215,22 +215,51 @@
           '<a class="kat-item__go" href="' + esc(cta) + '">' + esc(UI[L].cta) + '</a>' +
           '</div></div></article>';
       });
-      if (!shown) html += '<p class="kat-note">' + esc(UI[L].empty) + '</p>';
+      html += '<p class="kat-note kat-note--empty"' + (shown ? ' hidden' : '') + '>' + esc(UI[L].empty) + '</p>';
       katEl.innerHTML = html;
     };
 
     var renderAll = function () { renderChips(); renderCards(); };
+
+    /* Filtrovani drive prestavelo celou mrizku pres innerHTML: fotky se
+       nacitaly znovu a pod nimi probleskavala prazdna dlazdice. Karty
+       uz pritom umi tridu is-hidden, takze staci prepnout ji — DOM
+       zustava, fotky zustavaji nactene a nemizi ani fokus. */
+    var applyFilter = function () {
+      if (!katData) return;
+      var shown = 0;
+      katEl.querySelectorAll('.kat-item').forEach(function (el) {
+        var it = katData.items[+el.getAttribute('data-i')];
+        if (!it) return;
+        var vis = matches(it);
+        el.classList.toggle('is-hidden', !vis);
+        if (vis) shown++;
+      });
+      var empty = katEl.querySelector('.kat-note--empty');
+      if (empty) empty.hidden = shown > 0;
+    };
+
+    var syncChips = function () {
+      if (!filtersEl) return;
+      ['cena', 'prilezitost'].forEach(function (group) {
+        var box = filtersEl.querySelector('[data-group="' + group + '"]');
+        if (!box) return;
+        box.querySelectorAll('.chip').forEach(function (ch) {
+          var on = ch.getAttribute('data-f') === active[group];
+          ch.classList.toggle('is-on', on);
+          ch.setAttribute('aria-pressed', String(on));
+        });
+      });
+    };
 
     if (filtersEl) {
       filtersEl.addEventListener('click', function (e) {
         var chip = e.target.closest('.chip');
         if (!chip) return;
         var group = chip.closest('[data-group]').getAttribute('data-group');
-        var fId = chip.getAttribute('data-f');
-        active[group] = fId;
-        renderAll();
-        var again = filtersEl.querySelector('[data-group="' + group + '"] .chip[data-f="' + fId + '"]');
-        if (again) again.focus();
+        active[group] = chip.getAttribute('data-f');
+        syncChips();
+        applyFilter();
       });
     }
 

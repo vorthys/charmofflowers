@@ -36,7 +36,11 @@
   --moss:       #565a20;   /* ztmavený chartreuse — akcent na světlém */
   --greige:     #dbd5d1;   /* linky, rámečky */
   --bg:         #efefef;   /* hlavní pozadí (dle guide) */
-  --card:       #ffffff;
+  /* Brand guide zna ctyri barvy a cista bila mezi nimi neni — pritom
+     zabirala 36 % plochy dokumentu. Teply odstin drzi stejny odstup
+     od pozadi #EFEFEF (o 12 stupnu svetlejsi), ale ma tyz teply spad
+     jako greige, takze plochy patri k sobe misto aby svitily. */
+  --card:       #fbfaf8;
 
   /* Ink */
   --ink:        var(--green);
@@ -466,7 +470,8 @@ section[id], main[id], [id="kontakt"] { scroll-margin-top: 84px; }
 }
 /* karty nemají žádný odkaz, takže reakce na najetí slibovala kliknutí,
    které nikam nevede — zůstává jen jemné projasnění plochy */
-.card:hover { background: #fbfaf9; }
+/* karty nikam nevedou, takze zadna reakce na najeti — a barva
+   #fbfaf9 se stejne slila s novym podkladem karet */
 .card__t {
   margin: 0 0 .9rem;
   font-family: var(--ff-disp);
@@ -496,9 +501,12 @@ section[id], main[id], [id="kontakt"] { scroll-margin-top: 84px; }
 
 @media (min-width: 1000px) {
   .cards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  /* 5 karet + fotka = 6 dlaždic; výšku buňky určují karty,
-     fotka se jen ořízne (absolutní <img> do gridu nemluví) */
+  /* 5 karet + fotka = 6 dlazdic, vysku bunky urcuji karty. Roztazeni
+     pres dva radky by mrizku rozbilo (vznikly by nove prazdne bunky),
+     takze vyrez jen posuneme nahoru — misto stredu stonku je videt
+     hlavicka kytice. */
   .cards__photo { grid-column: auto; aspect-ratio: auto; }
+  .cards__photo img { object-position: center 26%; }
 }
 
 /* ---------- 10. Ceník ---------- */
@@ -905,6 +913,18 @@ section[id], main[id], [id="kontakt"] { scroll-margin-top: 84px; }
   grid-column: 1 / -1;
   background: var(--card);
 }
+/* Formular je vyssi nez sloupec s kontakty, takze pod nimi zustavalo
+   267 px prazdna a mapa se tlacila az pod obe kolony. Nad 1200 px ji
+   posadime rovnou pod kontakty do praveho sloupce. */
+@media (min-width: 1200px) {
+  /* formular drzi levy sloupec pres obe radky, kontakty a mapa se
+     poskladaji do praveho — diru 253 px pod kontakty vyplni mapa */
+  .contact { grid-template-rows: auto 1fr; align-items: stretch; }
+  .form { grid-column: 1; grid-row: 1 / 3; }
+  .contact__info { grid-column: 2; grid-row: 1; align-self: start; }
+  .contact__map { grid-column: 2; grid-row: 2; }
+  .contact__map iframe { min-height: 240px; height: 100%; }
+}
 .contact__map iframe {
   width: 100%; height: 100%;
   min-height: 360px;
@@ -1180,14 +1200,23 @@ section[id], main[id], [id="kontakt"] { scroll-margin-top: 84px; }
 .lb[hidden] { display: none; }
 .lb.is-open { opacity: 1; }
 
-.lb__fig { margin: 0; max-height: 100%; display: flex; flex-direction: column; }
+/* Sirka sceny byla dana fotkou, takze mezi snimky ruznych pomeru
+   sipky utikaly pod kurzorem az o 50 px a popisek o dvou radcich
+   posouval fotku o 12 px. Scena ma proto pevny ram a fotka se do
+   nej vklada. */
+.lb__fig {
+  margin: 0;
+  width: min(86vw, 720px);
+  display: flex; flex-direction: column; align-items: center;
+}
 .lb__fig img {
-  max-width: min(90vw, 720px);
-  max-height: 78vh;
+  max-width: 100%;
+  height: 74vh;
   width: auto; object-fit: contain;
 }
 .lb__fig figcaption {
   margin-top: 1rem;
+  min-height: 2.6em;          /* misto pro dvouradkovy popisek */
   max-width: 60ch;
   font-size: .85rem;
   text-align: center;
@@ -1359,7 +1388,9 @@ section[id], main[id], [id="kontakt"] { scroll-margin-top: 84px; }
   /* hero stlačené tak, aby tlačítka padla na první obrazovku —
      na iPhonu začínala až ~65 px pod ohybem */
   .hero__in { padding-top: 1.6rem; padding-bottom: 2.6rem; gap: 1.4rem; }
-  .hero__frame img { aspect-ratio: 4 / 2.85; }
+  /* pri 4/2.85 zbylo z kytice 53 % — obe podpurne fotky na strance
+     byly vyssi nez ta hlavni; 4/3.4 a posun k horni casti to srovna */
+  .hero__frame img { aspect-ratio: 4 / 3.4; object-position: center 38%; }
   .hero__lede { margin-bottom: .35rem; }
   .hero__sub { margin-bottom: 1.4rem; }
   .hero__facts { margin-top: 1.4rem; padding-top: 1rem; }
